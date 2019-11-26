@@ -17,6 +17,7 @@ import com.ruoyi.system.service.ISysUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,6 +40,7 @@ public class AreaGroupingController extends BaseController{
     @Autowired
     private ISysUserService iSysUserService;
 
+    @RequiresPermissions("broad:areaGrouping:view")
     @GetMapping()
     public String areaGrouping()
     {
@@ -50,6 +52,7 @@ public class AreaGroupingController extends BaseController{
 
     @PostMapping("/list")
     @Log(title = "分组管理列表")
+    @RequiresPermissions("broad:areaGrouping:list")
     @ResponseBody
     public TableDataInfo list(AreaGrouping areaGrouping)
     {
@@ -107,5 +110,27 @@ public class AreaGroupingController extends BaseController{
     public AjaxResult addSave(AreaGrouping areaGrouping)
     {
         return toAjax(iAreaGroupingService.insertAreaGrouping(areaGrouping));
+    }
+
+    /**
+     * 修改分组管理记录
+     */
+    @GetMapping("/edit/{aid}")
+    public String edit(@PathVariable("aid") String aid, ModelMap mmap)
+    {
+        AreaGrouping areaGrouping = iAreaGroupingService.selectAreaGroupingByAid(aid);
+        mmap.put("areaGrouping", areaGrouping);
+        return prefix + "/edit";
+    }
+
+    /**
+     * 修改保存分组管理记录
+     */
+    @Log(title = "分组管理记录保存", businessType = BusinessType.UPDATE)
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(AreaGrouping areaGrouping)
+    {
+        return toAjax(iAreaGroupingService.updateAreaGrouping(areaGrouping));
     }
 }

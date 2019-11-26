@@ -63,7 +63,7 @@ public class OrganizationController extends BaseController
 	/**
 	 * 查询终端信息列表
 	 */
-//	@RequiresPermissions("broad:organization:list")
+	@RequiresPermissions("broad:organization:list")
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(Organization organization)
@@ -89,6 +89,7 @@ public class OrganizationController extends BaseController
 	 * 删除终端信息
 	 */
 	@Log(title = "终端信息删除", businessType = BusinessType.DELETE)
+	@RequiresPermissions("broad:organization:remove")
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
@@ -99,6 +100,7 @@ public class OrganizationController extends BaseController
 	/**
 	 * 编辑终端信息
 	 */
+
 	@GetMapping("/edit/{tid}")
 	public String edit(@PathVariable("tid") String tid, ModelMap mmap)
 	{
@@ -131,6 +133,7 @@ public class OrganizationController extends BaseController
 
 
 	@PostMapping("/add")
+	@RequiresPermissions("broad:organization:add")
 	@ResponseBody
 	public AjaxResult addSave(Organization organization){
 		return toAjax(organizationService.insertOrganization(organization));
@@ -180,6 +183,7 @@ public class OrganizationController extends BaseController
 	 * @return 终端管理表集合
 	 */
 	@Log(title = "终端管理", businessType = BusinessType.EXPORT)
+	@RequiresPermissions("broad:organization:export")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(Organization organization)
@@ -237,6 +241,13 @@ public class OrganizationController extends BaseController
 		startPage() ;
 		List<Organization> list = organizationService.selectProBroadList(organization);
 		return getDataTable(list);
+	}
+
+	@PostMapping( "/isuseSet")
+	@ResponseBody
+	public AjaxResult isuseSet(String tid, Boolean isuse)
+	{
+		return toAjax(organizationService.updateIsuseByTid(tid,isuse));
 	}
 }
 

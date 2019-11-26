@@ -31,7 +31,7 @@ function setPro(obj){
     $("#tbody").append("<tr style='max-height: 70px;min-height:70px'><td class='center'>"+type+"</td> <td class='center'></td>"+
         "<td class='center'></td> <td class='center'>"+obj+"</td>"+
         "<td class='center' name='00:00:00'>"+time+"</td> <td class='center'>00:00:00</td>"+
-        " <td class='center'>"+
+    " <td class='center'>"+
         "<div class='action-buttons'>"+
         "<a class='green' onclick='editTime(this);'>"+
         "<i class='ace-icon fa fa-pencil-square-o bigger-130' title='修改时间'></i>"+
@@ -252,6 +252,7 @@ function save(){
         });
         return false;
     }
+    debugger
     if(onindex!=0 ||(offindex-onindex)<=0 || (stopindex-offindex)!=1){
         $("#appon").tips({
             side:3,

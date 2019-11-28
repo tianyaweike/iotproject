@@ -141,18 +141,6 @@
 
             },
                 {
-                    title : '操作',
-                    visible: true,
-                    width: 50 ,
-                    formatter: function (value, row, index) {
-                        var actions = [];
-						actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="phoneEdit(\'' + row.tid + '\')"><i class="fa fa-edit" ></i>修改授权号码</a> ');
-                        actions.push('<a class="btn btn-success btn-xs '+editFlag + '" href="#" onclick="$.operate.edit(\'' + row.tid + '\')"><i class="fa fa-edit" ></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.tid + '\')"><i class="fa fa-remove"></i>删除</a>');
-                        return actions.join('');
-                    }
-                },
-                {
                     field : 'tid',
                     title : '终端IMEI',
                     visible: true,
@@ -372,6 +360,18 @@
                     field : 'hbtime',
                     title : '心跳包时间',
                     align: 'center'
+                },
+                {
+                    title : '操作',
+                    visible: true,
+                    width: 50 ,
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="phoneEdit(\'' + row.tid + '\')"><i class="fa fa-edit" ></i>修改授权号码</a> ');
+                        actions.push('<a class="btn btn-success btn-xs '+editFlag + '" href="#" onclick="$.operate.edit(\'' + row.tid + '\')"><i class="fa fa-edit" ></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.tid + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
                 }
             ]
         };

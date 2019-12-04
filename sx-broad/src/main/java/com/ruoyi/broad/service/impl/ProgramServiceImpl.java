@@ -61,4 +61,10 @@ public class ProgramServiceImpl implements IProgramService {
     public int deleteProgram(String fid){
         return programMapper.deleteProgram(Convert.toStrArray(fid));
     }
+
+    @Override
+    @DataSource(value = DataSourceType.SLAVE)
+    public List<Program> selectProgramListByids(List<String> sfids) {
+        return programMapper.selectProgramListByids(sfids);
+    }
 }

@@ -9,6 +9,7 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,5 +57,15 @@ public class ProSpecController extends BaseController {
             List<ProSpec> list = proSpecService.selectProSpecList(proSpec);
             return getDataTable(list);
         }
+    }
+
+    /**
+     * 返回特种节目替换页面
+     * @param mmap
+     * @return
+     */
+    @GetMapping("/speclist")
+    public String doCham(ModelMap mmap){
+        return prefix+"/speclist";
     }
 }

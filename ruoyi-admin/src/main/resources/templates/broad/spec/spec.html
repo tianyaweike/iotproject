@@ -104,7 +104,7 @@
                     sortable: false,
                     formatter: function(value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-xs btn-success" href="#" onclick="$.operate.edit(\'' + row.fid + '\')"><i class="fa fa-edit"></i>编辑</a>');
+                        actions.push('<a class="btn btn-xs btn-success" href="#" onclick="dospeclist()"><i class="fa fa-edit"></i>编辑</a>');
                         return actions;
                     }
                 },
@@ -132,6 +132,62 @@
         audio.src=value;
         console.log(audio);
         audio.play();
+    }
+
+    function dospeclist() {
+        // var baseTime = "08:00:00";
+        // if($("#broaddate").val() == ""){
+        //     layer.tips('请选择播出日期','#broaddate', {
+        //         tips: [1, '#3595CC'],
+        //         time: 4000
+        //     });
+        //     return false;
+        // }
+        // var data = $("#broaddate").val();
+
+        var _url = "/broad/spec/speclist";
+        var _title = '替换节目';
+        var _width = "1200";
+        var _height = ($(window).height() - 50);
+        layer.open({
+            type: 2,
+            maxmin: true,
+            shade: 0.3,
+            title: _title,
+            fix: false,
+            area: [_width + 'px', _height + 'px'],
+            content: _url,
+            shadeClose: true,
+            btn: ['<i class="fa fa-chat"></i> 确认', '<i class="fa fa-close"></i> 关闭'],
+            yes: function (index, layero) {
+                console.log("================++",index,"===",layero)
+                layer.close(index);
+                //获取子页面关闭前的回调函数获取到的值
+
+                var res = $(layero).find("bootstrap-table")[0].contentWindow.callbackfile();
+                console.log(">>>",res)
+                // var times = getTime(data+" "+baseTime,res.data_time);
+                // $("#tbody").append("<tr><td class='center'>电台播音</td> <td class='center'>"+res.data_fileID+"</td>"+
+                //     "<td class='center'>"+res.data_filename+"</td> <td class='center'>"+res.data_file+"</td>"+
+                //     "<td class='center' name = '"+res.data_time+"'>"+times+"</td> <td class='center'>"+res.data_time+"</td>"+
+                //     " <td class='center'>"+
+                //     "<div class='action-buttons'>"+
+                //     "<a class='green' onclick='editTime(this);'>"+
+                //     "<i class='ace-icon fa fa-pencil-square-o bigger-130' title='修改'></i>"+
+                //     "</a> <a class='red' onclick='deletePro(this);'>"+
+                //     "<i class='ace-icon fa fa-trash-o bigger-120' title='删除'></i>"+
+                //     "</a> </div>"+
+                //     "</td><td class='center'><div class='action-buttons'><a class='red' onclick='moveUp(this)'>"+
+                //     "<i class='ace-icon fa fa-arrow-up bigger-120' title='上移'></i></a>&nbsp;&nbsp;" +
+                //     "<a class='red' onclick='moveDown(this)'>" +
+                //     "<i class='ace-icon fa fa-arrow-down bigger-120' title='下移'></i></a></div></td></tr>");
+                // times = getTime(data+" "+baseTime,res.data_time);
+            },
+            cancel: function () {
+                console.log("================")
+                return true;
+            }
+        });
     }
 </script>
 

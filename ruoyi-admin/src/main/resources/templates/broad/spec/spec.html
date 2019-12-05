@@ -100,6 +100,15 @@
                     sortable: true
                 },
                 {
+                    title : '操作',
+                    sortable: false,
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-xs btn-success" href="#" onclick="$.operate.edit(\'' + row.fid + '\')"><i class="fa fa-edit"></i>编辑</a>');
+                        return actions;
+                    }
+                },
+                {
                     field: 'urls',
                     title: '试听',
                     align: 'center',

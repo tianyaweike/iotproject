@@ -172,4 +172,6 @@ public interface OrganizationMapper
 	public int addphoneEdit(TerminalTels terminalTels);
 
 	public int deletephoneedit(String telid);
+
+	public List<Organization> selectOrganizationListByids(List<String> sfids);
 }

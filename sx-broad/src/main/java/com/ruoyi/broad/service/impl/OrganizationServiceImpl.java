@@ -331,4 +331,10 @@ public class OrganizationServiceImpl implements IOrganizationService
 		return organizationMapper.deletephoneedit(telid);
 	}
 
+	@Override
+	@DataSource(value = DataSourceType.SLAVE)
+	public List<Organization> selectOrganizationListByids(List<String> sfids){
+		return organizationMapper.selectOrganizationListByids(sfids);
+	}
+
 }

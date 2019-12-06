@@ -52,7 +52,7 @@ public class ProSpecController extends BaseController {
             List<ProSpec> list = proSpecService.selectProSpecList(proSpec);
             return getDataTable(list);
         }else{
-            proSpec.setUserid(userid);
+            proSpec.setUserid(userid.toString());
             startPage();
             List<ProSpec> list = proSpecService.selectProSpecList(proSpec);
             return getDataTable(list);
@@ -67,5 +67,27 @@ public class ProSpecController extends BaseController {
     @GetMapping("/speclist")
     public String doCham(ModelMap mmap){
         return prefix+"/speclist";
+    }
+
+    /**
+     * 返回特种节目替换页面
+     * @param
+     * @return
+     */
+    @PostMapping("/changespec")
+    @ResponseBody
+    public int changespec(String oldfid,String createdtime,String filename,String flenth,String fname,String fsize,String uname,String urls,String userid){
+        ProSpec proSpec = new ProSpec();
+        proSpec.setFid(oldfid);
+        proSpec.setCreatedtime(createdtime);
+        proSpec.setFilename(filename);
+        proSpec.setFlenth(flenth);
+        proSpec.setFname(fname);
+        proSpec.setFsize(fsize);
+        proSpec.setUname(uname);
+        proSpec.setUrls(urls);
+        proSpec.setUserid(userid);
+        int value = proSpecService.updateprospec(proSpec);
+        return value;
     }
 }

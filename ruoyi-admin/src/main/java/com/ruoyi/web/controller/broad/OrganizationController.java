@@ -249,5 +249,22 @@ public class OrganizationController extends BaseController
 	{
 		return toAjax(organizationService.updateIsuseByTid(tid,isuse));
 	}
+
+	/** @author qwerty
+	 * @description 导出√中的数据
+	 *
+	 * @param sfids
+	 * @return
+	 */
+	@Log(title = "终端导出", businessType = BusinessType.EXPORT)
+	@RequiresPermissions("broad:organization:export")
+	@PostMapping("/exportbysingle")
+	@ResponseBody
+	public AjaxResult exportOrganizationByIds(@RequestParam("sjids") List<String> sfids) {
+		List<Organization> list = organizationService.selectOrganizationListByids(sfids);
+		ExcelUtil<Organization> util = new ExcelUtil<Organization>(Organization.class);
+		return util.exportExcel(list, "Organization");
+	}
+
 }
 

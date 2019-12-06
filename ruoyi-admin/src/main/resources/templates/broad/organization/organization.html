@@ -99,7 +99,7 @@
 			<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="broad:organization:remove">
 				<i class="fa fa-remove"></i> 批量删除
 			</a>
-			<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="broad:organization:export">
+			<a class="btn btn-warning" onclick="$.operate.exportExcelBySingle()" shiro:hasPermission="broad:organization:export">
 				<i class="fa fa-download"></i> 导出
 			</a>
 		</div>
@@ -131,6 +131,7 @@
             removeUrl: prefix + "/remove",
             rdsSetUrl: prefix + "/rdsSet",
             fmfrequencyUrl: prefix + "/fmfrequencySet",
+			exportBySingleUrl: prefix + "/exportbysingle",
 			uniqueId: "tid",
             striped:true,
             modalName: "终端管理",

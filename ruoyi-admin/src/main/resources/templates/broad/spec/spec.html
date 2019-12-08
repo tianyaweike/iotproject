@@ -146,6 +146,7 @@
                 console.log(selecteddata)
                 layer.close(index);
                 $.post("/broad/spec/changespec",selecteddata);
+                $.table.refresh();
             },
             cancel: function () {
                 return true;

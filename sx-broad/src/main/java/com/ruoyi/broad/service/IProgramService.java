@@ -49,4 +49,7 @@ public interface IProgramService {
 
 
     public List<Program> selectProgramListByids(List<String> sfids);
+
+    public int setIsPublic(String fid);
+
 }

@@ -101,7 +101,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">现场照片：</label>
             <div class="col-sm-8">
-                <input id="poscene" name="`poscene" disabled class="form-control" type="text" placeholder="请输入现场照片">
+                <input id="poscene" name="poscene" accept=".jpg,.png,.jpeg " class="form-control" type="file" placeholder="请输入现场照片">
             </div>
         </div>
         <div class="form-group">
@@ -132,7 +132,10 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">广播接收频率：</label>
             <div class="col-sm-8">
-                <input id="fmfrequency" name="fmfrequency" class="form-control" required type="text" placeholder="请输入广播接收频率">
+<!--                <input id="fmfrequency" name="fmfrequency" class="form-control" required type="text" placeholder="请输入广播接收频率">-->
+                <select class="form-control" id="fmfrequency" name="fmfrequency">
+                    <option value="">--请输入广播接收频率--</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -163,16 +166,15 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">管理员电话：</label>
             <div class="col-sm-8">
-                <input id="managertel" name="managertel" class="form-control" required type="text" minlength="7" maxlength="13" placeholder="请输入管理员电话">
+                <input id="managertel" name="managertel" class="form-control" required type="text" minlength="7" maxlength="13" placeholder="请输入管理员电话(15位)">
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">创建时间：</label>
-            <div class="col-sm-8">
-<!--                <input id="createdtime" name="createdtime" class="form-control" required type="text" disabled placeholder="请输入创建时间">-->
-                <input id="createdtime" name="createdtime" class="form-control" type="text" disabled>
-            </div>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label class="col-sm-3 control-label">创建时间：</label>-->
+<!--            <div class="col-sm-8">-->
+<!--                <input id="createdtime" name="createdtime" class="form-control" type="text" disabled>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="form-group">
             <label class="col-sm-3 control-label">备注：</label>
@@ -213,6 +215,19 @@
         });
     })
 
+    // 获取广播接收频率组件
+    $(function getfmfrequency(ele,msg) {
+        $.post("/broad/proChamanage/list",function getmsg(params1,params2) {
+            let params = params1.rows;
+            for (let index = 0; index < params.length; index++) {
+                let text = params[index].frequencies;
+                let value = params[index].frequencies;
+                $("#fmfrequency").append("<option value='"+value+"'>"+text+"</option>")
+            }
+        });
+    })
+
+
     function submitHandler() {
         if ($.validate.form()) {
             $.operate.save(prefix + "/add", $('#form-tbOrganization-add').serialize());
@@ -229,7 +244,7 @@
             callBack: doSubmitAid
         };
         $.modal.openOptions(options);
-}
+    }
     function doSubmit(index, layero){
         var tree = layero.find("iframe")[0].contentWindow.$._tree;
         if ($.tree.notAllowParents(tree)) {
@@ -252,23 +267,28 @@
 }
 
     $('input[type=radio][name=type]').change(function(val) {
-
         var terminaltype = $('input:radio:checked').val();
         if(terminaltype == "fashe"){
+            $("#yingjis").removeAttr("selected");
+            $("#houbeis").removeAttr("selected");
+            $("#fashes").attr("selected",true);
             $("#rds").attr("disabled",false);
             $("#transmitfrequency").attr("disabled",false);
             $("#eovolume").attr("disabled",false);
-        }else{
+        }else if(terminaltype == "houbei"){
+            $("#yingjis").removeAttr("selected");
+            $("#fashes").removeAttr("selected");
+            $("#houbeis").attr("selected",true);
             $("#rds").attr("disabled",true);
             $("#transmitfrequency").attr("disabled",true);
             $("#eovolume").attr("disabled",true);
-        }
-        if(terminaltype == "fashe"){
-            $("#fashes").attr("selected",true);
-        }else if(terminaltype == "houbei"){
-            $("#houbeis").attr("selected",true);
         }else{
+            $("#fashes").removeAttr("selected");
+            $("#houbeis").removeAttr("selected");
             $("#yingjis").attr("selected",true);
+            $("#rds").attr("disabled",true);
+            $("#transmitfrequency").attr("disabled",true);
+            $("#eovolume").attr("disabled",true);
         }
     });
 

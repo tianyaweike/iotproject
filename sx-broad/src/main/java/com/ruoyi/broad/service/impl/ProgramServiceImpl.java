@@ -67,4 +67,10 @@ public class ProgramServiceImpl implements IProgramService {
     public List<Program> selectProgramListByids(List<String> sfids) {
         return programMapper.selectProgramListByids(sfids);
     }
+
+    @Override
+    @DataSource(value = DataSourceType.SLAVE)
+    public int setIsPublic(String fid){
+        return programMapper.setIsPublic(fid);
+    }
 }

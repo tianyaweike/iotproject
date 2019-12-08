@@ -164,4 +164,11 @@ public class PerController extends BaseController {
         return util.exportExcel(list, "Organization");
     }
 
+    @Log(title = "节目库是否公共状态转换", businessType = BusinessType.UPDATE)
+    @GetMapping("/setispublic/{fid}")
+    @ResponseBody
+    public int setIsPublic(@PathVariable("fid") String fid) {
+        return iProgramService.setIsPublic(fid);
+    }
+
 }

@@ -132,7 +132,10 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">广播接收频率：</label>
             <div class="col-sm-8">
-                <input id="fmfrequency" name="fmfrequency" class="form-control" required type="text" placeholder="请输入广播接收频率">
+<!--                <input id="fmfrequency" name="fmfrequency" class="form-control" required type="text" placeholder="请输入广播接收频率">-->
+                <select class="form-control" id="fmfrequency" name="fmfrequency">
+                    <option value="">--请输入广播接收频率--</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -163,7 +166,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">管理员电话：</label>
             <div class="col-sm-8">
-                <input id="managertel" name="managertel" class="form-control" required type="text" minlength="7" maxlength="13" placeholder="请输入管理员电话">
+                <input id="managertel" name="managertel" class="form-control" required type="text" minlength="7" maxlength="13" placeholder="请输入管理员电话(15位)">
             </div>
         </div>
 <!--        <div class="form-group">-->
@@ -211,6 +214,19 @@
             }
         });
     })
+
+    // 获取广播接收频率组件
+    $(function getfmfrequency(ele,msg) {
+        $.post("/broad/proChamanage/list",function getmsg(params1,params2) {
+            let params = params1.rows;
+            for (let index = 0; index < params.length; index++) {
+                let text = params[index].frequencies;
+                let value = params[index].frequencies;
+                $("#fmfrequency").append("<option value='"+value+"'>"+text+"</option>")
+            }
+        });
+    })
+
 
     function submitHandler() {
         if ($.validate.form()) {

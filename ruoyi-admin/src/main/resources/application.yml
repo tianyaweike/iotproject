@@ -153,8 +153,8 @@ SX:
   #终端流量清零日期
   trafficresetdate: 1
   #流媒体直播后台控制交互服务连接地址
-  SERVERIP: 110.53.162.164
+  SERVERIP: 127.0.0.1
   SERVERPORT: 8800
   SERVERbacklog: 2000
   #流媒体直播服务器地址
-  rtmpAddress: rtmp://110.53.162.164:1936/live
+  rtmpAddress: rtmp://127.0.0.1:1936/live

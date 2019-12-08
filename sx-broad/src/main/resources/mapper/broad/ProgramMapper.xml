@@ -143,4 +143,8 @@
         </foreach>
         order by  createdtime desc,fid desc
     </select>
+
+    <update id="setIsPublic" parameterType="String">
+        update programs SET ispublic= not ispublic where fid=#{fid}
+    </update>
 </mapper>

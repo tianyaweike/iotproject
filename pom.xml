@@ -12,6 +12,7 @@
 	<url>www.teavamc.com</url>
     <description>融媒体综合数据管理平台</description>
 
+
     <properties>
 	    <ruoyi.version>3.1</ruoyi.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

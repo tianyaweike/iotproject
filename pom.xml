@@ -6,7 +6,7 @@
 
     <groupId>com.ruoyi</groupId>
     <artifactId>ruoyi</artifactId>
-    <version>3.1</version>
+    <version>3.1.0</version>
 
     <name>RongSys</name>
 	<url>www.teavamc.com</url>

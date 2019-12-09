@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ruoyi</groupId>
-    <artifactId>ruyi</artifactId>
+    <artifactId>ruoyi</artifactId>
     <version>3.1</version>
 
     <name>RongSys</name>
@@ -77,7 +77,7 @@
 
         <!-- Mysql驱动包 -->
         <dependency>
-            <groupId>mysql</groupId>
+            <groupId>ysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 

@@ -139,18 +139,24 @@
     <script type="text/javascript">
 		var prefix = ctx + "village/tbHuodong"
         var Upload=document.getElementById("files");
+        // var upload2=document.getElementsById("files2");
         //var formData=new FormData(); //通过FormData对象可以组装一组用 [XMLHttpRequest]发送请求的键/值对,它可以更灵活方便的发送表单数据。
         Upload.onchange=function(){  //onchange在你选择完文件时触发
             var fileList=Upload.files ; //通过input的files属性获得fileList
+            // var fileList2=upload2.files;
             var filesnum = fileList.length;//获得文件数量
             $("#filesnum").val(filesnum);//用于传至后台进行处理
+
             for(let i=0;i<filesnum;i++)
             {
                 var file=fileList[i];
+
                 //formData.append("file"+i,file);  //key:"file"+i,value:file,然后就可以把formData post到后台了
                 console.log(file.name+file.lastModifiedDate);
+
             }
         }
+
 
         // 检测是否选择文件，如果选择，返回文件对象;如果没选择，返回false
         function checkFile(){

@@ -175,4 +175,14 @@ public interface IOrganizationService
 	public int deletephoneedit(String telid);
 
 	public List<Organization> selectOrganizationListByids(List<String> sfids);
+
+	int terinfoedittime(String time,List<String> tids);
+
+	int terinfoeditrds(String time,List<String> tids);
+
+	int terinfoeditfrequency(String time,List<String> tids);
+
+	int terinfoeditphone(String time,List<String> tids);
+
+	int terinfoeditphonedelete(String time,List<String> tids);
 }

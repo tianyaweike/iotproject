@@ -174,4 +174,15 @@ public interface OrganizationMapper
 	public int deletephoneedit(String telid);
 
 	public List<Organization> selectOrganizationListByids(List<String> sfids);
+
+	int terinfoedittime(String time,List<String> sfids);
+
+	int terinfoeditrds(String time,List<String> sfids);
+
+	int terinfoeditfrequency(String time,List<String> sfids);
+
+	int terinfoeditphone(String time,List<String> sfids);
+
+	int terinfoeditphonedelete(String time,List<String> sfids);
+
 }

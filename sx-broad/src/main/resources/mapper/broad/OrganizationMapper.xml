@@ -324,6 +324,7 @@
             <if test="parentaid != null and parentaid != '' "> and area.parentaid = #{parentaid}</if>
             <if test="hbtime != null and hbtime != '' "> and t.hbtime = #{hbtime}</if>
         </where>
+        ORDER BY createdtime DESC
     </select>
 
     <select id="selectAllOrganization" resultMap="AreatreeResult">
@@ -624,4 +625,39 @@
             #{sfid}
         </foreach>
     </select>
+
+    <update id="terinfoedittime">
+        update  terminals set intertime = #{param1} where tid  in
+        <foreach collection="arg1" item="arg" open="(" close=")" separator=",">
+            #{arg}
+        </foreach>
+    </update>
+
+    <update id="terinfoeditrds">
+        update  terminals set rds = #{param1} where tid  in
+        <foreach collection="arg1" item="arg" open="(" close=")" separator=",">
+            #{arg}
+        </foreach>
+    </update>
+
+    <update id="terinfoeditfrequency">
+        update  terminals set brfrequency = #{param1} where tid  in
+        <foreach collection="arg1" item="arg" open="(" close=")" separator=",">
+            #{arg}
+        </foreach>
+    </update>
+
+    <update id="terinfoeditphone">
+        update  terminals set atphone = #{param1} where tid  in
+        <foreach collection="arg1" item="arg" open="(" close=")" separator=",">
+            #{arg}
+        </foreach>
+    </update>
+
+    <update id="terinfoeditphonedelete">
+        update  terminals set atphone = #{param1} where tid  in
+        <foreach collection="arg1" item="arg" open="(" close=")" separator=",">
+            #{arg}
+        </foreach>
+    </update>
 </mapper>

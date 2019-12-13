@@ -58,8 +58,6 @@ public class OrganizationController extends BaseController
 		return prefix + "/organization";
 	}
 
-
-
 	/**
 	 * 查询终端信息列表
 	 */

@@ -13,7 +13,7 @@ public interface ManageMapper {
 
     /**
      * @author cx
-     * @param manage
+     * @param managef
      *
      * @Description 查询管理参数列表
      */

@@ -22,7 +22,7 @@ import com.ruoyi.common.utils.ExcelUtil;
 /**
  * 终端运转 信息操作处理
  * 
- * @author 张超
+ * @author 孙维
  * @date 2019-03-03
  */
 @Controller

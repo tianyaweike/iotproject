@@ -459,7 +459,6 @@
 						}
 					);
 				}
-				console.log("yesend")
 				layer.close(index);
 				$.table.refresh();
 			},
@@ -483,11 +482,11 @@
         $.tree.init(options);
     }
     function phoneEdit(data) {
-		$.modal.openTab("添加" + "授权管理号码","broad/organization/phoneEdit/"+data);
+		$.modal.openTab("添加授权管理号码","broad/organization/phoneEdit/"+data);
 	}
 
 	$('#form-group11').on('change', function (e) {
-			$("#form-group1").attr("name",$("#form-group11").val())
+		$("#form-group1").attr("name",$("#form-group11").val())
 	});
 	$('#form-group22').on('change', function (e) {
 		$("#form-group2").attr("name",$("#form-group22").val())
@@ -498,19 +497,6 @@
 	$('#form-group44').on('change', function (e) {
 		$("#form-group4").attr("value",$("#form-group44").val());
 	});
-
-
-	//处理页面提交
-	function submitHandler() {
-		// debugger
-		if ($.validate.form()) {
-			// console.log("喝了咯")
-			$.operate.save("/broad/organization/add", $('#form-tbOrganization-add').serialize());
-			// console.log("喝了咯")
-		}
-	}
-
 </script>
-
 </body>
 </html>

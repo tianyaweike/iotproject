@@ -56,7 +56,7 @@
 								<option value="manager">终端管理员名称</option>
 								<option value="managertel">管理员电话</option>
 							</select>
-							<input type="text" name="tname" id="form-group1" style="width: 100px"/>
+							<input type="text" name="tid" id="form-group1" style="width: 100px"/>
 						</li>
 						<li class="form-group" style="display: inline-flex">
 							<select class="form-control noselect2 selectpicker" id="form-group22" style="width: 120px;padding: 0">
@@ -96,7 +96,7 @@
 							</select>
 						</li>
 						<li>
-							<a class="btn btn-primary btn-rounded btn-sm" onclick="customsearch()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+							<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 							<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
 						</li>
 					</ul>
@@ -398,7 +398,7 @@
 			type: 2,
 			maxmin: false,
 			shade: 0.3,
-			title: '批量设置终端交互时间',
+			title: '添加终端',
 			fix: false,
 			area: ["800" + 'px', ($(window).height() - 50) + 'px'],
 			content: "/broad/organization/add",
@@ -408,17 +408,57 @@
 				$(layero).find("iframe")[0].contentWindow.$("#aid").val(aid1);
 			},
 			yes: function (index, layero) {
-				// let selecteddata = $(layero).find("iframe")[0].contentWindow.$("#form-tbOrganization-add").validate({
-				// 	rules:{
-				// 		xxxx:{
-				// 			required:true,
-				// 		},
-				// 	}
-				// });
+				var selected = $(layero).find("iframe")[0].contentWindow.$("#form-tbOrganization-add");
+				//对表单数据校验
+				selected.validate({
+					rules:{
+						aid:"required",
+						userinfo:"required",
+						terminaltype:"required",
+						tid:"required",
+						tname:"required",
+						intertime:"required",
+						phone:"required",
+						address:"required",
+						lastaccesstime:"required",
+						ypowerconsumption:"required",
+						MaintenanceFunds:"required",
+						basestation:"required",
+						// poscenepic:"required",
+						atphone:"required",
+						facid:"required",
+						irfrequency:"required",
+						dcs:"required",
+						fmfrequency:"required",
+						// rds:"required",
+						// transmitfrequency:"required",
+						// eovolume:"required",
+						manager:"required",
+						managertel:"required",
+						note:"required",
+						// eovolume:"required",
 
-
-
-
+					}
+				});
+				//提交表单数据
+				var formData = new FormData(selected[0]);
+				if ($.validate.form()) {
+					$.ajax({
+							type : "POST",
+							url : prefix +"/add",
+							data : formData,
+							async: false,
+							cache: false,
+							contentType: false,
+							processData: false,
+							success : function(msg) {
+								if(msg){
+									alert('提交成功！');
+								}
+							}
+						}
+					);
+				}
 				layer.close(index);
 				$.table.refresh();
 			},
@@ -442,40 +482,21 @@
         $.tree.init(options);
     }
     function phoneEdit(data) {
-		$.modal.openTab("添加" + "授权管理号码","broad/organization/phoneEdit/"+data);
+		$.modal.openTab("添加授权管理号码","broad/organization/phoneEdit/"+data);
 	}
 
-	function customsearch() {
-		var key1 = $("#form-group11").val()
-		var key2 = $("#form-group22").val()
-		var key3 = $("#form-group33").val()
-		var value4 = $("#form-group44").val()
-		$('#form-group11').on('select2:select', function (e) {
-			$("#form-group1").name=key1
-		});
-		$('#form-group22').on('select2:select', function (e) {
-			$("#form-group2").name=key2
-		});
-		$('#form-group33').on('select2:select', function (e) {
-			$("#form-group3").name=key3
-		});
-		$('#form-group44').on('select2:select', function (e) {
-			$("#form-group4").attr("value",value4);
-		});
-		$.table.search()
-	}
-
-	// //处理页面提交
-	// function submitHandler() {
-	// 	// debugger
-	// 	if ($.validate.form()) {
-	// 		// console.log("喝了咯")
-	// 		$.operate.save("/broad/organization/add", $('#form-tbOrganization-add').serialize());
-	// 		// console.log("喝了咯")
-	// 	}
-	// }
-
+	$('#form-group11').on('change', function (e) {
+		$("#form-group1").attr("name",$("#form-group11").val())
+	});
+	$('#form-group22').on('change', function (e) {
+		$("#form-group2").attr("name",$("#form-group22").val())
+	});
+	$('#form-group33').on('select2:select', function (e) {
+		$("#form-group3").attr("name",$("#form-group33").val())
+	});
+	$('#form-group44').on('change', function (e) {
+		$("#form-group4").attr("value",$("#form-group44").val());
+	});
 </script>
-
 </body>
 </html>

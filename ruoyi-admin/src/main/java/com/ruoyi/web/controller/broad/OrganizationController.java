@@ -7,6 +7,7 @@ import com.ruoyi.broad.domain.TerminalTels;
 import com.ruoyi.broad.service.IAreaService;
 import com.ruoyi.broad.service.IMessageService;
 import com.ruoyi.broad.service.IOrganizationService;
+import com.ruoyi.broad.utils.bFileUtil;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
@@ -21,9 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 /**
@@ -134,6 +134,11 @@ public class OrganizationController extends BaseController
 	@RequiresPermissions("broad:organization:add")
 	@ResponseBody
 	public AjaxResult addSave(Organization organization){
+		//获取上传的图片，保存
+		MultipartFile pic= organization.getPoscenepic();
+		String picname = pic.getOriginalFilename();
+		String fileurl = bFileUtil.saveImg(pic,picname);//存文件
+		organization.setPoscene(fileurl);
 		return toAjax(organizationService.insertOrganization(organization));
 	}
 

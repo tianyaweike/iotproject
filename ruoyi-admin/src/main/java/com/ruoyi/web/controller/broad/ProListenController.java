@@ -59,4 +59,20 @@ public class ProListenController extends BaseController{
             List<ProListen> list = iProListenService.selectProListenList(proListen);
             return getDataTable(list);
     }
+
+    @GetMapping("/play")
+    @RequiresPermissions("broad:prolisten:view")
+    public String proreApplyplay() {
+        return prefix + "/play";
+    }
+
+
+    @GetMapping("/pass/{paid}")
+    @RequiresPermissions("broad:prolisten:view")
+    @ResponseBody
+    public int checkpass(@PathVariable("paid") String paid) {
+
+        int row = iProListenService.checkpass(paid);
+        return row;
+    }
 }

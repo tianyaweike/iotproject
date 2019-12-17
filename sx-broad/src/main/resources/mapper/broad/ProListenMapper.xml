@@ -84,6 +84,11 @@
             <if test="submittime != null  and submittime != '' ">and submittime like CONCAT('%',#{submittime},'%')</if>
             <if test="iscancel != null  and iscancel != '' ">and iscancel like CONCAT('%',#{iscancel},'%')</if>
         </where>
+       order by paid desc
     </select>
+
+    <update id="checkpass" >
+        update prore_apply set islisten=true where paid =#{paid}
+    </update>
 
 </mapper>

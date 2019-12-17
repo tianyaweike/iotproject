@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.base.BaseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 终端表 tb_organization
@@ -181,12 +182,21 @@ public class Organization extends BaseEntity
     private String eovolume;
     /**现场照片*/
     private String poscene;
+    private MultipartFile poscenepic;
     /**父地域id*/
     private String parentaid;
     /**所属用户编号*/
     private String userid;
     /**心跳包时间*/
     private String hbtime;
+
+    public MultipartFile getPoscenepic() {
+        return poscenepic;
+    }
+
+    public void setPoscenepic(MultipartFile poscenepic) {
+        this.poscenepic = poscenepic;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

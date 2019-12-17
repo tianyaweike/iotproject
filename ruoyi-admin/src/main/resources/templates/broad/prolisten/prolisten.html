@@ -135,6 +135,41 @@
                             return "已回复"
                         }
                     }
+                },
+                 {
+                     field: 'urls',
+                     title: '试听',
+                     align: 'center',
+                     visible: true,
+                     formatter: function (value, row, index) {
+                         var actions = '<a class=\"btn btn-xs btn-success\"  onclick=listenmusic(\'' + value + '\')>试听</a>';
+                         return actions;
+                     }
+                 },
+                {
+                    field: 'islisten',
+                    title: '是否审听',
+                    formatter: function (value, row, index) {
+                        if(value){
+                            return "是";
+                        }else{
+                           return "否";
+                        }
+
+                    }
+                },
+                {
+                    field: 'operate',
+                    title: '操作',
+                    formatter: function (value, row, index) {
+                        if(row.islisten){
+                            return "审听已通过";
+                        }else{
+                            var actions = '<a class=\"btn btn-xs btn-success\"  onclick=pass(\'' + row.paid + '\')>通过</a> &nbsp;<a class=\"btn btn-xs btn-success\"  onclick=nopass(\'' + row.paid + '\')>不通过</a>';
+                            return actions;
+                        }
+
+                    }
                 }
             ]
         };
@@ -161,8 +196,6 @@
             type: 'time',
         });
     });
-</script>
-<script>
     laydate({
         elem:"#endtime",
         event:"focus"
@@ -180,6 +213,39 @@
             type: 'time',
         });
     });
+    //试听按钮函数
+    function listenmusic(value) {
+        layer.open({
+            type: 2,
+            maxmin: false,
+            shade: 0.3,
+            title: '试听',
+            fix: true,
+            area: ["350px", "120px"],
+            content: "/broad/prolisten/play",
+            shadeClose: false,
+            success:function(layero, index){
+                $(layero).find("iframe")[0].contentWindow.$("audio").val("src",value);
+            }
+        })
+    }
+    function pass(paid) {
+        $.get("/broad/prolisten/pass/"+paid, function(data){
+            if(data==1){
+                alert("修改成功");
+                $.table.refresh();
+            }
+        });
+    }
+    function nopass(paid) {
+        // $.get("/broad/prolisten/nopass/"+paid, function(data){
+        //     if(data==1){
+                alert("测试审听不通过"+paid);
+                // $.table.refresh();
+            // }
+        // });
+    }
+
 </script>
 </body>
 </html>

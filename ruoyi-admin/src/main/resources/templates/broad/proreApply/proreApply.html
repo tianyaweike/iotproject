@@ -118,7 +118,9 @@
 					title : '是否撤回',
 					sortable: true,
 					formatter:function (value, row, index) {
-						if(row.isread==1){
+						if(row.isreply=="已回复"){
+							return "已回复不可撤回"
+						}if(row.isread==1){
 							return "已阅读不可撤回"
 						}else if(row.iscancel=="已撤回"){
 							return "已撤回"
@@ -134,7 +136,6 @@
 					title : '是否回复',
 					sortable: true,
 					formatter:function (value, row, index) {
-						console.log(value, row, index)
 						var actions = [];
 						if(value=="已回复"){
 							// return actions.push('<a class="btn btn-success btn-xs" href="#" onclick="reply(\'' + row.paid +'\',\'' + row.pname + '\',\'' + row.uname + '\',\'' + row.userid + '\')"><i class="fa fa-edit"></i>已回复</a>');
@@ -227,7 +228,7 @@
 					 if ($.validate.form() && $(layero).find("iframe")[0].contentWindow.$("#replayfile")) {
 						 $.ajax({
                                  type : "POST",
-                                 url : prefix +"/reply",
+                                 url : "/broad/proreApply/reply",
                                  data : formData,
                                  async: false,
                                  cache: false,

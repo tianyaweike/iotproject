@@ -128,7 +128,7 @@ public class ProreApplyController extends BaseController
 							  @RequestParam(value="requires") String requires,
 							  @RequestParam(value="timelimit") String timelimit,
 							  @RequestParam(value="isemergency") String isemergency,
-							  @RequestParam(value="filename") String filename)throws IOException
+							  @RequestParam(value="pname") String panme)throws IOException
 	{
 		SimpleDateFormat sim=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String time=sim.format(new Date());
@@ -138,15 +138,13 @@ public class ProreApplyController extends BaseController
 
 		//存放节目名称、录制要求、是否紧急、时间要求、doc文件、filename要求文稿名称、fileurl文件路径、申请时间
 		ProreApply  proreApply = new ProreApply();
-		proreApply.setPname(file.getOriginalFilename());
+		proreApply.setPname(panme);
 		proreApply.setUserid(userId);
 		proreApply.setRequires(requires);
 		proreApply.setIsemergency(isemergency=="true"?true:false);
 		proreApply.setTimelimit(timelimit);
-		proreApply.setFilename(bConst.FILEPATHAPPLY+filename);
 		proreApply.setFileurl(fileurl);
 		proreApply.setSubmittime(time);
-
 		return toAjax(proreApplyService.insertProreApply(proreApply));
 	}
 
@@ -206,7 +204,7 @@ public class ProreApplyController extends BaseController
 	@Log(title = "修改节目申请", businessType = BusinessType.UPDATE)
 	@PostMapping("/reply")
 	@ResponseBody
-	public String replyfile(String paid,String replyperson,MultipartFile file,String userid){
+	public AjaxResult replyfile(String paid,String replyperson,MultipartFile file,String userid){
 		SimpleDateFormat sim=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String time=sim.format(new Date());
 
@@ -216,19 +214,19 @@ public class ProreApplyController extends BaseController
 
 		String maxfileid = iProgramService.getMaxFileidofYear(year);
 		Program g = bFileUtil.uplodeFile(maxfileid, file, file.getOriginalFilename(),duration, String.valueOf(file.getSize()), year, userid);
+		g.setPtype(true);
+		g.setCreatedtime(time);
 		g.setIspublic(false);
 		iProgramService.insertProgram(g);
 
+
+		System.out.println(Integer.valueOf(paid));
 		proreApply.setPaid(Integer.parseInt(paid));
 		proreApply.setReplyperson(replyperson);
 		proreApply.setReplytime(time);
 		proreApply.setFileurl(g.getUrls());
 		proreApply.setIsreply(true);
-		int row = proreApplyService.updateProreApply(proreApply);
-		if(row==1){
-			return "success";
-		}
-		return "";
+		return toAjax(proreApplyService.updateProreApply(proreApply));
 	}
 
 }

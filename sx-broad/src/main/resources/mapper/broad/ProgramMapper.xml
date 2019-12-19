@@ -108,7 +108,7 @@
 	     flenth,
 	     fsize,
 	     createdtime,
-	     islisten,ptype,uname
+	     islisten,ptype
 		) values (
 	     #{fname},
          #{filename},
@@ -119,7 +119,7 @@
 	     #{flenth},
 	     #{fsize},
 	     #{createdtime},
-	     #{islisten},#{ptype},#{uname}
+	     #{islisten},#{ptype}
 		)
     </insert>
 

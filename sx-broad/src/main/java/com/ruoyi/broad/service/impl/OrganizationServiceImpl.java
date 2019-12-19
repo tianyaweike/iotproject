@@ -357,13 +357,13 @@ public class OrganizationServiceImpl implements IOrganizationService
 
 	@Override
 	@DataSource(value = DataSourceType.SLAVE)
-	public int terinfoeditphone(String time, List<String> tids) {
-		return organizationMapper.terinfoeditphone(time,tids);
+	public int terinfoeditphone(List<Organization> organizations) {
+		return organizationMapper.terinfoeditphone(organizations);
 	}
 
 	@Override
 	@DataSource(value = DataSourceType.SLAVE)
-	public int terinfoeditphonedelete(String time, List<String> tids) {
+	public int terinfoeditphonedelete(String time,List<String> tids) {
 		return organizationMapper.terinfoeditphonedelete(time,tids);
 	}
 }

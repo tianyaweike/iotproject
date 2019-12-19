@@ -286,6 +286,7 @@
         left join terminal_traffic on t.tid = terminal_traffic.tid
         )
         <where>
+            <if test="userid != null  and userid != '' "> and t.userid = #{userid}</if>
             <if test="tid != null  and tid != '' "> and t.tid = #{tid}</if>
             <if test="tname != null  and tname != '' "> and t.tname = #{tname}</if>
             <if test="username != null  and username != '' "> and userinfo.uname = #{uname}</if>
@@ -647,15 +648,16 @@
         </foreach>
     </update>
 
-    <update id="terinfoeditphone">
-        update  terminals set atphone = #{param1} where tid  in
-        <foreach collection="arg1" item="arg" open="(" close=")" separator=",">
-            #{arg}
-        </foreach>
-    </update>
+    <insert id="terinfoeditphone">
+        insert into terminaltels (tid, Tel, telperson)
+        VALUES
+        <foreach collection ="list" item="item" separator =",">
+            (#{item.tid}, #{item.atphone}, #{item.manager})
+        </foreach >
+    </insert>
 
     <update id="terinfoeditphonedelete">
-        update  terminals set atphone = #{param1} where tid  in
+        delete from terminaltels where Tel = #{param1} and tid  in
         <foreach collection="arg1" item="arg" open="(" close=")" separator=",">
             #{arg}
         </foreach>

@@ -181,7 +181,7 @@ public interface OrganizationMapper
 
 	int terinfoeditfrequency(String time,List<String> sfids);
 
-	int terinfoeditphone(String time,List<String> sfids);
+	int terinfoeditphone(List<Organization> organizations);
 
 	int terinfoeditphonedelete(String time,List<String> sfids);
 

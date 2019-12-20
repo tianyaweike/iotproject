@@ -2,138 +2,98 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.iot.mapper.TorrentMapper">
-    
-    <resultMap type="Torrent" id="TorrentResult">
-        <result property="dataid"    column="dataid"    />
-        <result property="IMEI"    column="IMEI"    />
-        <result property="pow1"    column="pow1"    />
-        <result property="grouppow"    column="grouppow"    />
-        <result property="outv1"    column="outv1"    />
-        <result property="outv2"    column="outv2"    />
-        <result property="v24"    column="v24"    />
-        <result property="v28"    column="v28"    />
-        <result property="extendpow"    column="extendpow"    />
-        <result property="solarpow"    column="solarpow"    />
-        <result property="charge"    column="charge"    />
-        <result property="work"    column="work"    />
-        <result property="time"    column="time"    />
-        <result property="iP"    column="IP"    />
-    </resultMap>
-	
-	<sql id="selectTorrentVo">
-        select dataid, IMEI, pow1, grouppow, outv1, outv2, v24, v28, extendpow, solarpow, charge, work, time, IP from torrent
-    </sql>
+<mapper namespace="com.ruoyi.iot.mapper.LEDMapper">
 
+    <resultMap type="LED" id="LEDResult">
+        <result property="led_id"    column="led_id"    />
+        <result property="led_status"    column="led_status"    />
+        <result property="led_bright"    column="led_bright"    />
+        <result property="screen_wide"    column="screen_wide"    />
+        <result property="screen_high"    column="screen_high"    />
+        <result property="screen_status"    column="screen_status"    />
+
+    </resultMap>
+    <!--查询整张表的信息-->
+	<sql id="selectLED">
+    select led_id,led_status,led_bright,screen_wide,screen_high,screen_status from iot_led
+    </sql>
+    <!--统计表中记录数-->
     <select id="countall" resultType="Integer">
         select
                count(*)
-        from torrent
+        from iot_led
     </select>
 
-    <select id="devicecount" resultType="Integer">
-        select
-            count(*)
-        from client
-    </select>
-
-    <select id="selectTorrentList" parameterType="Torrent" resultMap="TorrentResult">
-        <include refid="selectTorrentVo"/>
+    <!--查询表的所有列表信息-->
+    <select id="selectLEDList" parameterType="LED" resultMap="LEDResult">
+        <include refid="selectLED"/>
         <where>  
-            <if test="dataid != null "> and dataid = #{dataid}</if>
-             <if test="IMEI != null  and IMEI != '' "> and IMEI = #{IMEI}</if>
-             <if test="pow1 != null  and pow1 != '' "> and pow1 = #{pow1}</if>
-             <if test="grouppow != null  and grouppow != '' "> and grouppow = #{grouppow}</if>
-             <if test="outv1 != null  and outv1 != '' "> and outv1 = #{outv1}</if>
-             <if test="outv2 != null  and outv2 != '' "> and outv2 = #{outv2}</if>
-             <if test="v24 != null  and v24 != '' "> and v24 = #{v24}</if>
-             <if test="v28 != null  and v28 != '' "> and v28 = #{v28}</if>
-             <if test="extendpow != null  and extendpow != '' "> and extendpow = #{extendpow}</if>
-             <if test="solarpow != null  and solarpow != '' "> and solarpow = #{solarpow}</if>
-             <if test="charge != null  and charge != '' "> and charge = #{charge}</if>
-             <if test="work != null  and work != '' "> and work = #{work}</if>
-             <if test="time != null "> and time = #{time}</if>
-             <if test="iP != null  and iP != '' "> and IP = #{iP}</if>
+            <if test="led_id != null "> and led_id = #{led_id}</if>
+             <if test="led_status!= null  and led_status!= '' "> and led_status= #{led_status}</if>
+             <if test="led_bright != null  and led_bright != '' "> and led_bright = #{led_bright}</if>
+             <if test="screen_wide != null  and screen_wide != '' "> and screen_wide = #{screen_wide}</if>
+             <if test="screen_high != null  and screen_high != '' "> and screen_high = #{screen_high}</if>
+             <if test="screen_status != null  and screen_status != '' "> and screen_status = #{screen_status}</if>
+
          </where>
-         order by dataid desc
+         order by led_id desc
     </select>
-    
-    <select id="selectTorrentById" parameterType="Integer" resultMap="TorrentResult">
-        <include refid="selectTorrentVo"/>
-        where dataid = #{dataid}
+
+    <!--根据ID查询信息-->
+    <select id="selectLEDById" parameterType="Integer" resultMap="LEDResult">
+        <include refid="selectLED"/>
+        where led_id = #{led_id}
     </select>
-        
-    <insert id="insertTorrent" parameterType="Torrent">
-        insert into torrent
+
+    <!--向表中插入新数据-->
+    <insert id="insertLED" parameterType="LED">
+        insert into iot_led
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="dataid != null  ">dataid,</if>
-			<if test="IMEI != null  and IMEI != ''  ">IMEI,</if>
-			<if test="pow1 != null  and pow1 != ''  ">pow1,</if>
-			<if test="grouppow != null  and grouppow != ''  ">grouppow,</if>
-			<if test="outv1 != null  and outv1 != ''  ">outv1,</if>
-			<if test="outv2 != null  and outv2 != ''  ">outv2,</if>
-			<if test="v24 != null  and v24 != ''  ">v24,</if>
-			<if test="v28 != null  and v28 != ''  ">v28,</if>
-			<if test="extendpow != null  and extendpow != ''  ">extendpow,</if>
-			<if test="solarpow != null  and solarpow != ''  ">solarpow,</if>
-			<if test="charge != null  and charge != ''  ">charge,</if>
-			<if test="work != null  and work != ''  ">work,</if>
-			<if test="time != null  ">time,</if>
-			<if test="iP != null  and iP != ''  ">IP,</if>
+			<if test="led_id != null  ">led_id,</if>
+			<if test="led_status!= null  and led_status!= ''  ">led_status,</if>
+			<if test="led_bright != null  and led_bright != ''  ">led_bright,</if>
+			<if test="screen_wide != null  and screen_wide != ''  ">screen_wide,</if>
+			<if test="screen_high != null  and screen_high != ''  ">screen_high,</if>
+			<if test="screen_status != null  and screen_status != ''  ">screen_status,</if>
+
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="dataid != null  ">#{dataid},</if>
-			<if test="IMEI != null  and IMEI != ''  ">#{IMEI},</if>
-			<if test="pow1 != null  and pow1 != ''  ">#{pow1},</if>
-			<if test="grouppow != null  and grouppow != ''  ">#{grouppow},</if>
-			<if test="outv1 != null  and outv1 != ''  ">#{outv1},</if>
-			<if test="outv2 != null  and outv2 != ''  ">#{outv2},</if>
-			<if test="v24 != null  and v24 != ''  ">#{v24},</if>
-			<if test="v28 != null  and v28 != ''  ">#{v28},</if>
-			<if test="extendpow != null  and extendpow != ''  ">#{extendpow},</if>
-			<if test="solarpow != null  and solarpow != ''  ">#{solarpow},</if>
-			<if test="charge != null  and charge != ''  ">#{charge},</if>
-			<if test="work != null  and work != ''  ">#{work},</if>
-			<if test="time != null  ">#{time},</if>
-			<if test="iP != null  and iP != ''  ">#{iP},</if>
+			<if test="led_id != null  ">#{led_id},</if>
+			<if test="led_status != null  and led_status != ''  ">#{led_status},</if>
+			<if test="led_bright != null  and led_bright != ''  ">#{led_bright},</if>
+			<if test="screen_wide != null  and screen_wide != ''  ">#{screen_wide},</if>
+			<if test="screen_high != null  and screen_high != ''  ">#{screen_high},</if>
+			<if test="screen_status != null  and screen_status != ''  ">#{screen_status},</if>
+
          </trim>
     </insert>
-	 
-    <update id="updateTorrent" parameterType="Torrent">
-        update torrent
+
+    <!--更新数据-->
+    <update id="updateLED" parameterType="LED">
+        update iot_led
         <trim prefix="SET" suffixOverrides=",">
-            <if test="IMEI != null  and IMEI != ''  ">IMEI = #{IMEI},</if>
-            <if test="pow1 != null  and pow1 != ''  ">pow1 = #{pow1},</if>
-            <if test="grouppow != null  and grouppow != ''  ">grouppow = #{grouppow},</if>
-            <if test="outv1 != null  and outv1 != ''  ">outv1 = #{outv1},</if>
-            <if test="outv2 != null  and outv2 != ''  ">outv2 = #{outv2},</if>
-            <if test="v24 != null  and v24 != ''  ">v24 = #{v24},</if>
-            <if test="v28 != null  and v28 != ''  ">v28 = #{v28},</if>
-            <if test="extendpow != null  and extendpow != ''  ">extendpow = #{extendpow},</if>
-            <if test="solarpow != null  and solarpow != ''  ">solarpow = #{solarpow},</if>
-            <if test="charge != null  and charge != ''  ">charge = #{charge},</if>
-            <if test="work != null  and work != ''  ">work = #{work},</if>
-            <if test="time != null  ">time = #{time},</if>
-            <if test="iP != null  and iP != ''  ">IP = #{iP},</if>
+            <if test="led_status != null  and led_status != ''  ">led_status = #{led_status},</if>
+            <if test="led_bright != null  and led_bright != ''  ">led_bright = #{led_bright},</if>
+            <if test="screen_wide != null  and screen_wide != ''  ">screen_wide = #{screen_wide},</if>
+            <if test="screen_high != null  and screen_high != ''  ">screen_high = #{screen_high},</if>
+            <if test="screen_status != null  and screen_status != ''  ">screen_status = #{screen_status},</if>
+
         </trim>
-        where dataid = #{dataid}
+        where led_id = #{led_id}
     </update>
 
-	<delete id="deleteTorrentById" parameterType="Integer">
-        delete from torrent where dataid = #{dataid}
+    <!--根据ID删除-->
+	<delete id="deleteLEDById" parameterType="Integer">
+        delete from iot_led where led_id = #{led_id}
     </delete>
-	
-    <delete id="deleteTorrentByIds" parameterType="String">
-        delete from torrent where dataid in 
-        <foreach item="dataid" collection="array" open="(" separator="," close=")">
-            #{dataid}
+
+    <!--批量删除-->
+    <delete id="deleteLEDByIds" parameterType="String">
+        delete from iot_led where led_id in
+        <foreach item="led_id" collection="array" open="(" separator="," close=")">
+            #{led_id}
         </foreach>
     </delete>
 
-    <select id="selectTorrentByitl" parameterType="IotgetPa" resultMap="TorrentResult">
-        <include refid="selectTorrentVo"/>
-        where IMEI=#{IMEI} and time between #{begintime} AND #{endtime}
-        order by time asc
-        limit 0,#{limit}
-    </select>
+
 </mapper>

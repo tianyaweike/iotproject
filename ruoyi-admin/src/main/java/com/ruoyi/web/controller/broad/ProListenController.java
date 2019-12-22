@@ -53,8 +53,7 @@ public class ProListenController extends BaseController{
     @RequiresPermissions("broad:prolisten:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(ProListen proListen)
-    {
+    public TableDataInfo list(ProListen proListen){
             startPage();
             List<ProListen> list = iProListenService.selectProListenList(proListen);
             return getDataTable(list);
@@ -70,9 +69,20 @@ public class ProListenController extends BaseController{
     @GetMapping("/pass/{paid}")
     @RequiresPermissions("broad:prolisten:view")
     @ResponseBody
-    public int checkpass(@PathVariable("paid") String paid) {
+    public AjaxResult checkpass(@PathVariable("paid") String paid) {
+        return toAjax(iProListenService.checkpass(paid));
+    }
 
-        int row = iProListenService.checkpass(paid);
-        return row;
+    @GetMapping("/nopassreason")
+    @RequiresPermissions("broad:prolisten:view")
+    public String nopassreason() {
+        return prefix + "/nopassreason";
+    }
+
+    @PostMapping("/nopassreason")
+    @RequiresPermissions("broad:prolisten:view")
+    @ResponseBody
+    public AjaxResult nopassreason(ProListen proListen) {
+        return toAjax(iProListenService.updateProListen(proListen));
     }
 }

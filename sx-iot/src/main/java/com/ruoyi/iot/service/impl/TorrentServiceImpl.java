@@ -14,74 +14,74 @@ import com.ruoyi.common.support.Convert;
 
 /**
  * 终端运转 服务层实现
- * 
+ *
  * @author 张超
  * @date 2019-03-03
  */
 @Service
-public class TorrentServiceImpl implements ITorrentService 
+public class TorrentServiceImpl implements ITorrentService
 {
 	@Autowired
 	private TorrentMapper torrentMapper;
 
 	/**
-     * 查询终端运转信息
-     * 
-     * @param dataid 终端运转ID
-     * @return 终端运转信息
-     */
-    @Override
+	 * 查询终端运转信息
+	 *
+	 * @param dataid 终端运转ID
+	 * @return 终端运转信息
+	 */
+	@Override
 	@DataSource(value = DataSourceType.SXINFOM)
 	public Torrent selectTorrentById(Integer dataid)
 	{
-	    return torrentMapper.selectTorrentById(dataid);
+		return torrentMapper.selectTorrentById(dataid);
 	}
-	
+
 	/**
-     * 查询终端运转列表
-     * 
-     * @param torrent 终端运转信息
-     * @return 终端运转集合
-     */
+	 * 查询终端运转列表
+	 *
+	 * @param torrent 终端运转信息
+	 * @return 终端运转集合
+	 */
 	@Override
 	@DataSource(value = DataSourceType.SXINFOM)
 	public List<Torrent> selectTorrentList(Torrent torrent)
 	{
-	    return torrentMapper.selectTorrentList(torrent);
+		return torrentMapper.selectTorrentList(torrent);
 	}
-	
-    /**
-     * 新增终端运转
-     * 
-     * @param torrent 终端运转信息
-     * @return 结果
-     */
+
+	/**
+	 * 新增终端运转
+	 *
+	 * @param torrent 终端运转信息
+	 * @return 结果
+	 */
 	@Override
 	@DataSource(value = DataSourceType.SXINFOM)
 	public int insertTorrent(Torrent torrent)
 	{
-	    return torrentMapper.insertTorrent(torrent);
+		return torrentMapper.insertTorrent(torrent);
 	}
-	
+
 	/**
-     * 修改终端运转
-     * 
-     * @param torrent 终端运转信息
-     * @return 结果
-     */
+	 * 修改终端运转
+	 *
+	 * @param torrent 终端运转信息
+	 * @return 结果
+	 */
 	@Override
 	@DataSource(value = DataSourceType.SXINFOM)
 	public int updateTorrent(Torrent torrent)
 	{
-	    return torrentMapper.updateTorrent(torrent);
+		return torrentMapper.updateTorrent(torrent);
 	}
 
 	/**
-     * 删除终端运转对象
-     * 
-     * @param ids 需要删除的数据ID
-     * @return 结果
-     */
+	 * 删除终端运转对象
+	 *
+	 * @param ids 需要删除的数据ID
+	 * @return 结果
+	 */
 	@Override
 	@DataSource(value = DataSourceType.SXINFOM)
 	public int deleteTorrentByIds(String ids)

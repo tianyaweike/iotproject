@@ -20,6 +20,34 @@ public class bFileUtil {
      * @return 返回相对路径
      */
     public static String saveImg(MultipartFile file,String saveName) {
+        String  path = bConstant.UPLOAD_PATH + bConstant.VIRTUAL_IMG_PATH; //图片存储路径
+        //拿到文件的后缀名和UUID进行拼接形成新的文件名
+        //4ca64e85b1544c96b4a6154bb521476f.jpg
+        saveName = bCommonUtil.getUuid() + "." + getFileSuffix(file.getOriginalFilename());
+        logger.info(" --- 终端图片保存路径：{}, 终端图片保存名称：{},终端图片名称：{} --- ", path, saveName,file.getOriginalFilename());
+        // 保存
+        try {
+            // 保存文件音频
+            File targetFile = new File(path);
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+            }
+            file.transferTo(new File(path + "/" + saveName));  //文件保存，写入硬盘
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("--- 音频保存异常：{} ---" + e.getMessage());
+            return null;
+        }
+        String filePath =  bConstant.UPLOAD_PATH;
+        //返回相对路径  img/virtual/4ca64e85b1544c96b4a6154bb521476f.jpg
+        return saveName; //filePath + "/" + saveName
+    }
+    /**
+     * 图片存储 完整路径（{user.home}/img/coldStone/XXX.jpg）
+     * @param file
+     * @return 返回相对路径
+     */
+    public static String saveMusic(MultipartFile file,String saveName) {
         //获取文件上传的根目录 C:\Users\wanghao/upload/img
         String  path = bConstant.UPLOAD_PATH + bConstant.MP3_FILE_NAME; //改为bConstant.UPLOAD_PATH
 
@@ -32,8 +60,8 @@ public class bFileUtil {
         try {
             // 保存文件音频
             File targetFile = new File(path);
-                if (!targetFile.exists()) {
-                    targetFile.mkdirs();
+            if (!targetFile.exists()) {
+                targetFile.mkdirs();
             }
             file.transferTo(new File(path + "/" + saveName));  //文件保存，写入内存
         } catch (Exception e) {
@@ -45,6 +73,7 @@ public class bFileUtil {
         //返回相对路径  img/virtual/4ca64e85b1544c96b4a6154bb521476f.jpg
         return saveName; //filePath + "/" + saveName
     }
+
     /**
      * 返回截取的文件后缀
      * @param path
@@ -117,14 +146,14 @@ public class bFileUtil {
                 //System.out.println("fname:--"+fname);
                 g.setFname(fname); //fname.substring(0, fname.lastIndexOf("."))
                 //String filePath = bPathUtil.getClasspath() + bConst.FILEPATHPER;			//文件上传路径
-                String mp3 = saveImg(file,filename);//////////////////////////
+                String mp3 = saveMusic(file,filename);//////////////////////////
                 //System.out.println("filename:--"+filename);
                 g.setFilename(filename);
                 //System.out.println("Userid:--"+bJurisdiction.getUserid()); //有错误///////////////////////////////
                 //g.setUserid(bJurisdiction.getUserid());
-                //System.out.println("Address:--"+bPathUtil.getClasspath() + bConst.FILEPATHPER+path);
+                System.out.println("Address:--"+bPathUtil.getClasspath() + bConst.FILEPATHPER);
                 g.setAddress(bPathUtil.getClasspath() + bConst.FILEPATHPER+mp3);
-                //System.out.println("Urls:--"+bConst.FILEPATHPER+path);
+                System.out.println("Urls:--"+bConst.FILEPATHPER);
                 g.setUrls(bConst.FILEPATHPER+mp3);
                 g.setUserid(uname);
                 //System.out.println("Createdtime:--"+df.format(new Date()));

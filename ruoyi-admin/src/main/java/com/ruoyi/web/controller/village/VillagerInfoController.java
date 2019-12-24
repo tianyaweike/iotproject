@@ -5,11 +5,17 @@ import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.page.TableDataInfo;
+import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.base.BaseController;
+import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.village.domain.Files;
 import com.ruoyi.village.domain.VillagerInfo;
 import com.ruoyi.village.service.IVillagerInfoService;
+import com.ruoyi.village.util.bFileUtil1;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +41,8 @@ public class VillagerInfoController extends BaseController
 
 	@Autowired
 	private IVillagerInfoService villagerInfoService;
-	
+	@Autowired
+	private ISysUserService sysUserService;
 	@RequiresPermissions("village:villagerInfo:view")
 	@GetMapping()
 	public String villagerInfo()
@@ -74,21 +81,80 @@ public class VillagerInfoController extends BaseController
 	 * 新增村民
 	 */
 	@GetMapping("/add")
-	public String add()
+	public String add(ModelMap mmap)
 	{
-	    return prefix + "/add";
+//从session中获取当前登陆用户的 username、phone、userid
+		SysUser currentUser = ShiroUtils.getSysUser();
+		String username =  currentUser.getUserName();
+		Long userid =  currentUser.getUserId();
+		String aid;
+		int returnId = new Long(userid).intValue();
+		//通过所获取的userid去广播用户表中查询用户所属区域的Aid
+		aid = sysUserService.selectAid(returnId);
+		//	将aid、fname、uname传至add.html中
+		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
+		mmap.put("userid", userid);
+		mmap.put("uname", username);
+		return prefix + "/add";
 	}
 	
 	/**
 	 * 新增保存村民
 	 */
-	@RequiresPermissions("village:villagerInfo:add")
+	//@RequiresPermissions("village:villagerInfo:add")
 	@Log(title = "村民", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
+	/*这里支持多文件上传*/
+	/*这里加入Project project是为了获得html页面form返回来的数据*/
 	@ResponseBody
 	public AjaxResult addSave(VillagerInfo villagerInfo)
-	{		
-		return toAjax(villagerInfoService.insertVillagerInfo(villagerInfo));
+	{
+		String year = DateUtil.getYear();
+
+		Date date = new Date();
+		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyyMMddhhmmss");
+		System.out.println(dateFormat.format(date));
+		String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名，防止储存同名文件
+	//	文件上传调用工具类
+ 		int i;
+        String personaddress = "";
+ 		for(i=0;i<villagerInfo.getPersonphotolist().length;i++){
+            Files g = bFileUtil1.uplodeFilepic(maxfileid, villagerInfo.getPersonphotolist()[i],villagerInfo.getPersonphotolist()[i].getName(), String.valueOf(villagerInfo.getPersonphotolist()[i].getSize()),year);
+            personaddress = personaddress + g.getAddress() + ";";//通过fileaddress来储存文件地址
+        }
+        villagerInfo.setPersonphoto(personaddress);
+
+ 		String hkaddress="";
+        for(i=0;i<villagerInfo.getHkphotolist().length;i++){
+            Files g = bFileUtil1.uplodeFilepic(maxfileid, villagerInfo.getHkphotolist()[i],villagerInfo.getHkphotolist()[i].getName(), String.valueOf(villagerInfo.getHkphotolist()[i].getSize()),year);
+            hkaddress = hkaddress + g.getAddress() + ";";//通过fileaddress来储存文件地址
+        }
+        villagerInfo.setHkphoto(hkaddress);
+
+        String idaddress="";
+        for(i=0;i<villagerInfo.getIdphotolist().length;i++){
+            Files g = bFileUtil1.uplodeFilepic(maxfileid, villagerInfo.getIdphotolist()[i],villagerInfo.getIdphotolist()[i].getName(), String.valueOf(villagerInfo.getIdphotolist()[i].getSize()),year);
+            idaddress = idaddress + g.getAddress() + ";";//通过fileaddress来储存文件地址
+        }
+        villagerInfo.setIdphoto(idaddress);
+
+        String caraddress="";
+        for(i=0;i<villagerInfo.getCarphotolist().length;i++){
+            Files g = bFileUtil1.uplodeFilepic(maxfileid, villagerInfo.getCarphotolist()[i],villagerInfo.getCarphotolist()[i].getName(), String.valueOf(villagerInfo.getCarphotolist()[i].getSize()),year);
+            caraddress = caraddress + g.getAddress() + ";";//通过fileaddress来储存文件地址
+        }
+        villagerInfo.setCarphoto(caraddress);
+
+        String houseohoto="";
+        for(i=0;i<villagerInfo.getHousephotolist().length;i++){
+            Files g = bFileUtil1.uplodeFilepic(maxfileid, villagerInfo.getHousephotolist()[i],villagerInfo.getHousephotolist()[i].getName(), String.valueOf(villagerInfo.getHousephotolist()[i].getSize()),year);
+            houseohoto = houseohoto + g.getAddress() + ";";//通过fileaddress来储存文件地址
+        }
+        villagerInfo.setHousephoto(houseohoto);
+        villagerInfoService.insertVillagerInfo(villagerInfo);
+
+
+		return toAjax(1);
 	}
 
 	/**

@@ -96,7 +96,7 @@
 <!--				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="broad:per:remove">-->
 <!--					<i class="fa fa-remove"></i> 删除-->
 <!--				</a>-->
-				<a class="btn btn-warning" onclick="$.table.exportExcel()">
+				<a class="btn btn-warning" onclick="$.operate.exportExcelBySingle()">
 						<i class="fa fa-download"></i> 导出
 				 </a>
 			</div>
@@ -124,6 +124,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
+				exportBySingleUrl: prefix + "/exportbysingle",
                 modalName: "节目单管理",
                 search: false,
 				showExport: false,
@@ -199,8 +200,8 @@
                         align: 'center',
                         visible: true,
                         formatter: function (value, row, index) {
-                            var msg = '<a class="btn btn-xs btn-primary" >设为公共</a> ';
-                            var actions = '<a class="btn btn-xs btn-success">设为非公共</a>';
+                            var msg = '<a class="btn btn-xs btn-primary" onclick=setIsPublic(\'' + row.fid + '\') >设为公共</a> ';
+                            var actions = '<a class="btn btn-xs btn-success" onclick=setIsPublic(\'' + row.fid + '\')>设为非公共</a>';
                             if (row.ispublic == 0) {
                                 return msg;
                             } else {
@@ -257,6 +258,15 @@
 			window.location.href = value;
             console.log(value);
         }
+
+        function setIsPublic(rowid) {
+			$.get("/broad/per/setispublic/"+rowid, function(data){
+				if(data==1){
+					alert("修改成功");
+					$.table.refresh();
+				}
+			});
+		}
 
      </script>
 

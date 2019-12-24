@@ -108,7 +108,7 @@
 	     flenth,
 	     fsize,
 	     createdtime,
-	     islisten,ptype,uname
+	     islisten,ptype
 		) values (
 	     #{fname},
          #{filename},
@@ -119,7 +119,7 @@
 	     #{flenth},
 	     #{fsize},
 	     #{createdtime},
-	     #{islisten},#{ptype},#{uname}
+	     #{islisten},#{ptype}
 		)
     </insert>
 
@@ -129,4 +129,22 @@
             #{fid}
         </foreach>
     </delete>
+
+    <select id="selectProgramListByids" parameterType="java.util.List" resultMap="programMap">
+        select
+        fid,fname,g.userid as userid,remark,ispublic,filename,urls,address,createdtime,ptype,flenth,fsize,ui.uname
+        from
+        <include refid="tableName"></include> g
+        LEFT JOIN <include refid="userstable"></include> ui on g.userid=ui.userid
+        where
+        fid in
+        <foreach collection="list" item="sfid" open="(" close=")" separator=",">
+            #{sfid}
+        </foreach>
+        order by  createdtime desc,fid desc
+    </select>
+
+    <update id="setIsPublic" parameterType="String">
+        update programs SET ispublic= not ispublic where fid=#{fid}
+    </update>
 </mapper>

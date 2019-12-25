@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.iot.mapper.BroadMapper">
+
+    <resultMap type="Broad" id="BroadResult">
+        <id property="broad_id"    column="broad_id"    />
+        <result property="address"    column="address"    />
+        <result property="statue"    column="statue"    />
+        <result property="details"    column="details"    />
+        <result property="runtime"    column="runtime"    />
+    </resultMap>
+
+    <!--定义selectLed为查询整表命令-->
+    <sql id="selectBroad">
+    select broad_id,address,statue,details,runtime from iot_broad
+    </sql>
+
+
+    <!--查询表的所有列表信息-->
+    <select id="selectBroadList" parameterType="Broad" resultMap="BroadResult">
+        <include refid="selectBroad"/>
+        <!--<where>
+            <if test="broad_id != null and broad_id='' "> and broad_id = #{broad_id}</if>
+            <if test="location != null  and location != '' "> and location = #{location}</if>
+            <if test="statue != null  and statue != '' "> and statue = #{statue}</if>
+            <if test="details != null  and details != '' "> and details = #{details}</if>
+        </where>
+        order by broad_id desc
+        -->
+    </select>
+
+    <!--根据ID查询信息-->
+    <select id="selectBroadById" parameterType="String" resultMap="BroadResult">
+        <include refid="selectBroad"/>
+        where broad_id=#{broad_id}
+        <!-- select
+         a.broad_id as broad_id,
+         a.location as location,
+         a.statue as statue,
+         a.details as details,
+         a.econdu as econdu
+         from iot_led a
+         -->
+        <!--
+        <where>
+            <if test="broad_id != null  and broad_id != '' ">and a.broad_id like CONCAT(#{broad_id},'%')</if>
+            <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
+        </where>
+        -->
+    </select>
+
+    <!--向表中插入新数据-->
+    <insert id="insertBroad" parameterType="Broad">
+        insert into iot_broad
+        (
+        <if test="broad_id != null and broad_id!='' ">broad_id,</if>
+        <if test="address != null  and address != ''  ">address,</if>
+        <if test="statue != null  and statue != ''  ">statue,</if>
+        <if test="details != null  and details != ''  ">details,</if>
+        runtime
+        )
+        values(
+        <if test="broad_id != null and broad_id!='' ">#{broad_id},</if>
+        <if test="address != null  and address != ''  ">#{address},</if>
+        <if test="statue != null  and statue != ''  ">#{statue},</if>
+        <if test="details != null  and details != ''  ">#{details},</if>
+        sysdate()
+        )
+    </insert>
+
+    <!--更新数据-->
+    <update id="updateBroad" parameterType="Broad">
+        update iot_broad
+        <set>
+            <if test="broad_id !=null and broad_id !=''">broad_id = #{broad_id},</if>
+            <if test="address != null  and address != ''  ">address = #{address},</if>
+            <if test="statue != null  and statue != ''  ">statue = #{statue},</if>
+            <if test="details != null  and details != ''  ">details = #{details},</if>
+        </set>
+        where broad_id = #{broad_id}
+    </update>
+
+    <!--根据ID删除-->
+    <delete id="deleteBroadById" parameterType="String">
+        delete from iot_braod where broad_id = #{broad_id}
+    </delete>
+
+    <!--批量删除
+    <delete id="deleteBroadByIds" parameterType="String">
+        delete from iot_broad where broad_id in
+        <foreach item="broad_id" collection="array" open="(" separator="," close=")">
+            #{broad_id}
+        </foreach>
+    </delete>
+     -->
+</mapper>

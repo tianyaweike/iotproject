@@ -32,7 +32,6 @@
         <include refid="selectBlowdown"/>
         <!--<where>
             <if test="sid != null and sid='' "> and sid = #{sid}</if>
-
             <if test="location != null  and location != '' "> and location = #{location}</if>
             <if test="Hmental != null  and Hmental != '' "> and Hmental = #{Hmental}</if>
             <if test="PH != null  and PH != '' "> and PH = #{PH}</if>
@@ -48,7 +47,6 @@
         where sid=#{sid}
         <!-- select
          a.sid as sid,
-
          a.location as location,
          a.Hmental as Hmental,
          a.PH as PH,
@@ -68,7 +66,6 @@
         insert into iot_Blowndown
         (
         <if test="sid != null and sid!='' ">sid,</if>
-
         <if test="location != null  and location != ''  ">location,</if>
         <if test="Hmental != null  and Hmental != ''  ">Hmental,</if>
         <if test="PH != null  and PH != ''  ">PH,</if>
@@ -77,7 +74,6 @@
         )
         values(
         <if test="sid != null and sid!='' ">#{sid},</if>
-
         <if test="location != null  and location != ''  ">#{location},</if>
         <if test="Hmental != null  and Hmental != ''  ">#{Hmental},</if>
         <if test="PH != null  and PH != ''  ">#{PH},</if>
@@ -91,7 +87,6 @@
         update iot_Blowdown
         <set>
             <if test="sid !=null and sid !=''">sid = #{sid},</if>
-
             <if test="location != null  and location != ''  ">location = #{location},</if>
             <if test="Hmental != null  and Hmental != ''  ">Hmental = #{Hmental},</if>
             <if test="PH != null  and PH != ''  ">PH = #{PH},</if>

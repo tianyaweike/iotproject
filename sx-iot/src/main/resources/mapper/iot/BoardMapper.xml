@@ -8,11 +8,8 @@
         <id property="board_id"    column="board_id"    />
         <result property="control"    column="control"    />
         <result property="working"    column="working"    />
-        <result property="screen_wide"    column="screen_wide"    />
-        <result property="screen_high"    column="screen_high"    />
-        <result property="screen_status"    column="screen_status"    />
-
     </resultMap>
+
     <!--定义selectBoard为查询整表命令-->
     <sql id="selectBoard">
     select board_id,control,working from iot_board

@@ -18,7 +18,7 @@ import java.util.List;
  * @create: 2019-12-25 17:30
  **/
 @Service
-public class EnvironlServiceImpl implements EnvironlService {
+public class EnvironlServiceImpl  implements EnvironlService {
     @Autowired
     private EnvironlMapper environlMapper;
 

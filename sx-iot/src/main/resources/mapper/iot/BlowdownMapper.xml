@@ -16,7 +16,7 @@
 
     <!--定义selectLed为查询整表命令-->
     <sql id="selectBlowdown">
-    select sid,monitortime,location,Hmental,PH,econdu from iot_Blowdown
+    select sid,monitortime,location,Hmental,PH,econdu from iot_blowdown
     </sql>
 
     <!--统计表中记录数
@@ -63,7 +63,7 @@
 
     <!--向表中插入新数据-->
     <insert id="insertBlowdown" parameterType="Blowdown">
-        insert into iot_Blowndown
+        insert into iot_blowndown
         (
         <if test="sid != null and sid!='' ">sid,</if>
         <if test="location != null  and location != ''  ">location,</if>
@@ -84,7 +84,7 @@
 
     <!--更新数据-->
     <update id="updateBlowdown" parameterType="Blowdown">
-        update iot_Blowdown
+        update iot_blowdown
         <set>
             <if test="sid !=null and sid !=''">sid = #{sid},</if>
             <if test="location != null  and location != ''  ">location = #{location},</if>
@@ -98,12 +98,12 @@
 
     <!--根据ID删除-->
     <delete id="deleteBlowdownById" parameterType="String">
-        delete from iot_Blowdown where sid = #{sid}
+        delete from iot_blowdown where sid = #{sid}
     </delete>
 
     <!--批量删除
     <delete id="deleteBlowdownByIds" parameterType="String">
-        delete from iot_Blowdown where sid in
+        delete from iot_blowdown where sid in
         <foreach item="sid" collection="array" open="(" separator="," close=")">
             #{sid}
         </foreach>

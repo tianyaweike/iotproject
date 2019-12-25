@@ -68,7 +68,7 @@
         insert into iot_Blowndown
         (
         <if test="sid != null and sid!='' ">sid,</if>
-        <if test="led_status!= null  and led_status!= ''  ">led_status,</if>
+
         <if test="location != null  and location != ''  ">location,</if>
         <if test="Hmental != null  and Hmental != ''  ">Hmental,</if>
         <if test="PH != null  and PH != ''  ">PH,</if>
@@ -77,7 +77,7 @@
         )
         values(
         <if test="sid != null and sid!='' ">#{sid},</if>
-        <if test="led_status != null  and led_status != ''  ">#{led_status},</if>
+
         <if test="location != null  and location != ''  ">#{location},</if>
         <if test="Hmental != null  and Hmental != ''  ">#{Hmental},</if>
         <if test="PH != null  and PH != ''  ">#{PH},</if>
@@ -91,7 +91,7 @@
         update iot_Blowdown
         <set>
             <if test="sid !=null and sid !=''">sid = #{sid},</if>
-            <if test="led_status != null  and led_status != ''  ">led_status = #{led_status},</if>
+
             <if test="location != null  and location != ''  ">location = #{location},</if>
             <if test="Hmental != null  and Hmental != ''  ">Hmental = #{Hmental},</if>
             <if test="PH != null  and PH != ''  ">PH = #{PH},</if>

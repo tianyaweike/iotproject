@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.iot.mapper.BlowdownMapper">
+
+    <resultMap type="Blowdown" id="BlowdownResult">
+        <id property="sid"    column="sid"    />
+        <result property="monitortime"    column="monitortime"    />
+        <result property="location"    column="location"    />
+        <result property="Hmental"    column="Hmental"    />
+        <result property="PH"    column="PH"    />
+        <result property="econdu"    column="econdu"    />
+        <result property="updatetime" column="updatetime" />
+    </resultMap>
+
+    <!--定义selectLed为查询整表命令-->
+    <sql id="selectBlowdown">
+    select sid,monitortime,location,Hmental,PH,econdu from iot_Blowdown
+    </sql>
+
+    <!--统计表中记录数
+    <select id="countall" resultType="Integer">
+        select
+               count(*)
+        from iot_led
+    </select>
+    -->
+
+    <!--查询表的所有列表信息-->
+    <select id="selectBlowdownList" parameterType="Blowdown" resultMap="BlowdownResult">
+        <include refid="selectBlowdown"/>
+        <!--<where>
+            <if test="sid != null and sid='' "> and sid = #{sid}</if>
+
+            <if test="location != null  and location != '' "> and location = #{location}</if>
+            <if test="Hmental != null  and Hmental != '' "> and Hmental = #{Hmental}</if>
+            <if test="PH != null  and PH != '' "> and PH = #{PH}</if>
+            <if test="econdu != null  and econdu != '' "> and econdu = #{econdu}</if>
+        </where>
+        order by sid desc
+        -->
+    </select>
+
+    <!--根据ID查询信息-->
+    <select id="selectBlowdownById" parameterType="String" resultMap="BlowdownResult">
+        <include refid="selectBlowdown"/>
+        where sid=#{sid}
+        <!-- select
+         a.sid as sid,
+
+         a.location as location,
+         a.Hmental as Hmental,
+         a.PH as PH,
+         a.econdu as econdu
+         from iot_led a
+         -->
+        <!--
+        <where>
+            <if test="sid != null  and sid != '' ">and a.sid like CONCAT(#{sid},'%')</if>
+            <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
+        </where>
+        -->
+    </select>
+
+    <!--向表中插入新数据-->
+    <insert id="insertBlowdown" parameterType="Blowdown">
+        insert into iot_Blowndown
+        (
+        <if test="sid != null and sid!='' ">sid,</if>
+        <if test="led_status!= null  and led_status!= ''  ">led_status,</if>
+        <if test="location != null  and location != ''  ">location,</if>
+        <if test="Hmental != null  and Hmental != ''  ">Hmental,</if>
+        <if test="PH != null  and PH != ''  ">PH,</if>
+        <if test="econdu != null  and econdu != ''  ">econdu,</if>
+        monitortime
+        )
+        values(
+        <if test="sid != null and sid!='' ">#{sid},</if>
+        <if test="led_status != null  and led_status != ''  ">#{led_status},</if>
+        <if test="location != null  and location != ''  ">#{location},</if>
+        <if test="Hmental != null  and Hmental != ''  ">#{Hmental},</if>
+        <if test="PH != null  and PH != ''  ">#{PH},</if>
+        <if test="econdu != null  and econdu != ''  ">#{econdu},</if>
+        sysdate()
+        )
+    </insert>
+
+    <!--更新数据-->
+    <update id="updateBlowdown" parameterType="Blowdown">
+        update iot_Blowdown
+        <set>
+            <if test="sid !=null and sid !=''">sid = #{sid},</if>
+            <if test="led_status != null  and led_status != ''  ">led_status = #{led_status},</if>
+            <if test="location != null  and location != ''  ">location = #{location},</if>
+            <if test="Hmental != null  and Hmental != ''  ">Hmental = #{Hmental},</if>
+            <if test="PH != null  and PH != ''  ">PH = #{PH},</if>
+            <if test="econdu != null  and econdu != ''  ">econdu = #{econdu},</if>
+            updatetime= sysdate()
+        </set>
+        where sid = #{sid}
+    </update>
+
+    <!--根据ID删除-->
+    <delete id="deleteBlowdownById" parameterType="String">
+        delete from iot_Blowdown where sid = #{sid}
+    </delete>
+
+    <!--批量删除
+    <delete id="deleteBlowdownByIds" parameterType="String">
+        delete from iot_Blowdown where sid in
+        <foreach item="sid" collection="array" open="(" separator="," close=")">
+            #{sid}
+        </foreach>
+    </delete>
+     -->
+
+</mapper>

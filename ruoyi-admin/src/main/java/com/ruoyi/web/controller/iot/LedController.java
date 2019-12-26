@@ -64,9 +64,9 @@ public class LEDController extends BaseController {
      * 修改LED信息
      */
     @GetMapping("/edit/{ledid}")
-    public String edit(@PathVariable("ledid") String ledid, ModelMap mmap)
+    public String edit(@PathVariable("led_id") String led_id, ModelMap mmap)
     {
-        LED led = LedService.selectByledid(ledid);
+        LED led = LedService.selectByledid(led_id);
         mmap.put("led", led);
         return prefix + "/edit";
     }
@@ -88,9 +88,9 @@ public class LEDController extends BaseController {
     @Log(title = "删除LED信息", businessType = BusinessType.DELETE)
     @PostMapping( "/remove/{ledid}")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("ledid") String ledid)
+    public AjaxResult remove(@PathVariable("led_id") String led_id)
     {
-        System.out.println("*******"+ledid);
-        return toAjax(LedService.deleteLedByIds(ledid));
+        System.out.println("*******"+led_id);
+        return toAjax(LedService.deleteLedByIds(led_id));
     }
 }

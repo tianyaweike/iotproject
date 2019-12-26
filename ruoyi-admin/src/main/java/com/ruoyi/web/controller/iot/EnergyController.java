@@ -31,14 +31,14 @@ public class EnergyController extends BaseController {
     }
 
     /**
-     * ENERGY列表
+     * Energy列表
      * @param energy
      * @return
      */
     //@RequiresPermissions("iot:energyinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(ENERGY energy){
+    public TableDataInfo list(Energy energy){
         startPage();
         List<Energy> list = EnergyService.selectEnergyList(energy);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class EnergyController extends BaseController {
     }
 
     /**
-     * 新增ENERGY信息
+     * 新增Energy信息
      */
     @RequiresPermissions("iot:energyinfo:add")
-    @Log(title = "ENERGY信息", businessType = BusinessType.INSERT)
+    @Log(title = "Energy信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(ENERGY energy)
+    public AjaxResult addSave(Energy energy)
     {
         return toAjax(EnergyService.insertenergy(energy));
     }
     /**
-     * 修改ENERGY信息
+     * 修改Energy信息
      */
     @GetMapping("/edit/{eid}")
     public String edit(@PathVariable("eid") String eid, ModelMap mmap)
     {
-        ENERGY energy = EnergyService.selectByeid(eid);
+        Energy energy = EnergyService.selectByeid(eid);
         mmap.put("energy", energy);
         return prefix + "/edit";
     }
     /**
-     * 修改保存ENERGY信息
+     * 修改保存Energy信息
      */
     @RequiresPermissions("iot:energyinfo:edit")
-    @Log(title = "ENERGY信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Energy信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(ENERGY energy)
+    public AjaxResult editSave(Energy energy)
     {
         return toAjax(EnergyService.updateEnergy(energy));
     }
     /**
-     * 删除ENERGY信息
+     * 删除Energy信息
      */
     @RequiresPermissions("iot:energyinfo:remove")
-    @Log(title = "删除ENERGY信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Energy信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{eid}")
     @ResponseBody

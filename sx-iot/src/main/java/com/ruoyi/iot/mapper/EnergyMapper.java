@@ -28,7 +28,7 @@ public interface EnergyMapper {
      * @param eid
      * @return
      */
-    Energy selectByeid(String eid);
+    Energy selectByid(String eid);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface EnergyMapper {
      * @param eid
      * @return
      */
-    int deleteEnergyById(String eid);
+    int deleteEnergyByid(String eid);
 }

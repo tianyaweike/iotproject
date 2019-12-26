@@ -31,14 +31,14 @@ public class PumpController extends BaseController {
     }
 
     /**
-     * PUMP列表
+     * Pump列表
      * @param pump
      * @return
      */
     //@RequiresPermissions("iot:pumpinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(PUMP pump){
+    public TableDataInfo list(Pump pump){
         startPage();
         List<Pump> list = PumpService.selectPumpList(pump);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class PumpController extends BaseController {
     }
 
     /**
-     * 新增PUMP信息
+     * 新增Pump信息
      */
     @RequiresPermissions("iot:pumpinfo:add")
-    @Log(title = "PUMP信息", businessType = BusinessType.INSERT)
+    @Log(title = "Pump信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(PUMP pump)
+    public AjaxResult addSave(Pump pump)
     {
         return toAjax(PumpService.insertpump(pump));
     }
     /**
-     * 修改PUMP信息
+     * 修改Pump信息
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id, ModelMap mmap)
     {
-        PUMP pump = PumpService.selectByid(id);
+        Pump pump = PumpService.selectByid(id);
         mmap.put("pump", pump);
         return prefix + "/edit";
     }
     /**
-     * 修改保存PUMP信息
+     * 修改保存Pump信息
      */
     @RequiresPermissions("iot:pumpinfo:edit")
-    @Log(title = "PUMP信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Pump信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(PUMP pump)
+    public AjaxResult editSave(Pump pump)
     {
         return toAjax(PumpService.updatePump(pump));
     }
     /**
-     * 删除PUMP信息
+     * 删除Pump信息
      */
     @RequiresPermissions("iot:pumpinfo:remove")
-    @Log(title = "删除PUMP信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Pump信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{id}")
     @ResponseBody

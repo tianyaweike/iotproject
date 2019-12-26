@@ -16,31 +16,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/iot/Broadinfo")
+@RequestMapping("/iot/broadinfo")
 public class BroadController extends BaseController {
 
-    private String prefix = "iot/Broadinfo";
+    private String prefix = "iot/broadinfo";
 
     @Autowired
     private BroadService BroadService;
 
-    @RequiresPermissions("iot:Broadinfo:view")
+    @RequiresPermissions("iot:broadinfo:view")
     @GetMapping()
     public String Broad(){
         return prefix+"/broad";
     }
 
     /**
-     * Broad列表
-     * @param Broad
+     * BROAD列表
+     * @param broad
      * @return
      */
-    //@RequiresPermissions("iot:Broadinfo:list")
+    //@RequiresPermissions("iot:broadinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Broad Broad){
+    public TableDataInfo list(BROAD broad){
         startPage();
-        List<Broad> list = BroadService.selectBroadList(Broad);
+        List<Broad> list = BroadService.selectBroadList(broad);
         return getDataTable(list);
     }
 
@@ -50,42 +50,43 @@ public class BroadController extends BaseController {
     }
 
     /**
-     * 新增Broad信息
+     * 新增BROAD信息
      */
-    @RequiresPermissions("iot:Broadinfo:add")
-    @Log(title = "Broad信息", businessType = BusinessType.INSERT)
+    @RequiresPermissions("iot:broadinfo:add")
+    @Log(title = "BROAD信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Broad Broad)
+    public AjaxResult addSave(BROAD broad)
     {
-        return toAjax(BroadService.insertBroad(Broad));
+        return toAjax(BroadService.insertbroad(broad));
     }
     /**
-     * 修改Broad信息
+     * 修改BROAD信息
      */
     @GetMapping("/edit/{billboard_id}")
     public String edit(@PathVariable("billboard_id") String billboard_id, ModelMap mmap)
     {
-        Broad Broad = BroadService.selectBybillboard_id(billboard_id);
-        mmap.put("Broad", Broad);
+        BROAD broad = BroadService.selectBybillboard_id(billboard_id);
+        mmap.put("broad", broad);
         return prefix + "/edit";
     }
     /**
-     * 修改保存Broad信息
+     * 修改保存BROAD信息
      */
-    @RequiresPermissions("iot:Broadinfo:edit")
-    @Log(title = "Broad信息", businessType = BusinessType.UPDATE)
+    @RequiresPermissions("iot:broadinfo:edit")
+    @Log(title = "BROAD信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Broad Broad)
+    public AjaxResult editSave(BROAD broad)
     {
-        return toAjax(BroadService.updateBroad(Broad));
+        return toAjax(BroadService.updateBroad(broad));
     }
     /**
-     * 删除Broad信息
+     * 删除BROAD信息
      */
-    @RequiresPermissions("iot:Broadinfo:remove")
-    @Log(title = "删除Broad信息", businessType = BusinessType.DELETE)
+    @RequiresPermissions("iot:broadinfo:remove")
+    @Log(title = "删除BROAD信息", businessType = BusinessType.DELETE)
+
     @PostMapping( "/remove/{billboard_id}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("billboard_id") String billboard_id)

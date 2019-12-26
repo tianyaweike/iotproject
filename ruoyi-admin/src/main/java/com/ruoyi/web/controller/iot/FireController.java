@@ -31,14 +31,14 @@ public class FireController extends BaseController {
     }
 
     /**
-     * FIRE列表
+     * Fire列表
      * @param fire
      * @return
      */
     //@RequiresPermissions("iot:fireinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(FIRE fire){
+    public TableDataInfo list(Fire fire){
         startPage();
         List<Fire> list = FireService.selectFireList(fire);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class FireController extends BaseController {
     }
 
     /**
-     * 新增FIRE信息
+     * 新增Fire信息
      */
     @RequiresPermissions("iot:fireinfo:add")
-    @Log(title = "FIRE信息", businessType = BusinessType.INSERT)
+    @Log(title = "Fire信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(FIRE fire)
+    public AjaxResult addSave(Fire fire)
     {
         return toAjax(FireService.insertfire(fire));
     }
     /**
-     * 修改FIRE信息
+     * 修改Fire信息
      */
     @GetMapping("/edit/{fid}")
     public String edit(@PathVariable("fid") String fid, ModelMap mmap)
     {
-        FIRE fire = FireService.selectByfid(fid);
+        Fire fire = FireService.selectByfid(fid);
         mmap.put("fire", fire);
         return prefix + "/edit";
     }
     /**
-     * 修改保存FIRE信息
+     * 修改保存Fire信息
      */
     @RequiresPermissions("iot:fireinfo:edit")
-    @Log(title = "FIRE信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Fire信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(FIRE fire)
+    public AjaxResult editSave(Fire fire)
     {
         return toAjax(FireService.updateFire(fire));
     }
     /**
-     * 删除FIRE信息
+     * 删除Fire信息
      */
     @RequiresPermissions("iot:fireinfo:remove")
-    @Log(title = "删除FIRE信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Fire信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{fid}")
     @ResponseBody

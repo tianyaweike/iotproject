@@ -14,7 +14,7 @@
 
     <!--定义selectLight为查询整表命令-->
     <sql id="selectLight">
-    select nid,atemperature,windspeed,current,voltage from iot_broad
+    select nid,atemperature,windspeed,current,voltage from iot_light
     </sql>
 
 

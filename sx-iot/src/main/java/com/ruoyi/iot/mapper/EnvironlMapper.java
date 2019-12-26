@@ -11,7 +11,7 @@ public interface EnvironlMapper {
     List<Environl> selectEnvironlList(Environl environl);
 
     /**
-     * 根据hid删除数据
+     * 根据hid批量删除数据
      * @param hid
      */
     int deleteEnvironlByids(String[] hid);
@@ -42,5 +42,5 @@ public interface EnvironlMapper {
      * @param hid
      * @return
      */
-    int deleteEnvironlByIds(String hid);
+    int deleteEnvironlById(String hid);
 }

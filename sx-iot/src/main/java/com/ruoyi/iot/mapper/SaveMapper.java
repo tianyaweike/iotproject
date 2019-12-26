@@ -11,7 +11,7 @@ public interface SaveMapper {
     List<Save> selectSaveList(Save save);
 
     /**
-     * 根据info_id删除数据
+     * 根据info_id批量删除数据
      * @param info_id
      */
     int deleteSaveByids(String[] info_id);
@@ -28,7 +28,7 @@ public interface SaveMapper {
      * @param info_id
      * @return
      */
-    Save selectByinfo_id(String info_id);
+    Save selectByid(String info_id);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface SaveMapper {
      * @param info_id
      * @return
      */
-    int deleteSaveByIds(String info_id);
+    int deleteSaveByid(String info_id);
 }

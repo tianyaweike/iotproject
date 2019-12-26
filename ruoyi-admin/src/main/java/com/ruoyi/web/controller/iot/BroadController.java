@@ -31,14 +31,14 @@ public class BroadController extends BaseController {
     }
 
     /**
-     * BROAD列表
+     * Broad列表
      * @param broad
      * @return
      */
     //@RequiresPermissions("iot:broadinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(BROAD broad){
+    public TableDataInfo list(Broad broad){
         startPage();
         List<Broad> list = BroadService.selectBroadList(broad);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class BroadController extends BaseController {
     }
 
     /**
-     * 新增BROAD信息
+     * 新增Broad信息
      */
     @RequiresPermissions("iot:broadinfo:add")
-    @Log(title = "BROAD信息", businessType = BusinessType.INSERT)
+    @Log(title = "Broad信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(BROAD broad)
+    public AjaxResult addSave(Broad broad)
     {
         return toAjax(BroadService.insertbroad(broad));
     }
     /**
-     * 修改BROAD信息
+     * 修改Broad信息
      */
     @GetMapping("/edit/{broad_id}")
     public String edit(@PathVariable("broad_id") String broad_id, ModelMap mmap)
     {
-        BROAD broad = BroadService.selectBybroad_id(broad_id);
+        Broad broad = BroadService.selectBybroad_id(broad_id);
         mmap.put("broad", broad);
         return prefix + "/edit";
     }
     /**
-     * 修改保存BROAD信息
+     * 修改保存Broad信息
      */
     @RequiresPermissions("iot:broadinfo:edit")
-    @Log(title = "BROAD信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Broad信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(BROAD broad)
+    public AjaxResult editSave(Broad broad)
     {
         return toAjax(BroadService.updateBroad(broad));
     }
     /**
-     * 删除BROAD信息
+     * 删除Broad信息
      */
     @RequiresPermissions("iot:broadinfo:remove")
-    @Log(title = "删除BROAD信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Broad信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{broad_id}")
     @ResponseBody

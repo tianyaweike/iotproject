@@ -2,10 +2,9 @@ package com.ruoyi.iot.service.impl;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
-import com.ruoyi.iot.service.*;
-import com.ruoyi.iot.domain.Mountainflood;
-import com.ruoyi.iot.mapper.MountainfloodMapper;
-import com.ruoyi.iot.service.MountainfloodService;
+import com.ruoyi.iot.domain.Flood;
+import com.ruoyi.iot.mapper.FloodMapper;
+import com.ruoyi.iot.service.FloodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +17,9 @@ import java.util.List;
  * @create: 2019-12-25 15:00
  **/
 @Service
-public class MountainfloodServiceImpl implements MountainfloodService{
+public class FloodServiceImpl implements FloodService {
     @Autowired
-    private MountainfloodMapper mountainfloodMapper;
+    private FloodMapper mountainfloodMapper;
 
     /**
      * 查询山洪记录列表
@@ -29,7 +28,7 @@ public class MountainfloodServiceImpl implements MountainfloodService{
      */
     @Override
     @DataSource(value = DataSourceType.SXVILLAGE)
-    public List<Mountainflood> selectMountainfloodList(Mountainflood mountainflood) {
+    public List<Flood> selectMountainfloodList(Flood mountainflood) {
         return mountainfloodMapper.selectMountainfloodList(mountainflood);
     }
 
@@ -50,7 +49,7 @@ public class MountainfloodServiceImpl implements MountainfloodService{
      */
     @Override
     @DataSource(value = DataSourceType.SXVILLAGE)
-    public int insertMountainflood(Mountainflood mountainflood) {
+    public int insertMountainflood(Flood mountainflood) {
         return mountainfloodMapper.insertMountainflood(mountainflood);
     }
 
@@ -61,7 +60,7 @@ public class MountainfloodServiceImpl implements MountainfloodService{
      */
     @Override
     @DataSource(value = DataSourceType.SXVILLAGE)
-    public Mountainflood selectByplace_id(String place_id) {
+    public Flood selectByplace_id(String place_id) {
         return mountainfloodMapper.selectByplace_id(place_id);
     }
 
@@ -83,7 +82,7 @@ public class MountainfloodServiceImpl implements MountainfloodService{
      */
     @Override
     @DataSource(value = DataSourceType.SXVILLAGE)
-    public int updateMountainflood(Mountainflood mountainflood) {
+    public int updateMountainflood(Flood mountainflood) {
         return mountainfloodMapper.updateMountainflood(mountainflood);
     }
 }

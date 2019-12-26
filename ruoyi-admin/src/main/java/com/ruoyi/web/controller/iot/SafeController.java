@@ -31,14 +31,14 @@ public class SafeController extends BaseController {
     }
 
     /**
-     * SAFE列表
+     * Safe列表
      * @param safe
      * @return
      */
     //@RequiresPermissions("iot:safeinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SAFE safe){
+    public TableDataInfo list(Safe safe){
         startPage();
         List<Safe> list = SafeService.selectSafeList(safe);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class SafeController extends BaseController {
     }
 
     /**
-     * 新增SAFE信息
+     * 新增Safe信息
      */
     @RequiresPermissions("iot:safeinfo:add")
-    @Log(title = "SAFE信息", businessType = BusinessType.INSERT)
+    @Log(title = "Safe信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(SAFE safe)
+    public AjaxResult addSave(Safe safe)
     {
         return toAjax(SafeService.insertsafe(safe));
     }
     /**
-     * 修改SAFE信息
+     * 修改Safe信息
      */
     @GetMapping("/edit/{info_id}")
     public String edit(@PathVariable("info_id") String info_id, ModelMap mmap)
     {
-        SAFE safe = SafeService.selectByinfo_id(info_id);
+        Safe safe = SafeService.selectByinfo_id(info_id);
         mmap.put("safe", safe);
         return prefix + "/edit";
     }
     /**
-     * 修改保存SAFE信息
+     * 修改保存Safe信息
      */
     @RequiresPermissions("iot:safeinfo:edit")
-    @Log(title = "SAFE信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Safe信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(SAFE safe)
+    public AjaxResult editSave(Safe safe)
     {
         return toAjax(SafeService.updateSafe(safe));
     }
     /**
-     * 删除SAFE信息
+     * 删除Safe信息
      */
     @RequiresPermissions("iot:safeinfo:remove")
-    @Log(title = "删除SAFE信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Safe信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{info_id}")
     @ResponseBody

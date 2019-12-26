@@ -11,7 +11,7 @@ public interface MeteorMapper {
     List<Meteor> selectMeteorList(Meteor meteor);
 
     /**
-     * 根据weather_id删除数据
+     * 根据weather_id批量删除数据
      * @param weather_id
      */
     int deleteMeteorByids(String[] weather_id);
@@ -28,7 +28,7 @@ public interface MeteorMapper {
      * @param weather_id
      * @return
      */
-    Meteor selectByweather_id(String weather_id);
+    Meteor selectByid(String weather_id);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface MeteorMapper {
      * @param weather_id
      * @return
      */
-    int deleteMeteorByIds(String weather_id);
+    int deleteMeteorByid(String weather_id);
 }

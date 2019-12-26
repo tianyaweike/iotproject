@@ -63,10 +63,10 @@ public class BroadController extends BaseController {
     /**
      * 修改Broad信息
      */
-    @GetMapping("/edit/{broad_id}")
-    public String edit(@PathVariable("broad_id") String broad_id, ModelMap mmap)
+    @GetMapping("/edit/{billboard_id}")
+    public String edit(@PathVariable("billboard_id") String billboard_id, ModelMap mmap)
     {
-        Broad Broad = BroadService.selectBybroad_id(broad_id);
+        Broad Broad = BroadService.selectBybillboard_id(billboard_id);
         mmap.put("Broad", Broad);
         return prefix + "/edit";
     }
@@ -86,11 +86,11 @@ public class BroadController extends BaseController {
      */
     @RequiresPermissions("iot:Broadinfo:remove")
     @Log(title = "删除Broad信息", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove/{broad_id}")
+    @PostMapping( "/remove/{billboard_id}")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("broad_id") String broad_id)
+    public AjaxResult remove(@PathVariable("billboard_id") String billboard_id)
     {
-        System.out.println("*******"+broad_id);
-        return toAjax(BroadService.deleteBroadByids(broad_id));
+        System.out.println("*******"+billboard_id);
+        return toAjax(BroadService.deleteBroadByids(billboard_id));
     }
 }

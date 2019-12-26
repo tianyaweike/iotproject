@@ -15,13 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-/**
- * @program: dyq_RongSys
- * @description: LED信息 信息操作处理
- * @author: Mr.Dai
- * @create: 2019-01-14 16:04
- **/
 @Controller
 @RequestMapping("/iot/ledinfo")
 public class LEDController extends BaseController {
@@ -33,7 +26,7 @@ public class LEDController extends BaseController {
 
     @RequiresPermissions("iot:ledinfo:view")
     @GetMapping()
-    public String Politic(){
+    public String Led(){
         return prefix+"/led";
     }
 
@@ -78,7 +71,7 @@ public class LEDController extends BaseController {
         return prefix + "/edit";
     }
     /**
-     * 修改保存LED
+     * 修改保存LED信息
      */
     @RequiresPermissions("iot:ledinfo:edit")
     @Log(title = "LED信息", businessType = BusinessType.UPDATE)

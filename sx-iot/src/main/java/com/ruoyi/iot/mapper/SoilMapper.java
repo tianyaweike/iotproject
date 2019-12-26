@@ -11,7 +11,7 @@ public interface SoilMapper {
     List<Soil> selectSoilList(Soil soil);
 
     /**
-     * 根据sid删除数据
+     * 根据sid批量删除数据
      * @param sid
      */
     int deleteSoilByids(String[] sid);
@@ -28,7 +28,7 @@ public interface SoilMapper {
      * @param sid
      * @return
      */
-    Soil selectBysid(String sid);
+    Soil selectByid(String sid);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface SoilMapper {
      * @param sid
      * @return
      */
-    int deleteSoilByIds(String sid);
+    int deleteSoilByid(String sid);
 }

@@ -31,16 +31,16 @@ public class PumpController extends BaseController {
     }
 
     /**
-     * Pump列表
-     * @param Pump
+     * PUMP列表
+     * @param pump
      * @return
      */
     //@RequiresPermissions("iot:pumpinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Pump Pump){
+    public TableDataInfo list(PUMP pump){
         startPage();
-        List<Pump> list = PumpService.selectPumpList(Pump);
+        List<Pump> list = PumpService.selectPumpList(pump);
         return getDataTable(list);
     }
 
@@ -50,42 +50,43 @@ public class PumpController extends BaseController {
     }
 
     /**
-     * 新增Pump信息
+     * 新增PUMP信息
      */
     @RequiresPermissions("iot:pumpinfo:add")
-    @Log(title = "Pump信息", businessType = BusinessType.INSERT)
+    @Log(title = "PUMP信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Pump Pump)
+    public AjaxResult addSave(PUMP pump)
     {
-        return toAjax(PumpService.insertPump(Pump));
+        return toAjax(PumpService.insertpump(pump));
     }
     /**
-     * 修改Pump信息
+     * 修改PUMP信息
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id, ModelMap mmap)
     {
-        Pump Pump = PumpService.selectByid(id);
-        mmap.put("Pump", Pump);
+        PUMP pump = PumpService.selectByid(id);
+        mmap.put("pump", pump);
         return prefix + "/edit";
     }
     /**
-     * 修改保存Pump信息
+     * 修改保存PUMP信息
      */
     @RequiresPermissions("iot:pumpinfo:edit")
-    @Log(title = "Pump信息", businessType = BusinessType.UPDATE)
+    @Log(title = "PUMP信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Pump Pump)
+    public AjaxResult editSave(PUMP pump)
     {
-        return toAjax(PumpService.updatePump(Pump));
+        return toAjax(PumpService.updatePump(pump));
     }
     /**
-     * 删除Pump信息
+     * 删除PUMP信息
      */
     @RequiresPermissions("iot:pumpinfo:remove")
-    @Log(title = "删除Pump信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除PUMP信息", businessType = BusinessType.DELETE)
+
     @PostMapping( "/remove/{id}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("id") String id)

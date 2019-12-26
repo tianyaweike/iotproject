@@ -11,7 +11,7 @@ public interface SandboxMapper {
     List<Sandbox> selectSandboxList(Sandbox sandbox);
 
     /**
-     * 根据switch_id删除数据
+     * 根据switch_id批量删除数据
      * @param switch_id
      */
     int deleteSandboxByids(String[] switch_id);
@@ -28,7 +28,7 @@ public interface SandboxMapper {
      * @param switch_id
      * @return
      */
-    Sandbox selectByswitch_id(String switch_id);
+    Sandbox selectByid(String switch_id);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface SandboxMapper {
      * @param switch_id
      * @return
      */
-    int deleteSandboxByIds(String switch_id);
+    int deleteSandboxByid(String switch_id);
 }

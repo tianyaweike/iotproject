@@ -63,10 +63,10 @@ public class LightController extends BaseController {
     /**
      * 修改Light信息
      */
-    @GetMapping("/edit/{light_id}")
-    public String edit(@PathVariable("light_id") String light_id, ModelMap mmap)
+    @GetMapping("/edit/{nid}")
+    public String edit(@PathVariable("nid") String nid, ModelMap mmap)
     {
-        Light Light = LightService.selectBylight_id(light_id);
+        Light Light = LightService.selectBynid(nid);
         mmap.put("Light", Light);
         return prefix + "/edit";
     }
@@ -86,11 +86,11 @@ public class LightController extends BaseController {
      */
     @RequiresPermissions("iot:lightinfo:remove")
     @Log(title = "删除Light信息", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove/{light_id}")
+    @PostMapping( "/remove/{nid}")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("light_id") String light_id)
+    public AjaxResult remove(@PathVariable("nid") String nid)
     {
-        System.out.println("*******"+light_id);
-        return toAjax(LightService.deleteLightByids(light_id));
+        System.out.println("*******"+nid);
+        return toAjax(LightService.deleteLightByids(nid));
     }
 }

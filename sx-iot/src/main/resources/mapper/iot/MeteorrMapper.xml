@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.iot.mapper.MeteorrMapper">
+
+    <resultMap type="Meteorr" id="MeteorrResult">
+        <result property="weather_id"    column="weather_id"    />
+        <result property="monitortime"    column="monitortime"    />
+        <result property="location"    column="location"    />
+        <result property="windpower"    column="windpower"    />
+        <result property="winderaction"    column="winderaction"    />
+        <result property="raincapacity"    column="raincapacity"    />
+        <result property="temprature"  column="temprature"  />
+        <result property="humidity" column="humidity" />
+        <result property="airlevel" column="airlevel" />
+        <result property="updatetime" column="updatetime" />
+    </resultMap>
+    <!--定义selecMeteorr为查询整表命令-->
+    <sql id="selectMeteorr">
+    select weather_id,monitortime,location,windpower,winderaction,raincapacity,temprature,humidity,airlevel from iot_meteorr
+    </sql>
+    <!--统计表中记录数
+    <select id="countall" resultType="Integer">
+        select
+               count(*)
+        from iot_meteorr
+    </select>
+    -->
+
+    <!--查询表的所有列表信息-->
+    <select id="selectMeteorrList" parameterType="Meteorr" resultMap="MeteorrResult">
+        <include refid="selectMeteorr"/>
+        <!--<where>
+            <if test="weather_id != null and weather_id='' "> and weather_id = #{weather_id}</if>
+            <if test="monitortime!= null  and monitortime!= '' "> and monitortime= #{monitortime}</if>
+            <if test="location != null  and location != '' "> and location = #{location}</if>
+            <if test="windpower != null  and windpower != '' "> and windpower = #{windpower}</if>
+            <if test="winderaction != null  and winderaction != '' "> and winderaction = #{winderaction}</if>
+            <if test="raincapacity != null  and raincapacity != '' "> and raincapacity = #{raincapacity}</if>
+            <if test="temprature != null  and temprature != '' "> and temprature = #{temprature}</if>
+            <if test="humidity !=null and humidity !='' ">and humidity = #{humidity}</if>
+            <if test="airlevel !=null and airlevel !='' ">and airlevel = #{airlevel}</if>
+        </where>
+        order by weather_id desc
+        -->
+    </select>
+
+    <!--根据ID查询信息-->
+    <select id="selectMeteorrById" parameterType="String" resultMap="MeteorrResult">
+        <include refid="selectMeteorr"/>
+        where weather_id=#{weather_id}
+        <!-- select
+         a.weather_id as weather_id,
+         a.monitortime as monitortime,
+         a.location as location,
+         a.windpower as windpower,
+         a.winderaction as winderaction,
+         a.raincapacity as raincapacity
+         from iot_led a
+         -->
+        <!--
+        <where>
+            <if test="weather_id != null  and weather_id != '' ">and a.weather_id like CONCAT(#{weather_id},'%')</if>
+            <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
+        </where>
+        -->
+    </select>
+
+    <!--向表中插入新数据-->
+    <insert id="insertMeteorr" parameterType="Meteorr">
+        insert into iot_meteorr
+        (
+        <if test="weather_id != null and weather_id!='' ">weather_id,</if>
+        <if test="location != null  and location != ''  ">location,</if>
+        <if test="windpower != null  and windpower != ''  ">windpower,</if>
+        <if test="winderaction != null  and winderaction != ''  ">winderaction,</if>
+        <if test="raincapacity != null  and raincapacity != ''  ">raincapacity,</if>
+        <if test="temprature != null and temprature !='' ">temprature,</if>
+        <if test="humidity != null and humidity != '' ">humidity,</if>
+        <if test="airlevel != null and airlevel !='' ">airlevel,</if>
+        monitortime
+        )
+        values(
+        <if test="weather_id != null and weather_id!='' ">#{weather_id},</if>
+        <if test="location != null  and location != ''  ">#{location},</if>
+        <if test="windpower != null  and windpower != ''  ">#{windpower},</if>
+        <if test="winderaction != null  and winderaction != ''  ">#{winderaction},</if>
+        <if test="raincapacity != null  and raincapacity != ''  ">#{raincapacity},</if>
+        <if test="temprature !=null and temprature !='' ">#{temprature},</if>
+        <if test="humidity !=null and humidity !='' ">#{humidity},</if>
+        <if test="airlevel !=null and airlevel !=''">#{airlevel},</if>
+        sysdate()
+        )
+    </insert>
+
+    <!--更新数据-->
+    <update id="updateMeteorr" parameterType="Meteorr">
+        update iot_meteorr
+        <set>
+            <if test="weather_id != null and weather_id !=''">weather_id = #{weather_id},</if>
+            <if test="location != null  and location != ''  ">location = #{location},</if>
+            <if test="windpower != null  and windpower != ''  ">windpower = #{winderaction},</if>
+            <if test="winderaction != null  and winderaction != ''  ">winderaction = #{winderaction},</if>
+            <if test="raincapacity != null  and raincapacity != ''  ">raincapacity = #{raincapacity},</if>
+            <if test="temprature !=null and temprature != ''">temprature = #{temprature},</if>
+            <if test="humidity != null and humidity != ''">humidity = #{humidity},</if>
+            <if test="airlevel != null and workingtemperature !=''">workingtemperature = #{workingtemperature},</if>
+            updatetime=sysdate()
+        </set>
+        where weather_id = #{weather_id}
+    </update>
+
+    <!--根据ID删除-->
+    <delete id="deleteMeteorrById" parameterType="String">
+        delete from iot_meteorr where weather_id = #{weather_id}
+    </delete>
+
+    <!--批量删除
+    <delete id="deleteMeteorrByIds" parameterType="String">
+        delete from iot_meteorr where weather_id in
+        <foreach item="weather_id" collection="array" open="(" separator="," close=")">
+            #{weather_id}
+        </foreach>
+    </delete>
+     -->
+</mapper>

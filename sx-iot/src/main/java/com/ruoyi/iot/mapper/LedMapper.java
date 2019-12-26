@@ -1,6 +1,4 @@
 package com.ruoyi.iot.mapper;
-
-import com.ruoyi.iot.domain.IotgetPa;
 import com.ruoyi.iot.domain.Led;
 
 import java.util.List;
@@ -13,74 +11,44 @@ import java.util.List;
  */
 public interface LedMapper {
     /**
-     * 查询终端运转信息
+     * led终端记录列表
      *
-     * @param led_id 终端运转ID
-     * @return 终端运转信息
+     * @return
      */
-    public Led selectLedById(Integer led_id);
+    List<Led> selectLedList(Led led);
 
     /**
-     * 统计物联网数据条目
-     *
-     * @param led_id 终端运转ID
-     * @return 终端运转信息
+     * 根据led_id批量删除数据
+     * @param led_id
      */
-    public int countall();
+    int deleteLedByids(String[] led_id);
 
     /**
-     * 统计物联网设备数量
-     *
-     * @param led_id 终端运转ID
-     * @return 终端运转信息
+     * 添加led终端信息
+     * @param led
+     * @return
      */
-    public int devicecount();
+    int insertLed(Led led);
 
     /**
-     * 查询终端运转列表
-     *
-     * @param led 终端运转信息
-     * @return 终端运转集合
+     * 根据led_id选择数据
+     * @param led_id
+     * @return
      */
-    public List<Led> selectLedList(Led led);
+    Led selectByid(String led_id);
 
     /**
-     * 新增终端运转
-     *
-     * @param led 终端运转信息
-     * @return 结果
+     * 保存用户修改
+     * @param led
+     * @return
      */
-    public int insertLed(Led led);
+    int updateLed(Led led);
 
     /**
-     * 修改终端运转
-     *
-     * @param led 终端运转信息
-     * @return 结果
+     * 删除led终端信息
+     * @param led_id
+     * @return
      */
-    public int updateLed(Led led);
+    int deleteLedByid(String led_id);
 
-    /**
-     * 删除终端运转
-     *
-     * @param led_id 终端运转ID
-     * @return 结果
-     */
-    public int deleteLedById(Integer led_id);
-
-    /**
-     * 批量删除终端运转
-     *
-     * @param led_ids 需要删除的数据ID
-     * @return 结果
-     */
-    public int deleteLedByIds(String[] led_ids);
-
-    /**
-     * 根据IMEI号和时间范围和查询条数统计物联网数据
-     *
-     * @param led 终端信息
-     * @return 终端信息集合
-     */
-    public List<Led> selectLedByitl(IotgetPa iotgetPa);
 }

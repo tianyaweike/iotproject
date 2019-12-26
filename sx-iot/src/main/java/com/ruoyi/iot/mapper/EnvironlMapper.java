@@ -28,7 +28,7 @@ public interface EnvironlMapper {
      * @param hid
      * @return
      */
-    Environl selectByhid(String hid);
+    Environl selectByid(String hid);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface EnvironlMapper {
      * @param hid
      * @return
      */
-    int deleteEnvironlById(String hid);
+    int deleteEnvironlByid(String hid);
 }

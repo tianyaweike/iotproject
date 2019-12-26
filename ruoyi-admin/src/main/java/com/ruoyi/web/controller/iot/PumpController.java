@@ -27,7 +27,7 @@ public class PumpController extends BaseController {
     @RequiresPermissions("iot:pumpinfo:view")
     @GetMapping()
     public String Pump(){
-        return prefix+"/Pump";
+        return prefix+"/pump";
     }
 
     /**

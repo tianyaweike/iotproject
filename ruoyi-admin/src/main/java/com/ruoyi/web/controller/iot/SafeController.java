@@ -66,7 +66,7 @@ public class SafeController extends BaseController {
     @GetMapping("/edit/{safe_id}")
     public String edit(@PathVariable("safe_id") String safe_id, ModelMap mmap)
     {
-        Safe Safe = SafeService.selectBySafeid(safe_id);
+        Safe Safe = SafeService.selectBySafe_id(safe_id);
         mmap.put("Safe", Safe);
         return prefix + "/edit";
     }

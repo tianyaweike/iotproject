@@ -28,7 +28,7 @@ public interface BoardMapper {
      * @param board_id
      * @return
      */
-    Board selectByboard_id(String board_id);
+    Board selectByid(String board_id);
 
     /**
      * 保存用户修改
@@ -40,7 +40,7 @@ public interface BoardMapper {
     /**
      * 删除广告牌信息
      * @param board_id
-     * @return
+     * @returni
      */
-    int deleteBoardById(String board_id);
+    int deleteBoardByid(String board_id);
 }

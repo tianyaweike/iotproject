@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/iot/ledinfo")
-public class LEDController extends BaseController {
+public class LedController extends BaseController {
 
     private String prefix = "iot/ledinfo";
 
@@ -31,14 +31,14 @@ public class LEDController extends BaseController {
     }
 
     /**
-     * LED列表
+     * Led列表
      * @param led
      * @return
      */
     //@RequiresPermissions("iot:ledinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(LED led){
+    public TableDataInfo list(Led led){
         startPage();
         List<Led> list = LedService.selectLedList(led);
         return getDataTable(list);
@@ -50,42 +50,43 @@ public class LEDController extends BaseController {
     }
 
     /**
-     * 新增LED信息
+     * 新增Led信息
      */
     @RequiresPermissions("iot:ledinfo:add")
-    @Log(title = "LED信息", businessType = BusinessType.INSERT)
+    @Log(title = "Led信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(LED led)
+    public AjaxResult addSave(Led led)
     {
         return toAjax(LedService.insertled(led));
     }
     /**
-     * 修改LED信息
+     * 修改Led信息
      */
     @GetMapping("/edit/{led_id}")
     public String edit(@PathVariable("led_id") String led_id, ModelMap mmap)
     {
-        LED led = LedService.selectByled_id(led_id);
+        Led led = LedService.selectByled_id(led_id);
         mmap.put("led", led);
         return prefix + "/edit";
     }
     /**
-     * 修改保存LED信息
+     * 修改保存Led信息
      */
     @RequiresPermissions("iot:ledinfo:edit")
-    @Log(title = "LED信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Led信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(LED led)
+    public AjaxResult editSave(Led led)
     {
         return toAjax(LedService.updateLed(led));
     }
     /**
-     * 删除LED信息
+     * 删除Led信息
      */
     @RequiresPermissions("iot:ledinfo:remove")
-    @Log(title = "删除LED信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Led信息", businessType = BusinessType.DELETE)
+
     @PostMapping( "/remove/{led_id}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("led_id") String led_id)

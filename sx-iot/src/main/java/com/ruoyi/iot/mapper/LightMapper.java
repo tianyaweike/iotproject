@@ -11,7 +11,7 @@ public interface LightMapper {
     List<Light> selectLightList(Light light);
 
     /**
-     * 根据nid删除数据
+     * 根据nid批量删除数据
      * @param nid
      */
     int deleteLightByids(String[] nid);
@@ -28,7 +28,7 @@ public interface LightMapper {
      * @param nid
      * @return
      */
-    Light selectBynid(String nid);
+    Light selectByid(String nid);
 
     /**
      * 保存用户修改
@@ -42,6 +42,6 @@ public interface LightMapper {
      * @param nid
      * @return
      */
-    int deleteLightByIds(String nid);
+    int deleteLightByid(String nid);
 
 }

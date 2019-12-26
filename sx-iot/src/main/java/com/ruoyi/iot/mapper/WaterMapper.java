@@ -11,7 +11,7 @@ public interface WaterMapper {
     List<Water> selectWaterList(Water water);
 
     /**
-     * 根据wid删除数据
+     * 根据wid批量删除数据
      * @param wid
      */
     int deleteWaterByids(String[] wid);
@@ -28,7 +28,7 @@ public interface WaterMapper {
      * @param wid
      * @return
      */
-    Water selectBywid(String wid);
+    Water selectByid(String wid);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface WaterMapper {
      * @param wid
      * @return
      */
-    int deleteWaterByIds(String wid);
+    int deleteWaterByid(String wid);
 }

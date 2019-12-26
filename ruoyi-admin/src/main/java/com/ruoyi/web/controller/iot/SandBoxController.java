@@ -31,14 +31,14 @@ public class SandBoxController extends BaseController {
     }
 
     /**
-     * SANDBOX列表
+     *  SandBox列表
      * @param sandBox
      * @return
      */
     //@RequiresPermissions("iot:sandBoxinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SANDBOX sandBox){
+    public TableDataInfo list( SandBox sandBox){
         startPage();
         List<SandBox> list = SandBoxService.selectSandBoxList(sandBox);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class SandBoxController extends BaseController {
     }
 
     /**
-     * 新增SANDBOX信息
+     * 新增 SandBox信息
      */
     @RequiresPermissions("iot:sandBoxinfo:add")
-    @Log(title = "SANDBOX信息", businessType = BusinessType.INSERT)
+    @Log(title = " SandBox信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(SANDBOX sandBox)
+    public AjaxResult addSave( SandBox sandBox)
     {
         return toAjax(SandBoxService.insertsandBox(sandBox));
     }
     /**
-     * 修改SANDBOX信息
+     * 修改 SandBox信息
      */
     @GetMapping("/edit/{switch_id}")
     public String edit(@PathVariable("switch_id") String switch_id, ModelMap mmap)
     {
-        SANDBOX sandBox = SandBoxService.selectByswitch_id(switch_id);
+         SandBox sandBox = SandBoxService.selectByswitch_id(switch_id);
         mmap.put("sandBox", sandBox);
         return prefix + "/edit";
     }
     /**
-     * 修改保存SANDBOX信息
+     * 修改保存 SandBox信息
      */
     @RequiresPermissions("iot:sandBoxinfo:edit")
-    @Log(title = "SANDBOX信息", businessType = BusinessType.UPDATE)
+    @Log(title = " SandBox信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(SANDBOX sandBox)
+    public AjaxResult editSave( SandBox sandBox)
     {
         return toAjax(SandBoxService.updateSandBox(sandBox));
     }
     /**
-     * 删除SANDBOX信息
+     * 删除 SandBox信息
      */
     @RequiresPermissions("iot:sandBoxinfo:remove")
-    @Log(title = "删除SANDBOX信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除 SandBox信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{switch_id}")
     @ResponseBody

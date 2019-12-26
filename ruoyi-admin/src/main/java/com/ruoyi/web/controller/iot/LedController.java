@@ -91,6 +91,6 @@ public class LEDController extends BaseController {
     public AjaxResult remove(@PathVariable("led_id") String led_id)
     {
         System.out.println("*******"+led_id);
-        return toAjax(LedService.deleteLedByIds(led_id));
+        return toAjax(LedService.deleteLedByids(led_id));
     }
 }

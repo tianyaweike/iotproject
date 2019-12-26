@@ -11,7 +11,7 @@ public interface EnergyMapper {
     List<Energy> selectEnergyList(Energy energy);
 
     /**
-     * 根据eid删除数据
+     * 根据eid批量删除数据
      * @param eid
      */
     int deleteEnergyByids(String[] eid);
@@ -42,5 +42,5 @@ public interface EnergyMapper {
      * @param eid
      * @return
      */
-    int deleteEnergyByIds(String eid);
+    int deleteEnergyById(String eid);
 }

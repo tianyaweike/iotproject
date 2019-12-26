@@ -66,7 +66,7 @@ public class LEDController extends BaseController {
     @GetMapping("/edit/{led_id}")
     public String edit(@PathVariable("led_id") String led_id, ModelMap mmap)
     {
-        LED led = LedService.selectByledid(led_id);
+        LED led = LedService.selectByled_id(led_id);
         mmap.put("led", led);
         return prefix + "/edit";
     }

@@ -66,7 +66,7 @@ public class BroadController extends BaseController {
     @GetMapping("/edit/{broad_id}")
     public String edit(@PathVariable("broad_id") String broad_id, ModelMap mmap)
     {
-        Broad Broad = BroadService.selectBybroadid(broad_id);
+        Broad Broad = BroadService.selectBybroad_id(broad_id);
         mmap.put("Broad", Broad);
         return prefix + "/edit";
     }

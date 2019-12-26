@@ -11,7 +11,7 @@ public interface FireMapper {
     List<Fire> selectFireList(Fire fire);
 
     /**
-     * 根据fid删除数据
+     * 根据fid批量删除数据
      * @param fid
      */
     int deleteFireByids(String[] fid);
@@ -28,7 +28,7 @@ public interface FireMapper {
      * @param fid
      * @return
      */
-    Fire selectByfid(String fid);
+    Fire selectByid(String fid);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface FireMapper {
      * @param fid
      * @return
      */
-    int deleteFireByIds(String fid);
+    int deleteFireByid(String fid);
 }

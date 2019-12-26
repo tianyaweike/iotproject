@@ -63,10 +63,10 @@ public class SafeController extends BaseController {
     /**
      * 修改Safe信息
      */
-    @GetMapping("/edit/{safe_id}")
-    public String edit(@PathVariable("safe_id") String safe_id, ModelMap mmap)
+    @GetMapping("/edit/{info_id}")
+    public String edit(@PathVariable("info_id") String info_id, ModelMap mmap)
     {
-        Safe Safe = SafeService.selectBySafe_id(safe_id);
+        Safe Safe = SafeService.selectByinfo_id(info_id);
         mmap.put("Safe", Safe);
         return prefix + "/edit";
     }
@@ -86,11 +86,11 @@ public class SafeController extends BaseController {
      */
     @RequiresPermissions("iot:safeinfo:remove")
     @Log(title = "删除Safe信息", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove/{safe_id}")
+    @PostMapping( "/remove/{info_id}")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("safe_id") String safe_id)
+    public AjaxResult remove(@PathVariable("info_id") String info_id)
     {
-        System.out.println("*******"+safe_id);
-        return toAjax(SafeService.deleteSafeByids(safe_id));
+        System.out.println("*******"+info_id);
+        return toAjax(SafeService.deleteSafeByids(info_id));
     }
 }

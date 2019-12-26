@@ -5,7 +5,7 @@
 <mapper namespace="com.ruoyi.iot.mapper.BlowdownMapper">
 
     <resultMap type="Blowdown" id="BlowdownResult">
-        <id property="sid"    column="sid"    />
+        <id property="pid"    column="pid"    />
         <result property="monitortime"    column="monitortime"    />
         <result property="location"    column="location"    />
         <result property="Hmental"    column="Hmental"    />
@@ -16,7 +16,7 @@
 
     <!--定义selectLed为查询整表命令-->
     <sql id="selectBlowdown">
-    select sid,monitortime,location,Hmental,PH,econdu from iot_blowdown
+    select pid,monitortime,location,Hmental,PH,econdu from iot_blowdown
     </sql>
 
     <!--统计表中记录数
@@ -31,22 +31,22 @@
     <select id="selectBlowdownList" parameterType="Blowdown" resultMap="BlowdownResult">
         <include refid="selectBlowdown"/>
         <!--<where>
-            <if test="sid != null and sid='' "> and sid = #{sid}</if>
+            <if test="pid != null and pid='' "> and pid = #{pid}</if>
             <if test="location != null  and location != '' "> and location = #{location}</if>
             <if test="Hmental != null  and Hmental != '' "> and Hmental = #{Hmental}</if>
             <if test="PH != null  and PH != '' "> and PH = #{PH}</if>
             <if test="econdu != null  and econdu != '' "> and econdu = #{econdu}</if>
         </where>
-        order by sid desc
+        order by pid desc
         -->
     </select>
 
     <!--根据ID查询信息-->
     <select id="selectBlowdownById" parameterType="String" resultMap="BlowdownResult">
         <include refid="selectBlowdown"/>
-        where sid=#{sid}
+        where pid=#{pid}
         <!-- select
-         a.sid as sid,
+         a.pid as pid,
          a.location as location,
          a.Hmental as Hmental,
          a.PH as PH,
@@ -55,7 +55,7 @@
          -->
         <!--
         <where>
-            <if test="sid != null  and sid != '' ">and a.sid like CONCAT(#{sid},'%')</if>
+            <if test="pid != null  and pid != '' ">and a.pid like CONCAT(#{pid},'%')</if>
             <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
         </where>
         -->
@@ -65,7 +65,7 @@
     <insert id="insertBlowdown" parameterType="Blowdown">
         insert into iot_blowndown
         (
-        <if test="sid != null and sid!='' ">sid,</if>
+        <if test="pid != null and pid!='' ">pid,</if>
         <if test="location != null  and location != ''  ">location,</if>
         <if test="Hmental != null  and Hmental != ''  ">Hmental,</if>
         <if test="PH != null  and PH != ''  ">PH,</if>
@@ -73,7 +73,7 @@
         monitortime
         )
         values(
-        <if test="sid != null and sid!='' ">#{sid},</if>
+        <if test="pid != null and pid!='' ">#{pid},</if>
         <if test="location != null  and location != ''  ">#{location},</if>
         <if test="Hmental != null  and Hmental != ''  ">#{Hmental},</if>
         <if test="PH != null  and PH != ''  ">#{PH},</if>
@@ -86,26 +86,26 @@
     <update id="updateBlowdown" parameterType="Blowdown">
         update iot_blowdown
         <set>
-            <if test="sid !=null and sid !=''">sid = #{sid},</if>
+            <if test="pid !=null and pid !=''">pid = #{pid},</if>
             <if test="location != null  and location != ''  ">location = #{location},</if>
             <if test="Hmental != null  and Hmental != ''  ">Hmental = #{Hmental},</if>
             <if test="PH != null  and PH != ''  ">PH = #{PH},</if>
             <if test="econdu != null  and econdu != ''  ">econdu = #{econdu},</if>
             updatetime= sysdate()
         </set>
-        where sid = #{sid}
+        where pid = #{pid}
     </update>
 
     <!--根据ID删除-->
     <delete id="deleteBlowdownById" parameterType="String">
-        delete from iot_blowdown where sid = #{sid}
+        delete from iot_blowdown where pid = #{pid}
     </delete>
 
     <!--批量删除
     <delete id="deleteBlowdownByIds" parameterType="String">
-        delete from iot_blowdown where sid in
-        <foreach item="sid" collection="array" open="(" separator="," close=")">
-            #{sid}
+        delete from iot_blowdown where pid in
+        <foreach item="pid" collection="array" open="(" separator="," close=")">
+            #{pid}
         </foreach>
     </delete>
      -->

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.iot.mapper.SaveMapper">
+
+    <resultMap type="Save" id="SaveResult">
+        <result property="info_id"    column="info_id"    />
+        <result property="user_adress"    column="user_adress"    />
+        <result property="warnstatus"    column="warnstatus"    />
+        <result property="ray"    column="ray"    />
+    </resultMap>
+
+    <!--定义selectLed为查询整表命令-->
+    <sql id="selectSave">
+    select info_id,user_adress,warnstatus,ray from iot_save
+    </sql>
+
+
+    <!--查询表的所有列表信息-->
+    <select id="selectSaveList" parameterType="Save" resultMap="SaveResult">
+        <include refid="selectSave"/>
+        <!--<where>
+            <if test="info_id != null and info_id='' "> and info_id = #{info_id}</if>
+            <if test="location != null  and location != '' "> and location = #{location}</if>
+            <if test="warnstatus != null  and warnstatus != '' "> and warnstatus = #{warnstatus}</if>
+            <if test="ray != null  and ray != '' "> and ray = #{ray}</if>
+        </where>
+        order by info_id desc
+        -->
+    </select>
+
+    <!--根据ID查询信息-->
+    <select id="selectSaveById" parameterType="String" resultMap="SaveResult">
+        <include refid="selectSave"/>
+        where info_id=#{info_id}
+        <!-- select
+         a.info_id as info_id,
+         a.location as location,
+         a.warnstatus as warnstatus,
+         a.ray as ray,
+         a.econdu as econdu
+         from iot_led a
+         -->
+        <!--
+        <where>
+            <if test="info_id != null  and info_id != '' ">and a.info_id like CONCAT(#{info_id},'%')</if>
+            <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
+        </where>
+        -->
+    </select>
+
+    <!--向表中插入新数据-->
+    <insert id="insertSave" parameterType="Save">
+        insert into iot_save
+        (
+        <if test="info_id != null and info_id!='' ">info_id,</if>
+        <if test="user_adress != null  and user_adress != ''  ">user_adress,</if>
+        <if test="warnstatus != null  and warnstatus != ''  ">warnstatus,</if>
+        <if test="ray != null  and ray != ''  ">ray,</if>
+        )
+        values(
+        <if test="info_id != null and info_id!='' ">#{info_id},</if>
+        <if test="user_adress != null  and user_adress != ''  ">#{user_adress},</if>
+        <if test="warnstatus != null  and warnstatus != ''  ">#{warnstatus},</if>
+        <if test="ray != null  and ray != ''  ">#{ray},</if>
+        )
+    </insert>
+
+    <!--更新数据-->
+    <update id="updateSave" parameterType="Save">
+        update iot_save
+        <set>
+            <if test="info_id !=null and info_id !=''">info_id = #{info_id},</if>
+            <if test="user_adress != null  and user_adress != ''  ">user_adress = #{user_adress},</if>
+            <if test="warnstatus != null  and warnstatus != ''  ">warnstatus = #{warnstatus},</if>
+            <if test="ray != null  and ray != ''  ">ray = #{ray},</if>
+        </set>
+        where info_id = #{info_id}
+    </update>
+
+    <!--根据ID删除-->
+    <delete id="deleteSaveById" parameterType="String">
+        delete from iot_save where info_id = #{info_id}
+    </delete>
+
+    <!--批量删除
+    <delete id="deleteSaveByIds" parameterType="String">
+        delete from iot_Save where info_id in
+        <foreach item="info_id" collection="array" open="(" separator="," close=")">
+            #{info_id}
+        </foreach>
+    </delete>
+     -->
+</mapper>

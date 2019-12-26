@@ -31,14 +31,14 @@ public class EnvironlController extends BaseController {
     }
 
     /**
-     * ENVIRONL列表
+     * Environl列表
      * @param environl
      * @return
      */
     //@RequiresPermissions("iot:environinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(ENVIRONL environl){
+    public TableDataInfo list(Environl environl){
         startPage();
         List<Environl> list = EnvironlService.selectEnvironlList(environl);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class EnvironlController extends BaseController {
     }
 
     /**
-     * 新增ENVIRONL信息
+     * 新增Environl信息
      */
     @RequiresPermissions("iot:environinfo:add")
-    @Log(title = "ENVIRONL信息", businessType = BusinessType.INSERT)
+    @Log(title = "Environl信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(ENVIRONL environl)
+    public AjaxResult addSave(Environl environl)
     {
         return toAjax(EnvironlService.insertenvironl(environl));
     }
     /**
-     * 修改ENVIRONL信息
+     * 修改Environl信息
      */
     @GetMapping("/edit/{hid}")
     public String edit(@PathVariable("hid") String hid, ModelMap mmap)
     {
-        ENVIRONL environl = EnvironlService.selectByhid(hid);
+        Environl environl = EnvironlService.selectByhid(hid);
         mmap.put("environl", environl);
         return prefix + "/edit";
     }
     /**
-     * 修改保存ENVIRONL信息
+     * 修改保存Environl信息
      */
     @RequiresPermissions("iot:environinfo:edit")
-    @Log(title = "ENVIRONL信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Environl信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(ENVIRONL environl)
+    public AjaxResult editSave(Environl environl)
     {
         return toAjax(EnvironlService.updateEnvironl(environl));
     }
     /**
-     * 删除ENVIRONL信息
+     * 删除Environl信息
      */
     @RequiresPermissions("iot:environinfo:remove")
-    @Log(title = "删除ENVIRONL信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Environl信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{hid}")
     @ResponseBody

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.iot.mapper.SoilMapper">
+
+    <resultMap type="Soil" id="SoilResult">
+        <result property="sid"    column="sid"    />
+        <result property="type"    column="type"    />
+        <result property="area"    column="area"    />
+        <result property="depth"    column="depth"    />
+        <result property="PH"    column="PH"    />
+        <result property="water"    column="water"    />
+        <result property="salinity"  column="salinity"  />
+        <result property="creator" column="creator" />
+        <result property="organic" column="organic" />
+        <result property="creatime" column="creatime" />
+    </resultMap>
+    <!--定义selectLed为查询整表命令-->
+    <sql id="selectSoil">
+    select sid,type,area,depth,PH,water,salinity,creator,organic,creatime from iot_soil
+    </sql>
+    <!--统计表中记录数
+    <select id="countall" resultType="Integer">
+        select
+               count(*)
+        from iot_soil
+    </select>
+    -->
+
+    <!--查询表的所有列表信息-->
+    <select id="selectSoilList" parameterType="Soil" resultMap="SoilResult">
+        <include refid="selectSoil"/>
+        <!--<where>
+            <if test="sid != null and sid='' "> and sid = #{sid}</if>
+            <if test="type!= null  and type!= '' "> and type= #{type}</if>
+            <if test="area != null  and area != '' "> and area = #{area}</if>
+            <if test="depth != null  and depth != '' "> and depth = #{depth}</if>
+            <if test="PH != null  and PH != '' "> and PH = #{PH}</if>
+            <if test="water != null  and water != '' "> and water = #{water}</if>
+            <if test="salinity != null  and salinity != '' "> and salinity = #{salinity}</if>
+            <if test="creator !=null and creator !='' ">and creator = #{creator}</if>
+            <if test="organic !=null and organic !='' ">and organic = #{organic}</if>
+            <if test="creatime !=null and creatime !='' ">and creatime = #{creatime}</if>
+        </where>
+        order by sid desc
+        -->
+    </select>
+
+    <!--根据ID查询信息-->
+    <select id="selectSoilById" parameterType="String" resultMap="SoilResult">
+        <include refid="selectSoil"/>
+        where sid=#{sid}
+        <!-- select
+         a.sid as sid,
+         a.type as type,
+         a.area as area,
+         a.depth as depth,
+         a.PH as PH,
+         a.water as water
+         from iot_led a
+         -->
+        <!--
+        <where>
+            <if test="sid != null  and sid != '' ">and a.sid like CONCAT(#{sid},'%')</if>
+            <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
+        </where>
+        -->
+    </select>
+
+    <!--向表中插入新数据-->
+    <insert id="insertSoil" parameterType="Soil">
+        insert into iot_soil
+        (
+        <if test="sid != null and sid!='' ">sid,</if>
+        <if test="type!= null  and type!= ''  ">type,</if>
+        <if test="area != null  and area != ''  ">area,</if>
+        <if test="depth != null  and depth != ''  ">depth,</if>
+        <if test="PH != null  and PH != ''  ">PH,</if>
+        <if test="water != null  and water != ''  ">water,</if>
+        <if test="salinity != null and salinity !='' ">salinity,</if>
+        <if test="creator != null and creator != '' ">creator,</if>
+        <if test="organic != null and organic !='' ">organic,</if>
+        creatime
+        )
+        values(
+        <if test="sid != null and sid!='' ">#{sid},</if>
+        <if test="type != null  and type != ''  ">#{type},</if>
+        <if test="area != null  and area != ''  ">#{area},</if>
+        <if test="depth != null  and depth != ''  ">#{depth},</if>
+        <if test="PH != null  and PH != ''  ">#{PH},</if>
+        <if test="water != null  and water != ''  ">#{water},</if>
+        <if test="salinity !=null and salinity !='' ">#{salinity},</if>
+        <if test="creator !=null and creator !='' ">#{creator},</if>
+        <if test="organic !=null and organic !=''">#{organic},</if>
+        sysdate()
+        )
+    </insert>
+
+    <!--更新数据-->
+    <update id="updateSoil" parameterType="Soil">
+        update iot_soil
+        <set>
+            <if test="sid != null and sid !=''">sid = #{sid},</if>
+            <if test="type != null  and type != ''  ">type = #{type},</if>
+            <if test="area != null  and area != ''  ">area = #{area},</if>
+            <if test="depth != null  and depth != ''  ">depth = #{depth},</if>
+            <if test="PH != null  and PH != ''  ">PH = #{PH},</if>
+            <if test="water != null  and water != ''  ">water = #{water},</if>
+            <if test="salinity !=null and salinity != ''">salinity = #{salinity},</if>
+
+            <if test="organic != null and workingtemperature !=''">workingtemperature = #{workingtemperature},</if>
+
+        </set>
+        where sid = #{sid}
+    </update>
+
+    <!--根据ID删除-->
+    <delete id="deleteSoilById" parameterType="String">
+        delete from iot_soil where sid = #{sid}
+    </delete>
+
+    <!--批量删除
+    <delete id="deleteSoilByIds" parameterType="String">
+        delete from iot_soil where sid in
+        <foreach item="sid" collection="array" open="(" separator="," close=")">
+            #{sid}
+        </foreach>
+    </delete>
+     -->
+</mapper>

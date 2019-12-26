@@ -33,8 +33,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectSandboxById" parameterType="String" resultMap="SandboxResult">
+    <!--根据id查询信息-->
+    <select id="selectSandboxByid" parameterType="String" resultMap="SandboxResult">
         <include refid="selectSandbox"/>
         where switch_id=#{switch_id}
         <!-- select
@@ -77,18 +77,18 @@
         where switch_id = #{switch_id}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteSandboxById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deleteSandboxByid" parameterType="String">
         delete from iot_sandbox where switch_id = #{switch_id}
     </delete>
 
-    <!--批量删除
-    <delete id="deleteSandboxByIds" parameterType="String">
+    <!--批量删除-->
+    <delete id="deleteSandboxByids" parameterType="String">
         delete from iot_sandbox where switch_id in
         <foreach item="switch_id" collection="array" open="(" separator="," close=")">
             #{switch_id}
         </foreach>
     </delete>
-     -->
+
 
 </mapper>

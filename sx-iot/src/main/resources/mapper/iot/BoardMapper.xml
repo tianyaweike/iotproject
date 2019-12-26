@@ -37,8 +37,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectBoardById" parameterType="String" resultMap="BoardResult">
+    <!--根据id查询信息-->
+    <select id="selectBoardByid" parameterType="String" resultMap="BoardResult">
         <include refid="selectBoard"/>
         where board_id=#{board_id}
         <!-- select
@@ -84,18 +84,18 @@
         where board_id = #{board_id}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteBoardById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deleteBoardByid" parameterType="String">
         delete from iot_board where board_id = #{board_id}
     </delete>
 
-    <!--批量删除
-    <delete id="deleteBoardByIds" parameterType="String">
+    <!--批量删除-->
+    <delete id="deleteBoardByids" parameterType="String">
         delete from iot_board where board_id in
         <foreach item="board_id" collection="array" open="(" separator="," close=")">
             #{board_id}
         </foreach>
     </delete>
-     -->
+
 
 </mapper>

@@ -16,7 +16,7 @@
         <result property="ppm" column="ppm" />
         <result property="Device_status" column="Device_status" />
     </resultMap>
-    <!--定义selectLed为查询整表命令-->
+    <!--定义selectEnvironl为查询整表命令-->
     <sql id="selectEnvironl">
     select hid,Ambient_temperature,ambient_humidity,wind_speed,wind_direction,Light_intensity,atmospheric_pressure,PM,ppm,Device_status from iot_environl
     </sql>
@@ -47,8 +47,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectEnvironlById" parameterType="String" resultMap="EnvironlResult">
+    <!--根据id查询信息-->
+    <select id="selectEnvironlByid" parameterType="String" resultMap="EnvironlResult">
         <include refid="selectEnvironl"/>
         where hid=#{hid}
         <!-- select
@@ -115,17 +115,17 @@
         where hid = #{hid}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteEnvironlById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deleteEnvironlByid" parameterType="String">
         delete from iot_environl where hid = #{hid}
     </delete>
 
-    <!--批量删除
-    <delete id="deleteEnvironlByIds" parameterType="String">
+    <!--批量删除-->
+    <delete id="deleteEnvironlByids" parameterType="String">
         delete from iot_environl where hid in
         <foreach item="hid" collection="array" open="(" separator="," close=")">
             #{hid}
         </foreach>
     </delete>
-     -->
+
 </mapper>

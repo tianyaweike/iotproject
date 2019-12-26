@@ -46,8 +46,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectMeteorrById" parameterType="String" resultMap="MeteorrResult">
+    <!--根据id查询信息-->
+    <select id="selectMeteorrByid" parameterType="String" resultMap="MeteorrResult">
         <include refid="selectMeteorr"/>
         where weather_id=#{weather_id}
         <!-- select
@@ -111,17 +111,17 @@
         where weather_id = #{weather_id}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteMeteorrById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deleteMeteorrByid" parameterType="String">
         delete from iot_meteorr where weather_id = #{weather_id}
     </delete>
 
-    <!--批量删除
-    <delete id="deleteMeteorrByIds" parameterType="String">
+    <!--批量删除-->
+    <delete id="deleteMeteorrByids" parameterType="String">
         delete from iot_meteorr where weather_id in
         <foreach item="weather_id" collection="array" open="(" separator="," close=")">
             #{weather_id}
         </foreach>
     </delete>
-     -->
+
 </mapper>

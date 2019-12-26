@@ -32,8 +32,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectFireById" parameterType="String" resultMap="FireResult">
+    <!--根据id查询信息-->
+    <select id="selectFireByid" parameterType="String" resultMap="FireResult">
         <include refid="selectFire"/>
         where fid=#{fid}
         <!-- select
@@ -87,17 +87,17 @@
         where fid = #{fid}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteFireById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deleteFireByid" parameterType="String">
         delete from iot_fire where fid = #{fid}
     </delete>
 
-    <!--批量删除
-    <delete id="deleteFireByIds" parameterType="String">
+    <!--批量删除-->
+    <delete id="deleteFireByids" parameterType="String">
         delete from iot_fire where fid in
         <foreach item="fid" collection="array" open="(" separator="," close=")">
             #{fid}
         </foreach>
     </delete>
-     -->
+
 </mapper>

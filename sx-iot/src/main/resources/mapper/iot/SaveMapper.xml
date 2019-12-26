@@ -30,8 +30,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectSaveById" parameterType="String" resultMap="SaveResult">
+    <!--根据id查询信息-->
+    <select id="selectSaveByid" parameterType="String" resultMap="SaveResult">
         <include refid="selectSave"/>
         where info_id=#{info_id}
         <!-- select
@@ -79,17 +79,17 @@
         where info_id = #{info_id}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteSaveById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deleteSaveByid" parameterType="String">
         delete from iot_save where info_id = #{info_id}
     </delete>
 
-    <!--批量删除
-    <delete id="deleteSaveByIds" parameterType="String">
+    <!--批量删除-->
+    <delete id="deleteSaveByids" parameterType="String">
         delete from iot_Save where info_id in
         <foreach item="info_id" collection="array" open="(" separator="," close=")">
             #{info_id}
         </foreach>
     </delete>
-     -->
+
 </mapper>

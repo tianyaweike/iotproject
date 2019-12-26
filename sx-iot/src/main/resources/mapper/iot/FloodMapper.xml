@@ -11,7 +11,7 @@
         <result property="rainfall"    column="rainfall"    />
     </resultMap>
 
-    <!--定义selectLed为查询整表命令-->
+    <!--定义selectFlood为查询整表命令-->
     <sql id="selectFlood">
     select place_id,stage,display,rainfall from iot_flood
     </sql>
@@ -30,8 +30,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectFloodById" parameterType="String" resultMap="FloodResult">
+    <!--根据id查询信息-->
+    <select id="selectFloodByid" parameterType="String" resultMap="FloodResult">
         <include refid="selectFlood"/>
         where place_id=#{place_id}
         <!-- select
@@ -79,17 +79,17 @@
         where place_id = #{place_id}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteFloodById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deleteFloodByid" parameterType="String">
         delete from iot_flood where place_id = #{place_id}
     </delete>
 
-    <!--批量删除
-    <delete id="deleteFloodByIds" parameterType="String">
+    <!--批量删除-->
+    <delete id="deleteFloodByids" parameterType="String">
         delete from iot_flood where place_id in
         <foreach item="place_id" collection="array" open="(" separator="," close=")">
             #{place_id}
         </foreach>
     </delete>
-     -->
+
 </mapper>

@@ -19,7 +19,7 @@
         <result property="creator" column="creator" />
         <result property="creatime" column="creatime" />
     </resultMap>
-    <!--定义selectLed为查询整表命令-->
+    <!--定义selectWater为查询整表命令-->
     <sql id="selectWater">
     select wid,type,area,temperature,color,turbidity,PH,seston,electric,oxygen,poison,creator,creatime from iot_water
     </sql>
@@ -50,8 +50,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectWaterById" parameterType="String" resultMap="WaterResult">
+    <!--根据id查询信息-->
+    <select id="selectWaterByid" parameterType="String" resultMap="WaterResult">
         <include refid="selectWater"/>
         where wid=#{wid}
         <!-- select
@@ -125,17 +125,17 @@
         where wid = #{wid}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteWaterById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deleteWaterByid" parameterType="String">
         delete from iot_water where wid = #{wid}
     </delete>
 
-    <!--批量删除
-    <delete id="deleteWaterByIds" parameterType="String">
+    <!--批量删除 -->
+    <delete id="deleteWaterByids" parameterType="String">
         delete from iot_water where wid in
         <foreach item="wid" collection="array" open="(" separator="," close=")">
             #{wid}
         </foreach>
     </delete>
-     -->
+
 </mapper>

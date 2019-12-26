@@ -32,8 +32,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectPumpById" parameterType="String" resultMap="PumpResult">
+    <!--根据id查询信息-->
+    <select id="selectPumpByid" parameterType="String" resultMap="PumpResult">
         select id,tid,PCurrent,PVoltage,WLHeight,WLPressure from iot_pump
         where id=#{id}
         <!-- select
@@ -87,17 +87,17 @@
         where id = #{id}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deletePumpById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deletePumpByid" parameterType="String">
         delete from iot_pump where id = #{id}
     </delete>
 
-    <!--批量删除
-    <delete id="deletePumpByIds" parameterType="String">
+    <!--批量删除-->
+    <delete id="deletePumpByids" parameterType="String">
         delete from iot_pump where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-     -->
+
 </mapper>

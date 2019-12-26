@@ -16,7 +16,7 @@
         <result property="organic" column="organic" />
         <result property="creatime" column="creatime" />
     </resultMap>
-    <!--定义selectLed为查询整表命令-->
+    <!--定义selectSoil为查询整表命令-->
     <sql id="selectSoil">
     select sid,type,area,depth,PH,water,salinity,creator,organic,creatime from iot_soil
     </sql>
@@ -47,8 +47,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectSoilById" parameterType="String" resultMap="SoilResult">
+    <!--根据id查询信息-->
+    <select id="selectSoilByid" parameterType="String" resultMap="SoilResult">
         <include refid="selectSoil"/>
         where sid=#{sid}
         <!-- select
@@ -115,17 +115,17 @@
         where sid = #{sid}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteSoilById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deleteSoilByid" parameterType="String">
         delete from iot_soil where sid = #{sid}
     </delete>
 
-    <!--批量删除
-    <delete id="deleteSoilByIds" parameterType="String">
+    <!--批量删除-->
+    <delete id="deleteSoilByids" parameterType="String">
         delete from iot_soil where sid in
         <foreach item="sid" collection="array" open="(" separator="," close=")">
             #{sid}
         </foreach>
     </delete>
-     -->
+
 </mapper>

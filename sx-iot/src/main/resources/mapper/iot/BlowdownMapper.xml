@@ -14,7 +14,7 @@
         <result property="updatetime" column="updatetime" />
     </resultMap>
 
-    <!--定义selectLed为查询整表命令-->
+    <!--定义selectBlowdown为查询整表命令-->
     <sql id="selectBlowdown">
     select pid,monitortime,location,Hmental,PH,econdu from iot_blowdown
     </sql>
@@ -41,8 +41,8 @@
         -->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectBlowdownById" parameterType="String" resultMap="BlowdownResult">
+    <!--根据id查询信息-->
+    <select id="selectBlowdownByid" parameterType="String" resultMap="BlowdownResult">
         <include refid="selectBlowdown"/>
         where pid=#{pid}
         <!-- select
@@ -96,17 +96,17 @@
         where pid = #{pid}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteBlowdownById" parameterType="String">
+    <!--根据id删除-->
+    <delete id="deleteBlowdownByid" parameterType="String">
         delete from iot_blowdown where pid = #{pid}
     </delete>
 
-    <!--批量删除
-    <delete id="deleteBlowdownByIds" parameterType="String">
+    <!--批量删除-->
+    <delete id="deleteBlowdownByids" parameterType="String">
         delete from iot_blowdown where pid in
         <foreach item="pid" collection="array" open="(" separator="," close=")">
             #{pid}
         </foreach>
     </delete>
-     -->
+
 </mapper>

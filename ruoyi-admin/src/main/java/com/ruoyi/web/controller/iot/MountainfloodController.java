@@ -31,14 +31,14 @@ public class MountainfloodController extends BaseController {
     }
 
     /**
-     * MOUNTAINFLOOD列表
+     * Mountainflood列表
      * @param mountainflood
      * @return
      */
     //@RequiresPermissions("iot:mountainfloodinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(MOUNTAINFLOOD mountainflood){
+    public TableDataInfo list(Mountainflood mountainflood){
         startPage();
         List<Mountainflood> list = MountainfloodService.selectMountainfloodList(mountainflood);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class MountainfloodController extends BaseController {
     }
 
     /**
-     * 新增MOUNTAINFLOOD信息
+     * 新增Mountainflood信息
      */
     @RequiresPermissions("iot:mountainfloodinfo:add")
-    @Log(title = "MOUNTAINFLOOD信息", businessType = BusinessType.INSERT)
+    @Log(title = "Mountainflood信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(MOUNTAINFLOOD mountainflood)
+    public AjaxResult addSave(Mountainflood mountainflood)
     {
         return toAjax(MountainfloodService.insertmountainflood(mountainflood));
     }
     /**
-     * 修改MOUNTAINFLOOD信息
+     * 修改Mountainflood信息
      */
     @GetMapping("/edit/{place_id}")
     public String edit(@PathVariable("place_id") String place_id, ModelMap mmap)
     {
-        MOUNTAINFLOOD mountainflood = MountainfloodService.selectByplace_id(place_id);
+        Mountainflood mountainflood = MountainfloodService.selectByplace_id(place_id);
         mmap.put("mountainflood", mountainflood);
         return prefix + "/edit";
     }
     /**
-     * 修改保存MOUNTAINFLOOD信息
+     * 修改保存Mountainflood信息
      */
     @RequiresPermissions("iot:mountainfloodinfo:edit")
-    @Log(title = "MOUNTAINFLOOD信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Mountainflood信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(MOUNTAINFLOOD mountainflood)
+    public AjaxResult editSave(Mountainflood mountainflood)
     {
         return toAjax(MountainfloodService.updateMountainflood(mountainflood));
     }
     /**
-     * 删除MOUNTAINFLOOD信息
+     * 删除Mountainflood信息
      */
     @RequiresPermissions("iot:mountainfloodinfo:remove")
-    @Log(title = "删除MOUNTAINFLOOD信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Mountainflood信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{place_id}")
     @ResponseBody

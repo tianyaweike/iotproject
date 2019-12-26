@@ -31,14 +31,14 @@ public class BoardController extends BaseController {
     }
 
     /**
-     * BOARD列表
+     * Board列表
      * @param board
      * @return
      */
     //@RequiresPermissions("iot:boardinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(BOARD board){
+    public TableDataInfo list(Board board){
         startPage();
         List<Board> list = BoardService.selectBoardList(board);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class BoardController extends BaseController {
     }
 
     /**
-     * 新增BOARD信息
+     * 新增Board信息
      */
     @RequiresPermissions("iot:boardinfo:add")
-    @Log(title = "BOARD信息", businessType = BusinessType.INSERT)
+    @Log(title = "Board信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(BOARD board)
+    public AjaxResult addSave(Board board)
     {
         return toAjax(BoardService.insertboard(board));
     }
     /**
-     * 修改BOARD信息
+     * 修改Board信息
      */
     @GetMapping("/edit/{billboard_id}")
     public String edit(@PathVariable("billboard_id") String billboard_id, ModelMap mmap)
     {
-        BOARD board = BoardService.selectBybillboard_id(billboard_id);
+        Board board = BoardService.selectBybillboard_id(billboard_id);
         mmap.put("board", board);
         return prefix + "/edit";
     }
     /**
-     * 修改保存BOARD信息
+     * 修改保存Board信息
      */
     @RequiresPermissions("iot:boardinfo:edit")
-    @Log(title = "BOARD信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Board信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(BOARD board)
+    public AjaxResult editSave(Board board)
     {
         return toAjax(BoardService.updateBoard(board));
     }
     /**
-     * 删除BOARD信息
+     * 删除Board信息
      */
     @RequiresPermissions("iot:boardinfo:remove")
-    @Log(title = "删除BOARD信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Board信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{billboard_id}")
     @ResponseBody

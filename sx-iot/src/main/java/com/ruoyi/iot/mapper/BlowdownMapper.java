@@ -28,7 +28,7 @@ public interface BlowdownMapper {
      * @param pid
      * @return
      */
-    Blowdown selectBypid(String pid);
+    Blowdown selectByid(String pid);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface BlowdownMapper {
      * @param pid
      * @return
      */
-    int deleteBlowdownById(String pid);
+    int deleteBlowdownByid(String pid);
 }

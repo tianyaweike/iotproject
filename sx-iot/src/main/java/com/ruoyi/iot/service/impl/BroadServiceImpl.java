@@ -35,7 +35,7 @@ public class BroadServiceImpl implements BroadService {
     }
 
     /**
-     * 根据id删除数据
+     * 根据id批量删除数据
      * @param id
      */
     @Override
@@ -67,7 +67,7 @@ public class BroadServiceImpl implements BroadService {
     }
 
     /**
-     * 批量删除广播信息
+     * 删除广播信息
      * @param Broad
      * @return
      */

@@ -18,10 +18,10 @@ public interface BoardService {
     public List<Board> selectBoardList(Board board);
 
     /**
-     * 根据billboard_id批量删除数据
-     * @param billboard_id
+     * 根据board_id批量删除数据
+     * @param board_id
      */
-    public int deleteBoardByids(String billboard_id);
+    public int deleteBoardByids(String board_id);
 
     /**
      * 添加广告牌公告数据
@@ -30,11 +30,11 @@ public interface BoardService {
      */
     public int insertBoard(Board board);
     /**
-     * 根据billboard_id选择数据
-     * @param billboard_id
+     * 根据board_id选择数据
+     * @param board_id
      * @return
      */
-    public Board selectBybillboard_id(String billboard_id);
+    public Board selectByboard_id(String board_id);
     /**
      * 保存用户修改
      * @param Board
@@ -43,8 +43,8 @@ public interface BoardService {
     public int updateBoard(Board board);
     /**
      * 删除广告牌信息
-     * @param billboard_id
+     * @param board_id
      * @return
      */
-    public int deleteBoardByIds(String billboard_id);
+    public int deleteBoardByIds(String board_id);
 }

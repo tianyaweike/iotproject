@@ -11,7 +11,7 @@ public interface BroadMapper {
     List<Broad> selectBroadList(Broad broad);
 
     /**
-     * 根据broad_id删除数据
+     * 根据broad_id批量删除数据
      * @param broad_id
      */
     int deleteBroadByids(String[] broad_id);
@@ -42,5 +42,5 @@ public interface BroadMapper {
      * @param broad_id
      * @return
      */
-    int deleteBroadByIds(String broad_id);
+    int deleteBroadById(String broad_id);
 }

@@ -28,7 +28,7 @@ public interface BroadMapper {
      * @param broad_id
      * @return
      */
-    Broad selectBybroad_id(String broad_id);
+    Broad selectByid(String broad_id);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface BroadMapper {
      * @param broad_id
      * @return
      */
-    int deleteBroadById(String broad_id);
+    int deleteBroadByid(String broad_id);
 }

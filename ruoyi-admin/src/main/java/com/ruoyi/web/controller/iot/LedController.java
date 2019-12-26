@@ -63,7 +63,7 @@ public class LEDController extends BaseController {
     /**
      * 修改LED信息
      */
-    @GetMapping("/edit/{ledid}")
+    @GetMapping("/edit/{led_id}")
     public String edit(@PathVariable("led_id") String led_id, ModelMap mmap)
     {
         LED led = LedService.selectByledid(led_id);
@@ -86,7 +86,7 @@ public class LEDController extends BaseController {
      */
     @RequiresPermissions("iot:ledinfo:remove")
     @Log(title = "删除LED信息", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove/{ledid}")
+    @PostMapping( "/remove/{led_id}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("led_id") String led_id)
     {

@@ -11,7 +11,7 @@ public interface PumpMapper {
     List<Pump> selectPumpList(Pump pump);
 
     /**
-     * 根据id删除数据
+     * 根据id批量删除数据
      * @param id
      */
     int deletePumpByids(String[] id);
@@ -42,5 +42,5 @@ public interface PumpMapper {
      * @param id
      * @return
      */
-    int deletePumpByIds(String id);
+    int deletePumpByid(String id);
 }

@@ -63,10 +63,10 @@ public class PumpController extends BaseController {
     /**
      * 修改Pump信息
      */
-    @GetMapping("/edit/{pump_id}")
-    public String edit(@PathVariable("pump_id") String pump_id, ModelMap mmap)
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") String id, ModelMap mmap)
     {
-        Pump Pump = PumpService.selectBypump_id(pump_id);
+        Pump Pump = PumpService.selectByid(id);
         mmap.put("Pump", Pump);
         return prefix + "/edit";
     }
@@ -86,11 +86,11 @@ public class PumpController extends BaseController {
      */
     @RequiresPermissions("iot:pumpinfo:remove")
     @Log(title = "删除Pump信息", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove/{pump_id}")
+    @PostMapping( "/remove/{id}")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("pump_id") String pump_id)
+    public AjaxResult remove(@PathVariable("id") String id)
     {
-        System.out.println("*******"+pump_id);
-        return toAjax(PumpService.deletePumpByids(pump_id));
+        System.out.println("*******"+id);
+        return toAjax(PumpService.deletePumpByids(id));
     }
 }

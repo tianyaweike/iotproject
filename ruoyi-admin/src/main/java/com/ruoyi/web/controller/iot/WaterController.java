@@ -31,14 +31,14 @@ public class WaterController extends BaseController {
     }
 
     /**
-     * WATER列表
+     * Water列表
      * @param water
      * @return
      */
     //@RequiresPermissions("iot:waterinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(WATER water){
+    public TableDataInfo list(Water water){
         startPage();
         List<Water> list = WaterService.selectWaterList(water);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class WaterController extends BaseController {
     }
 
     /**
-     * 新增WATER信息
+     * 新增Water信息
      */
     @RequiresPermissions("iot:waterinfo:add")
-    @Log(title = "WATER信息", businessType = BusinessType.INSERT)
+    @Log(title = "Water信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(WATER water)
+    public AjaxResult addSave(Water water)
     {
         return toAjax(WaterService.insertwater(water));
     }
     /**
-     * 修改WATER信息
+     * 修改Water信息
      */
     @GetMapping("/edit/{wid}")
     public String edit(@PathVariable("wid") String wid, ModelMap mmap)
     {
-        WATER water = WaterService.selectBywid(wid);
+        Water water = WaterService.selectBywid(wid);
         mmap.put("water", water);
         return prefix + "/edit";
     }
     /**
-     * 修改保存WATER信息
+     * 修改保存Water信息
      */
     @RequiresPermissions("iot:waterinfo:edit")
-    @Log(title = "WATER信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Water信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(WATER water)
+    public AjaxResult editSave(Water water)
     {
         return toAjax(WaterService.updateWater(water));
     }
     /**
-     * 删除WATER信息
+     * 删除Water信息
      */
     @RequiresPermissions("iot:waterinfo:remove")
-    @Log(title = "删除WATER信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Water信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{wid}")
     @ResponseBody

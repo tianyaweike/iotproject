@@ -11,7 +11,7 @@ public interface FloodMapper {
     List<Flood> selectFloodList(Flood flood);
 
     /**
-     * 根据place_id删除数据
+     * 根据place_id批量删除数据
      * @param place_id
      */
     int deleteFloodByids(String[] place_id);
@@ -28,7 +28,7 @@ public interface FloodMapper {
      * @param place_id
      * @return
      */
-    Flood selectByplace_id(String place_id);
+    Flood selectByid(String place_id);
 
     /**
      * 保存用户修改
@@ -42,5 +42,5 @@ public interface FloodMapper {
      * @param place_id
      * @return
      */
-    int deleteFloodByIds(String place_id);
+    int deleteFloodByid(String place_id);
 }

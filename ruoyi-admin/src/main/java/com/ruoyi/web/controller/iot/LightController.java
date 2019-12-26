@@ -31,14 +31,14 @@ public class LightController extends BaseController {
     }
 
     /**
-     * LIGHT列表
+     * Light列表
      * @param light
      * @return
      */
     //@RequiresPermissions("iot:lightinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(LIGHT light){
+    public TableDataInfo list(Light light){
         startPage();
         List<Light> list = LightService.selectLightList(light);
         return getDataTable(list);
@@ -50,42 +50,42 @@ public class LightController extends BaseController {
     }
 
     /**
-     * 新增LIGHT信息
+     * 新增Light信息
      */
     @RequiresPermissions("iot:lightinfo:add")
-    @Log(title = "LIGHT信息", businessType = BusinessType.INSERT)
+    @Log(title = "Light信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(LIGHT light)
+    public AjaxResult addSave(Light light)
     {
         return toAjax(LightService.insertlight(light));
     }
     /**
-     * 修改LIGHT信息
+     * 修改Light信息
      */
     @GetMapping("/edit/{nid}")
     public String edit(@PathVariable("nid") String nid, ModelMap mmap)
     {
-        LIGHT light = LightService.selectBynid(nid);
+        Light light = LightService.selectBynid(nid);
         mmap.put("light", light);
         return prefix + "/edit";
     }
     /**
-     * 修改保存LIGHT信息
+     * 修改保存Light信息
      */
     @RequiresPermissions("iot:lightinfo:edit")
-    @Log(title = "LIGHT信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Light信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(LIGHT light)
+    public AjaxResult editSave(Light light)
     {
         return toAjax(LightService.updateLight(light));
     }
     /**
-     * 删除LIGHT信息
+     * 删除Light信息
      */
     @RequiresPermissions("iot:lightinfo:remove")
-    @Log(title = "删除LIGHT信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Light信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{nid}")
     @ResponseBody

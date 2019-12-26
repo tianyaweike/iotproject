@@ -27,7 +27,7 @@ public class EnergyController extends BaseController {
     @RequiresPermissions("iot:energyinfo:view")
     @GetMapping()
     public String Energy(){
-        return prefix+"/Energy";
+        return prefix+"/energy";
     }
 
     /**

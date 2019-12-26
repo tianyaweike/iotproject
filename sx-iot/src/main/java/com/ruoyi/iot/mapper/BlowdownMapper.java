@@ -11,7 +11,7 @@ public interface BlowdownMapper {
     List<Blowdown> selectBlowdownList(Blowdown blowdown);
 
     /**
-     * 根据pid删除数据
+     * 根据pid批量删除数据
      * @param pid
      */
     int deleteBlowdownByids(String[] pid);
@@ -42,5 +42,5 @@ public interface BlowdownMapper {
      * @param pid
      * @return
      */
-    int deleteBlowdownByIds(String pid);
+    int deleteBlowdownById(String pid);
 }

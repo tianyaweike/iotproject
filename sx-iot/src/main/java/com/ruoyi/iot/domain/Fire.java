@@ -1,6 +1,8 @@
 package com.ruoyi.iot.domain;
 
 public class Fire {
+    private String fid;
+
     private String Device_status;
 
     private String temperature;
@@ -14,7 +16,8 @@ public class Fire {
     @Override
     public String toString() {
         return "Fire{" +
-                "Device_status='" + Device_status + '\'' +
+                "fid='" + fid + '\'' +
+                ", Device_status='" + Device_status + '\'' +
                 ", temperature='" + temperature + '\'' +
                 ", ppm='" + ppm + '\'' +
                 ", PM='" + PM + '\'' +
@@ -22,7 +25,8 @@ public class Fire {
                 '}';
     }
 
-    public Fire(String device_status, String temperature, String ppm, String PM, String current_sense) {
+    public Fire(String fid, String device_status, String temperature, String ppm, String PM, String current_sense) {
+        this.fid = fid;
         Device_status = device_status;
         this.temperature = temperature;
         this.ppm = ppm;
@@ -32,6 +36,14 @@ public class Fire {
 
     public Fire() {
         super();
+    }
+
+    public String getFid() {
+        return fid;
+    }
+
+    public void setFid(String fid) {
+        this.fid = fid;
     }
 
     public String getDevice_status() {

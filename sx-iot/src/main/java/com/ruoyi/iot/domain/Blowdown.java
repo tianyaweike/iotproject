@@ -2,7 +2,7 @@ package com.ruoyi.iot.domain;
 
 public class Blowdown {
 
-    private String sid;
+    private String pid;
 
     private String monitortime;
 
@@ -19,7 +19,7 @@ public class Blowdown {
     @Override
     public String toString() {
         return "Blowdown{" +
-                "sid='" + sid + '\'' +
+                "pid='" + pid + '\'' +
                 ", monitortime='" + monitortime + '\'' +
                 ", location='" + location + '\'' +
                 ", Hmental='" + Hmental + '\'' +
@@ -29,8 +29,8 @@ public class Blowdown {
                 '}';
     }
 
-    public Blowdown(String sid, String monitortime, String location, String hmental, String PH, String econdu, String updatetime) {
-        this.sid = sid;
+    public Blowdown(String pid, String monitortime, String location, String hmental, String PH, String econdu, String updatetime) {
+        this.pid = pid;
         this.monitortime = monitortime;
         this.location = location;
         Hmental = hmental;
@@ -43,12 +43,12 @@ public class Blowdown {
         super();
     }
 
-    public String getSid() {
-        return sid;
+    public String getPid() {
+        return pid;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
     public String getMonitortime() {

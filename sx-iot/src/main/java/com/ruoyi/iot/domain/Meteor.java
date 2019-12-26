@@ -2,7 +2,7 @@ package com.ruoyi.iot.domain;
 
 public class Meteor {
 
-    private String sid;
+    private String weather_id;
 
     private String monitortime;
 
@@ -25,7 +25,7 @@ public class Meteor {
     @Override
     public String toString() {
         return "Meteor{" +
-                "sid='" + sid + '\'' +
+                "weather_id='" + weather_id + '\'' +
                 ", monitortime='" + monitortime + '\'' +
                 ", location='" + location + '\'' +
                 ", windpower='" + windpower + '\'' +
@@ -38,8 +38,8 @@ public class Meteor {
                 '}';
     }
 
-    public Meteor(String sid, String monitortime, String location, String windpower, String winderaction, String raincapacity, String temprature, String humidity, String airlevel, String updatetime) {
-        this.sid = sid;
+    public Meteor(String weather_id, String monitortime, String location, String windpower, String winderaction, String raincapacity, String temprature, String humidity, String airlevel, String updatetime) {
+        this.weather_id = weather_id;
         this.monitortime = monitortime;
         this.location = location;
         this.windpower = windpower;
@@ -55,12 +55,12 @@ public class Meteor {
         super();
     }
 
-    public String getSid() {
-        return sid;
+    public String getWeather_id() {
+        return weather_id;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setWeather_id(String weather_id) {
+        this.weather_id = weather_id;
     }
 
     public String getMonitortime() {

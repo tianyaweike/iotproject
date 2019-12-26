@@ -1,6 +1,8 @@
 package com.ruoyi.iot.domain;
 
 public class Environl {
+    private String hid;
+
     private String Ambient_temperature;
 
     private String ambient_humidity;
@@ -22,7 +24,8 @@ public class Environl {
     @Override
     public String toString() {
         return "Environl{" +
-                "Ambient_temperature='" + Ambient_temperature + '\'' +
+                "hid='" + hid + '\'' +
+                ", Ambient_temperature='" + Ambient_temperature + '\'' +
                 ", ambient_humidity='" + ambient_humidity + '\'' +
                 ", wind_speed='" + wind_speed + '\'' +
                 ", wind_direction='" + wind_direction + '\'' +
@@ -34,7 +37,8 @@ public class Environl {
                 '}';
     }
 
-    public Environl(String ambient_temperature, String ambient_humidity, String wind_speed, String wind_direction, String light_intensity, String atmospheric, String PM, String ppm, String device_status) {
+    public Environl(String hid, String ambient_temperature, String ambient_humidity, String wind_speed, String wind_direction, String light_intensity, String atmospheric, String PM, String ppm, String device_status) {
+        this.hid = hid;
         Ambient_temperature = ambient_temperature;
         this.ambient_humidity = ambient_humidity;
         this.wind_speed = wind_speed;
@@ -48,6 +52,14 @@ public class Environl {
 
     public Environl() {
         super();
+    }
+
+    public String getHid() {
+        return hid;
+    }
+
+    public void setHid(String hid) {
+        this.hid = hid;
     }
 
     public String getAmbient_temperature() {

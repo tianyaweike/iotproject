@@ -11,7 +11,7 @@ public interface BoardMapper {
     List<Board> selectBoardList(Board board);
 
     /**
-     * 根据board_id删除数据
+     * 根据board_id批量删除数据
      * @param board_id
      */
     int deleteBoardByids(String[] board_id);
@@ -42,5 +42,5 @@ public interface BoardMapper {
      * @param board_id
      * @return
      */
-    int deleteBoardByIds(String board_id);
+    int deleteBoardById(String board_id);
 }

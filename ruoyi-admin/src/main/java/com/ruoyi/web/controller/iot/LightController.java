@@ -27,20 +27,20 @@ public class LightController extends BaseController {
     @RequiresPermissions("iot:lightinfo:view")
     @GetMapping()
     public String Light(){
-        return prefix+"/Light";
+        return prefix+"/light";
     }
 
     /**
-     * Light列表
-     * @param Light
+     * LIGHT列表
+     * @param light
      * @return
      */
     //@RequiresPermissions("iot:lightinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Light Light){
+    public TableDataInfo list(LIGHT light){
         startPage();
-        List<Light> list = LightService.selectLightList(Light);
+        List<Light> list = LightService.selectLightList(light);
         return getDataTable(list);
     }
 
@@ -50,42 +50,43 @@ public class LightController extends BaseController {
     }
 
     /**
-     * 新增Light信息
+     * 新增LIGHT信息
      */
     @RequiresPermissions("iot:lightinfo:add")
-    @Log(title = "Light信息", businessType = BusinessType.INSERT)
+    @Log(title = "LIGHT信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Light Light)
+    public AjaxResult addSave(LIGHT light)
     {
-        return toAjax(LightService.insertLight(Light));
+        return toAjax(LightService.insertlight(light));
     }
     /**
-     * 修改Light信息
+     * 修改LIGHT信息
      */
     @GetMapping("/edit/{nid}")
     public String edit(@PathVariable("nid") String nid, ModelMap mmap)
     {
-        Light Light = LightService.selectBynid(nid);
-        mmap.put("Light", Light);
+        LIGHT light = LightService.selectBynid(nid);
+        mmap.put("light", light);
         return prefix + "/edit";
     }
     /**
-     * 修改保存Light信息
+     * 修改保存LIGHT信息
      */
     @RequiresPermissions("iot:lightinfo:edit")
-    @Log(title = "Light信息", businessType = BusinessType.UPDATE)
+    @Log(title = "LIGHT信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Light Light)
+    public AjaxResult editSave(LIGHT light)
     {
-        return toAjax(LightService.updateLight(Light));
+        return toAjax(LightService.updateLight(light));
     }
     /**
-     * 删除Light信息
+     * 删除LIGHT信息
      */
     @RequiresPermissions("iot:lightinfo:remove")
-    @Log(title = "删除Light信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除LIGHT信息", businessType = BusinessType.DELETE)
+
     @PostMapping( "/remove/{nid}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("nid") String nid)

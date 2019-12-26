@@ -31,16 +31,16 @@ public class EnergyController extends BaseController {
     }
 
     /**
-     * Energy列表
-     * @param Energy
+     * ENERGY列表
+     * @param energy
      * @return
      */
     //@RequiresPermissions("iot:energyinfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Energy Energy){
+    public TableDataInfo list(ENERGY energy){
         startPage();
-        List<Energy> list = EnergyService.selectEnergyList(Energy);
+        List<Energy> list = EnergyService.selectEnergyList(energy);
         return getDataTable(list);
     }
 
@@ -50,42 +50,43 @@ public class EnergyController extends BaseController {
     }
 
     /**
-     * 新增Energy信息
+     * 新增ENERGY信息
      */
     @RequiresPermissions("iot:energyinfo:add")
-    @Log(title = "Energy信息", businessType = BusinessType.INSERT)
+    @Log(title = "ENERGY信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Energy Energy)
+    public AjaxResult addSave(ENERGY energy)
     {
-        return toAjax(EnergyService.insertEnergy(Energy));
+        return toAjax(EnergyService.insertenergy(energy));
     }
     /**
-     * 修改Energy信息
+     * 修改ENERGY信息
      */
     @GetMapping("/edit/{eid}")
     public String edit(@PathVariable("eid") String eid, ModelMap mmap)
     {
-        Energy Energy = EnergyService.selectByeid(eid);
-        mmap.put("Energy", Energy);
+        ENERGY energy = EnergyService.selectByeid(eid);
+        mmap.put("energy", energy);
         return prefix + "/edit";
     }
     /**
-     * 修改保存Energy信息
+     * 修改保存ENERGY信息
      */
     @RequiresPermissions("iot:energyinfo:edit")
-    @Log(title = "Energy信息", businessType = BusinessType.UPDATE)
+    @Log(title = "ENERGY信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Energy Energy)
+    public AjaxResult editSave(ENERGY energy)
     {
-        return toAjax(EnergyService.updateEnergy(Energy));
+        return toAjax(EnergyService.updateEnergy(energy));
     }
     /**
-     * 删除Energy信息
+     * 删除ENERGY信息
      */
     @RequiresPermissions("iot:energyinfo:remove")
-    @Log(title = "删除Energy信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除ENERGY信息", businessType = BusinessType.DELETE)
+
     @PostMapping( "/remove/{eid}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("eid") String eid)

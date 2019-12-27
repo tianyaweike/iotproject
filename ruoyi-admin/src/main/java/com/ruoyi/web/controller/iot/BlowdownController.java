@@ -5,8 +5,8 @@ import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.page.TableDataInfo;
 import com.ruoyi.framework.web.base.BaseController;
-import com.ruoyi.iot.domain.Pollution;
-import com.ruoyi.iot.service.PollutionService;
+import com.ruoyi.iot.domain.Blowdown;
+import com.ruoyi.iot.service.BlowdownService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,30 +17,30 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/iot/blowdowninfo")
-public class PollutionController extends BaseController {
+public class BlowdownController extends BaseController {
 
     private String prefix = "iot/blowdowninfo";
 
     @Autowired
-    private PollutionService PollutionService;
+    private BlowdownService BlowdownService;
 
     @RequiresPermissions("iot:blowdowninfo:view")
     @GetMapping()
-    public String Pollution(){
-        return prefix+"/pollution";
+    public String Blowdown(){
+        return prefix+"/blowdown";
     }
 
     /**
-     * Pollution列表
-     * @param pollution
+     * Blowdown列表
+     * @param blowdown
      * @return
      */
     //@RequiresPermissions("iot:blowdowninfo:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Pollution pollution){
+    public TableDataInfo list(Blowdown blowdown){
         startPage();
-        List<Pollution> list = PollutionService.selectPollutionList(pollution);
+        List<Blowdown> list = BlowdownService.selectBlowdownList(blowdown);
         return getDataTable(list);
     }
 
@@ -50,48 +50,48 @@ public class PollutionController extends BaseController {
     }
 
     /**
-     * 新增Pollution信息
+     * 新增Blowdown信息
      */
     @RequiresPermissions("iot:blowdowninfo:add")
-    @Log(title = "Pollution信息", businessType = BusinessType.INSERT)
+    @Log(title = "Blowdown信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Pollution pollution)
+    public AjaxResult addSave(Blowdown blowdown)
     {
-        return toAjax(PollutionService.insertpollution(pollution));
+        return toAjax(BlowdownService.insertblowdown(blowdown));
     }
     /**
-     * 修改Pollution信息
+     * 修改Blowdown信息
      */
     @GetMapping("/edit/{pid}")
     public String edit(@PathVariable("pid") String pid, ModelMap mmap)
     {
-        Pollution pollution = PollutionService.selectBypid(pid);
-        mmap.put("pollution", pollution);
+        Blowdown blowdown = BlowdownService.selectBypid(pid);
+        mmap.put("blowdown", blowdown);
         return prefix + "/edit";
     }
     /**
-     * 修改保存Pollution信息
+     * 修改保存Blowdown信息
      */
     @RequiresPermissions("iot:blowdowninfo:edit")
-    @Log(title = "Pollution信息", businessType = BusinessType.UPDATE)
+    @Log(title = "Blowdown信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Pollution pollution)
+    public AjaxResult editSave(Blowdown blowdown)
     {
-        return toAjax(PollutionService.updatePollution(pollution));
+        return toAjax(BlowdownService.updateBlowdown(blowdown));
     }
     /**
-     * 删除Pollution信息
+     * 删除Blowdown信息
      */
     @RequiresPermissions("iot:blowdowninfo:remove")
-    @Log(title = "删除Pollution信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除Blowdown信息", businessType = BusinessType.DELETE)
 
     @PostMapping( "/remove/{pid}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("pid") String pid)
     {
         System.out.println("*******"+pid);
-        return toAjax(PollutionService.deletePollutionByids(pid));
+        return toAjax(BlowdownService.deleteBlowdownByids(pid));
     }
 }

@@ -12,7 +12,7 @@
                 <div class="select-list">
                     <ul>
                         <li>
-                            编号：<input type="text" name="pid"/>
+                            编号：<input type="text" name="weather_id"/>
                         </li>
                         <li>
                             监测时间：<input type="time" name="monitortime"/>
@@ -21,13 +21,22 @@
                             监测地点：<input type="text" name="location"/>
                         </li>
                         <li>
-                            重金属含量：<input type="text" name="Hmental"/>
+                            风力：<input type="text" name="windpower"/>
                         </li>
                         <li>
-                            PH值：<input type="text" name="PH"/>
+                            风向：<input type="text" name="winderaction"/>
                         </li>
                         <li>
-                            电导率：<input type="text" name="econdu"/>
+                            降雨量：<input type="text" name="raincapacity"/>
+                        </li>
+                        <li>
+                            温度：<input type="text" name="temperature"/>
+                        </li>
+                        <li>
+                            湿度：<input type="text" name="humidity"/>
+                        </li>
+                        <li>
+                            空气质量等级：<input type="text" name="airlevel"/>
                         </li>
                         <li>
                             更新时间：<input type="time" name="updatetime"/>
@@ -42,16 +51,16 @@
         </div>
 
         <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="iot:blowdowninfo:add">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="iot:meteorinfo:add">
                 <i class="fa fa-plus"></i> 新增
             </a>
-            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="iot:blowdowninfo:edit">
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="iot:meteorinfo:edit">
                 <i class="fa fa-edit"></i> 修改
             </a>
-            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="iot:blowdowninfo:remove">
+            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="iot:meteorinfo:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:blowdowninfo:export">
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:meteorinfo:export">
                 <i class="fa fa-download"></i> 导出
             </a>
         </div>
@@ -63,9 +72,9 @@
 </div>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('iot:blowdowninfo:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('iot:blowdowninfo:remove')}]];
-    var prefix = ctx + "iot/blowdown";
+    var editFlag = [[${@permission.hasPermi('iot:meteorinfo:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('iot:meteorinfo:remove')}]];
+    var prefix = ctx + "iot/meteor";
 
     $(function() {
         var options = {
@@ -74,15 +83,15 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-           // sortName: "blowdownSort",
-            modalName: "排污监测",
+          //  sortName: "meteorSort",
+            modalName: "气象监测",
             search: false,
             showExport: false,
             columns: [{
                 checkbox: true
             },
                 {
-                    field: 'pid',
+                    field: 'weather_id',
                     title: '编号'
                 },
                 {
@@ -96,18 +105,33 @@
                     sortable: true
                 },
                 {
-                    field: 'Hmental',
-                    title: '重金属含量',
+                    field: 'windpower',
+                    title: '风力',
                     sortable: true
                 },
                 {
-                    field: 'PH',
-                    title: 'PH值',
+                    field: 'winderaction',
+                    title: '风向',
                     sortable: true
                 },
                 {
-                    field: 'econdu',
-                    title: '电导率',
+                    field: 'raincapacity',
+                    title: '降雨量',
+                    sortable: true
+                },
+                {
+                    field: 'temperature',
+                    title: '温度',
+                    sortable: true
+                },
+                {
+                    field: 'humidity',
+                    title: '湿度',
+                    sortable: true
+                },
+                {
+                    field: 'airlevel',
+                    title: '空气质量等级',
                     sortable: true
                 },
                 {
@@ -120,8 +144,8 @@
                     align: 'center',
                     formatter: function(value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.pid + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.pid + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.weather_id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.weather_id + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }]

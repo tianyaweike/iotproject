@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.iot.mapper.FloodMapper">
+    <resultMap type="Flood" id="FloodResult">
+        <result property="place_id"    column="place_id"    />
+        <result property="stage"    column="stage"    />
+        <result property="display"    column="display"    />
+        <result property="rainfall"    column="rainfall"    />
+    </resultMap>
+
+    <!--定义selectFlood为查询整表命令-->
+    <sql id="selectFlood">
+    select place_id,stage,display,rainfall from iot_flood
+    </sql>
+    <!--查询表的所有列表信息-->
+    <select id="selectFloodList" parameterType="Flood" resultMap="FloodResult">
+        <include refid="selectFlood"/>
+        <!--<where>
+            <if test="place_id != null and place_id='' "> and place_id = #{place_id}</if>
+            <if test="location != null  and location != '' "> and location = #{location}</if>
+            <if test="display != null  and display != '' "> and display = #{display}</if>
+            <if test="rainfall != null  and rainfall != '' "> and rainfall = #{rainfall}</if>
+        </where>
+        order by place_id desc
+        -->
+    </select>
+
+    <!--根据id查询信息-->
+    <select id="selectByid" parameterType="String" resultMap="FloodResult">
+        <include refid="selectFlood"/>
+        where place_id=#{place_id}
+        <!-- select
+         a.place_id as place_id,
+         a.location as location,
+         a.display as display,
+         a.rainfall as rainfall,
+         a.econdu as econdu
+         from iot_led a
+         -->
+        <!--
+        <where>
+            <if test="place_id != null  and place_id != '' ">and a.place_id like CONCAT(#{place_id},'%')</if>
+            <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
+        </where>
+        -->
+    </select>
+    <!--向表中插入新数据-->
+    <insert id="insertFlood" parameterType="Flood">
+        insert into iot_flood
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="place_id != null and place_id!='' ">place_id,</if>
+        <if test="stage != null  and stage != ''  ">stage,</if>
+        <if test="display != null  and display != ''  ">display,</if>
+        <if test="rainfall != null  and rainfall != ''  ">rainfall,</if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+        <if test="place_id != null and place_id!='' ">#{place_id},</if>
+        <if test="stage != null  and stage != ''  ">#{stage},</if>
+        <if test="display != null  and display != ''  ">#{display},</if>
+        <if test="rainfall != null  and rainfall != ''  ">#{rainfall},</if>
+        </trim>
+    </insert>
+    <!--更新数据-->
+    <update id="updateFlood" parameterType="Flood">
+        update iot_flood
+        <set>
+            <if test="place_id !=null and place_id !=''">place_id = #{place_id},</if>
+            <if test="stage != null  and stage != ''  ">stage = #{stage},</if>
+            <if test="display != null  and display != ''  ">display = #{display},</if>
+            <if test="rainfall != null  and rainfall != ''  ">rainfall = #{rainfall},</if>
+        </set>
+        where place_id = #{place_id}
+    </update>
+
+    <!--根据id删除-->
+    <delete id="deleteFloodByid" parameterType="String">
+        delete from iot_flood where place_id = #{place_id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteFloodByids" parameterType="String">
+        delete from iot_flood where place_id in
+        <foreach item="place_id" collection="array" open="(" separator="," close=")">
+            #{place_id}
+        </foreach>
+    </delete>
+
+</mapper>

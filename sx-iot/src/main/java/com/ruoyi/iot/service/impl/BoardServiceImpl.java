@@ -28,7 +28,7 @@ public class BoardServiceImpl implements BoardService{
      * @return
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
+    @DataSource(value = DataSourceType.SXINFOM)
     public List<Board> selectBoardList(Board board) {
         return boardMapper.selectBoardList(board);
     }
@@ -38,9 +38,9 @@ public class BoardServiceImpl implements BoardService{
      * @param id
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
-    public int deleteBoardByids(String billboard_id) {
-        return boardMapper.deleteBoardByids(Convert.toStrArray(billboard_id));
+    @DataSource(value = DataSourceType.SXINFOM)
+    public int deleteBoardByids(String board_id) {
+        return boardMapper.deleteBoardByids(Convert.toStrArray(board_id));
     }
 
     /**
@@ -49,20 +49,20 @@ public class BoardServiceImpl implements BoardService{
      * @return
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
+    @DataSource(value = DataSourceType.SXINFOM)
     public int insertBoard(Board board) {
         return boardMapper.insertBoard(board);
     }
 
     /**
-     * 根据billboard_id选择数据
-     * @param billboard_id
+     * 根据board_id选择数据
+     * @param board_id
      * @return
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
-    public Board selectBybillboard_id(String billboard_id) {
-        return boardMapper.selectBybillboard_id(billboard_id);
+    @DataSource(value = DataSourceType.SXINFOM)
+    public Board selectByid(String board_id) {
+        return boardMapper.selectByid(board_id);
     }
 
     /**
@@ -71,9 +71,9 @@ public class BoardServiceImpl implements BoardService{
      * @return
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
-    public int deleteBoardByIds(String billboard_id) {
-        return boardMapper.deleteBoardByIds(billboard_id);
+    @DataSource(value = DataSourceType.SXINFOM)
+    public int deleteBoardByid(String board_id) {
+        return boardMapper.deleteBoardByid(board_id);
     }
 
     /**
@@ -82,7 +82,7 @@ public class BoardServiceImpl implements BoardService{
      * @return
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
+    @DataSource(value = DataSourceType.SXINFOM)
     public int updateBoard(Board board) {
         return boardMapper.updateBoard(board);
     }

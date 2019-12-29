@@ -34,7 +34,7 @@ public interface BoardService {
      * @param board_id
      * @return
      */
-    public Board selectByboard_id(String board_id);
+    public Board selectByid(String board_id);
     /**
      * 保存用户修改
      * @param Board
@@ -46,5 +46,5 @@ public interface BoardService {
      * @param board_id
      * @return
      */
-    public int deleteBoardByIds(String board_id);
+    public int deleteBoardByid(String board_id);
 }

@@ -1,50 +1,50 @@
 package com.ruoyi.iot.service;
-import com.ruoyi.iot.domain.SandBox;
+import com.ruoyi.iot.domain.Sandbox;
 
 import java.util.List;
 /**
- * @program: SandBoxSys
+ * @program: SandboxSys
  * @description: 沙盘系统
  * @author: 饶泽敏
  * @create: 2019-12-25 15:20
  **/
 
-public interface  SandBoxService {
+public interface  SandboxService {
     /**
      * 查询沙盘记录列表
      *
      * @return
      */
-    public List<SandBox> selectSandBoxList(SandBox sandBox);
+    public List<Sandbox> selectSandboxList(Sandbox Sandbox);
 
     /**
      * 根据switch_id批量删除数据
      * @param switch_id
      */
-    public int deleteSandBoxByids(String switch_id);
+    public int deleteSandboxByids(String switch_id);
 
     /**
      * 添加沙盘公告数据
-     * @param  SandBox
+     * @param  Sandbox
      * @return
      */
-    public int insertSandBox(SandBox sandBox);
+    public int insertSandbox(Sandbox sandbox);
     /**
      * 根据switch_id选择数据
      * @param switch_id
      * @return
      */
-    public SandBox selectByswitch_id(String switch_id);
+    public Sandbox selectByid(String switch_id);
     /**
      * 保存用户修改
-     * @param SandBox
+     * @param Sandbox
      * @return
      */
-    public int updateSandBox(SandBox sandBox);
+    public int updateSandbox(Sandbox Sandbox);
     /**
      * 删除沙盘信息
      * @param switch_id
      * @return
      */
-    public int deleteSandBoxByIds(String switch_id);
+    public int deleteSandboxByid(String switch_id);
 }

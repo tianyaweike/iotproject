@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @program:  MountainfloodSys
+ * @program:  FloodSys
  * @description: 山洪系统
  * @author: 饶泽敏
  * @create: 2019-12-25 15:00
@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class FloodServiceImpl implements FloodService {
     @Autowired
-    private FloodMapper mountainfloodMapper;
+    private FloodMapper floodMapper;
 
     /**
      * 查询山洪记录列表
@@ -27,9 +27,9 @@ public class FloodServiceImpl implements FloodService {
      * @return
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
-    public List<Flood> selectMountainfloodList(Flood mountainflood) {
-        return mountainfloodMapper.selectMountainfloodList(mountainflood);
+    @DataSource(value = DataSourceType.SXINFOM)
+    public List<Flood> selectFloodList(Flood flood) {
+        return floodMapper.selectFloodList(flood);
     }
 
     /**
@@ -37,20 +37,20 @@ public class FloodServiceImpl implements FloodService {
      * @param id
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
-    public int deleteMountainfloodByids(String place_id) {
-        return mountainfloodMapper.deleteMountainfloodByids(Convert.toStrArray(place_id));
+    @DataSource(value = DataSourceType.SXINFOM)
+    public int deleteFloodByids(String place_id) {
+        return floodMapper.deleteFloodByids(Convert.toStrArray(place_id));
     }
 
     /**
      * 添加山洪公告数据
-     * @param  Mountainflood
+     * @param  Flood
      * @return
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
-    public int insertMountainflood(Flood mountainflood) {
-        return mountainfloodMapper.insertMountainflood(mountainflood);
+    @DataSource(value = DataSourceType.SXINFOM)
+    public int insertFlood(Flood flood) {
+        return floodMapper.insertFlood(flood);
     }
 
     /**
@@ -59,30 +59,30 @@ public class FloodServiceImpl implements FloodService {
      * @return
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
-    public Flood selectByplace_id(String place_id) {
-        return mountainfloodMapper.selectByplace_id(place_id);
+    @DataSource(value = DataSourceType.SXINFOM)
+    public Flood selectByid(String place_id) {
+        return floodMapper.selectByid(place_id);
     }
 
     /**
      * 删除山洪信息
-     * @param Mountainflood
+     * @param Flood
      * @return
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
-    public int deleteMountainfloodByIds(String place_id) {
-        return mountainfloodMapper.deleteMountainfloodByIds(place_id);
+    @DataSource(value = DataSourceType.SXINFOM)
+    public int deleteFloodByid(String place_id) {
+        return floodMapper.deleteFloodByid(place_id);
     }
 
     /**
      * 保存用户修改
-     * @param Mountainflood
+     * @param Flood
      * @return
      */
     @Override
-    @DataSource(value = DataSourceType.SXVILLAGE)
-    public int updateMountainflood(Flood mountainflood) {
-        return mountainfloodMapper.updateMountainflood(mountainflood);
+    @DataSource(value = DataSourceType.SXINFOM)
+    public int updateFlood(Flood flood) {
+        return floodMapper.updateFlood(flood);
     }
 }

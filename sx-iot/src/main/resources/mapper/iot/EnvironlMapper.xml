@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.iot.mapper.EnvironlMapper">
+    <resultMap type="Environl" id="EnvironlResult">
+        <result property="hid"    column="hid"    />
+        <result property="Ambient_temperature"    column="Ambient_temperature"    />
+        <result property="ambient_humidity"    column="ambient_humidity"    />
+        <result property="wind_speed"    column="wind_speed"    />
+        <result property="wind_direction"    column="wind_direction"    />
+        <result property="Light_intensity"    column="Light_intensity"    />
+        <result property="atmospheric_pressure"  column="atmospheric_pressure"  />
+        <result property="PM" column="PM" />
+        <result property="ppm" column="ppm" />
+        <result property="Device_status" column="Device_status" />
+    </resultMap>
+    <!--定义selectEnvironl为查询整表命令-->
+    <sql id="selectEnvironl">
+    select hid,Ambient_temperature,ambient_humidity,wind_speed,wind_direction,Light_intensity,atmospheric_pressure,PM,ppm,Device_status from iot_environl
+    </sql>
+    <!--统计表中记录数
+    <select id="countall" resultType="Integer">
+        select
+               count(*)
+        from iot_environl
+    </select>
+    -->
+    <!--查询表的所有列表信息-->
+    <select id="selectEnvironlList" parameterType="com.ruoyi.iot.domain.Environl" resultMap="EnvironlResult">
+        <include refid="selectEnvironl"/>
+        <!--<where>
+            <if test="hid != null and hid='' "> and hid = #{hid}</if>
+            <if test="Ambient_temperature!= null  and Ambient_temperature!= '' "> and Ambient_temperature= #{Ambient_temperature}</if>
+            <if test="ambient_humidity != null  and ambient_humidity != '' "> and ambient_humidity = #{ambient_humidity}</if>
+            <if test="wind_speed != null  and wind_speed != '' "> and wind_speed = #{wind_speed}</if>
+            <if test="wind_direction != null  and wind_direction != '' "> and wind_direction = #{wind_direction}</if>
+            <if test="Light_intensity != null  and Light_intensity != '' "> and Light_intensity = #{Light_intensity}</if>
+            <if test="atmospheric_pressure != null  and atmospheric_pressure != '' "> and atmospheric_pressure = #{atmospheric_pressure}</if>
+            <if test="PM !=null and PM !='' ">and PM = #{PM}</if>
+            <if test="ppm !=null and ppm !='' ">and ppm = #{ppm}</if>
+            <if test="Device_status !=null and Device_status !='' ">and Device_status = #{Device_status}</if>
+        </where>
+        order by hid desc
+        -->
+    </select>
+
+    <!--根据id查询信息-->
+    <select id="selectByhid" parameterType="String" resultMap="EnvironlResult">
+        <include refid="selectEnvironl"/>
+        where hid=#{hid}
+        <!-- select
+         a.hid as hid,
+         a.Ambient_temperature as Ambient_temperature,
+         a.ambient_humidity as ambient_humidity,
+         a.wind_speed as wind_speed,
+         a.wind_direction as wind_direction,
+         a.Light_intensity as Light_intensity
+         from iot_led a
+         -->
+        <!--
+        <where>
+            <if test="hid != null  and hid != '' ">and a.hid like CONCAT(#{hid},'%')</if>
+            <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
+        </where>
+        -->
+    </select>
+    <!--向表中插入新数据-->
+    <insert id="insertEnvironl" parameterType="com.ruoyi.iot.domain.Environl">
+        insert into iot_environl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hid != null and hid!='' ">hid,</if>
+            <if test="Ambient_temperature!= null  and Ambient_temperature!= ''  ">Ambient_temperature,</if>
+            <if test="ambient_humidity != null  and ambient_humidity != ''  ">ambient_humidity,</if>
+            <if test="wind_speed != null  and wind_speed != ''  ">wind_speed,</if>
+            <if test="wind_direction != null  and wind_direction != ''  ">wind_direction,</if>
+            <if test="Light_intensity != null  and Light_intensity != ''  ">Light_intensity,</if>
+            <if test="atmospheric_pressure != null and atmospheric_pressure !='' ">atmospheric_pressure,</if>
+            <if test="PM != null and PM != '' ">PM,</if>
+            <if test="ppm != null and ppm !='' ">ppm,</if>
+            <if test="Device_status !=null and Device_status !=''">Device_status,</if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="hid != null and hid!='' ">#{hid},</if>
+            <if test="Ambient_temperature != null  and Ambient_temperature != ''  ">#{Ambient_temperature},</if>
+            <if test="ambient_humidity != null  and ambient_humidity != ''  ">#{ambient_humidity},</if>
+            <if test="wind_speed != null  and wind_speed != ''  ">#{wind_speed},</if>
+            <if test="wind_direction != null  and wind_direction != ''  ">#{wind_direction},</if>
+            <if test="Light_intensity != null  and Light_intensity != ''  ">#{Light_intensity},</if>
+            <if test="atmospheric_pressure !=null and atmospheric_pressure !='' ">#{atmospheric_pressure},</if>
+            <if test="PM !=null and PM !='' ">#{PM},</if>
+            <if test="ppm !=null and ppm !=''">#{ppm},</if>
+            <if test="Device_status !=null and Device_status !=''">#{Device_status},</if>
+        </trim>
+    </insert>
+    <!--更新数据-->
+    <update id="updateEnvironl" parameterType="com.ruoyi.iot.domain.Environl">
+        update iot_environl
+        <set>
+            <if test="hid != null and hid !=''">hid = #{hid},</if>
+            <if test="Ambient_temperature != null  and Ambient_temperature != ''  ">Ambient_temperature = #{Ambient_temperature},</if>
+            <if test="ambient_humidity != null  and ambient_humidity != ''  ">ambient_humidity = #{ambient_humidity},</if>
+            <if test="wind_speed != null  and wind_speed != ''  ">wind_speed = #{wind_speed},</if>
+            <if test="wind_direction != null  and wind_direction != ''  ">wind_direction = #{wind_direction},</if>
+            <if test="Light_intensity != null  and Light_intensity != ''  ">Light_intensity = #{Light_intensity},</if>
+            <if test="atmospheric_pressure !=null and atmospheric_pressure != ''">atmospheric_pressure = #{atmospheric_pressure},</if>
+            <if test="PM != null and PM != ''">PM = #{PM},</if>
+            <if test="ppm != null and workingtemperature !=''">workingtemperature = #{workingtemperature},</if>
+            <if test="Device_status !=null and Device_status !='' ">Device_status = #{Device_status},</if>
+        </set>
+        where hid = #{hid}
+    </update>
+
+    <!--根据id删除-->
+    <delete id="deleteEnvironlByid" parameterType="String">
+        delete from iot_environl where hid = #{hid}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteEnvironlByids" parameterType="String">
+        delete from iot_environl where hid in
+        <foreach item="hid" collection="array" open="(" separator="," close=")">
+            #{hid}
+        </foreach>
+    </delete>
+
+</mapper>

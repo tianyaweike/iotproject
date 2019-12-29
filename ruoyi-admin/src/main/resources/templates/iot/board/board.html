@@ -15,11 +15,19 @@
                             广告牌编号：<input type="text" name="board_id"/>
                         </li>
                         <li>
-                            远程开关控制：<input type="time" name="control"/>
+                            远程开关控制：<input type="text" name="control"/>
                         </li>
                         <li>
-                            运行时间：<input type="time" name="working"/>
+                            <input class="laydate-icon  layer-date"
+                                   name="working"
+                                   id="working"
+                                   value=""
+                                   readonly="readonly"
+                                   style="width:150px;"
+                                   placeholder="运行时间"
+                                   title="运行时间"/>
                         </li>
+
 
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -31,16 +39,16 @@
         </div>
 
         <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="iot:board:add">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="iot:boardinfo:add">
                 <i class="fa fa-plus"></i> 新增
             </a>
-            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="iot:board:edit">
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="iot:boardinfo:edit">
                 <i class="fa fa-edit"></i> 修改
             </a>
-            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="iot:board:remove">
+            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="iot:boardinfo:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:board:export">
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:boardinfo:export">
                 <i class="fa fa-download"></i> 导出
             </a>
         </div>
@@ -52,8 +60,8 @@
 </div>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('iot:board:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('iot:board:remove')}]];
+    var editFlag = [[${@permission.hasPermi('iot:boardinfo:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('iot:boardinfo:remove')}]];
     var prefix = ctx + "iot/board";
 
     $(function() {
@@ -63,7 +71,7 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-            sortName: "boardSort",
+            sortName: "board_id",
             modalName: "广告牌管理",
             search: false,
             showExport: false,
@@ -98,5 +106,23 @@
         $.table.init(options);
     });
 </script>
+<script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
+<script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
+<!--时间插件-->
+<script>
+    laydate({
+        elem:"#pushdate",
+        event:"focus"
+    });
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem:"#iot",
+            type: 'time',
+        });
+    });
+</script>
+
 </body>
 </html>

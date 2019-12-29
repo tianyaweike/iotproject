@@ -7,8 +7,7 @@
     <form class="form-horizontal m" id="form-led-edit" th:object="${led}">
         <input id="led_id" name="led_id" th:field="*{led_id}"  type="hidden">
         <div class="form-group">
-            <label class="col-sm-3 control-label">
-                灯状态：</label>
+            <label class="col-sm-3 control-label">灯状态：</label>
             <div class="col-sm-8">
                 <input id="led_status" name="led_status" th:field="*{led_status}" class="form-control" type="text">
             </div>
@@ -52,7 +51,7 @@
 
     function submitHandler() {
         if ($.validate.form()) {
-            $.operate.save(prefix + "/lededit", $('#form-led-edit').serialize());
+            $.operate.save(prefix + "/edit", $('#form-led-edit').serialize());
         }
     }
 </script>

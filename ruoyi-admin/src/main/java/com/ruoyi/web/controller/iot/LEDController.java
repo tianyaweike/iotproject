@@ -19,6 +19,7 @@ import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.common.page.TableDataInfo;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.utils.ExcelUtil;
+import com.ruoyi.framework.util.ShiroUtils;
 
 /**
  * 终端运转 信息操作处理
@@ -35,17 +36,14 @@ public class LEDController extends BaseController
     @Autowired
     private ILEDService ledService;
 
-    @RequiresPermissions("iot:led:view")
+    @RequiresPermissions("iot:ledinfo:view")
     @GetMapping()
-    public String torrent()
-    {
-        return prefix + "/led";
-    }
+    public String operlog() { return prefix + "/led"; }
 
     /**
      * 查询终端运转列表
      */
-    @RequiresPermissions("iot:led:list")
+    @RequiresPermissions("iot:ledinfo:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(LED led)
@@ -59,7 +57,8 @@ public class LEDController extends BaseController
     /**
      * 导出终端运转列表
      */
-    @RequiresPermissions("iot:led:export")
+    @Log(title = "LED", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("iot:ledinfo:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(LED led)
@@ -68,21 +67,20 @@ public class LEDController extends BaseController
         ExcelUtil<LED> util = new ExcelUtil<LED>(LED.class);
         return util.exportExcel(list, "led");
     }
-
     /**
-     * 新增终端运转
+     * 新增
      */
     @GetMapping("/add")
     public String add()
     {
-        return prefix + "/ledadd";
+        return prefix + "/add";
     }
 
     /**
-     * 新增保存终端运转
+     * 新增保存
      */
-    @RequiresPermissions("iot:led:add")
-    @Log(title = "终端运转", businessType = BusinessType.INSERT)
+    @RequiresPermissions("iot:ledinfo:add")
+    @Log(title = "LED", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(LED led)
@@ -98,13 +96,13 @@ public class LEDController extends BaseController
     {
         LED led = ledService.selectLedById(led_id);
         mmap.put("led", led);
-        return prefix + "/lededit";
+        return prefix + "/edit";
     }
 
     /**
      * 修改保存终端运转
      */
-    @RequiresPermissions("iot:led:edit")
+    @RequiresPermissions("iot:ledinfo:edit")
     @Log(title = "终端运转", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -116,13 +114,19 @@ public class LEDController extends BaseController
     /**
      * 删除终端运转
      */
-    @RequiresPermissions("iot:led:remove")
-    @Log(title = "终端运转", businessType = BusinessType.DELETE)
+    @RequiresPermissions("iot:ledinfo:remove")
+    @Log(title = "LED", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
     {
         return toAjax(ledService.deleteLedByIds(ids));
     }
+
+
+    /*public AjaxResult remove(String led_ids)
+    {
+        return toAjax(ledService.deleteLedByIds(led_ids));
+    }*/
 
 }

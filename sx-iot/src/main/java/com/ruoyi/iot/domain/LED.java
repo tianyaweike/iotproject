@@ -1,11 +1,14 @@
 package com.ruoyi.iot.domain;
 
+import com.ruoyi.common.annotation.Excel;
+
 public class LED {
-    private String led_id;
+    @Excel(name = "灯编号")
+    private int Led_id;
+    @Excel(name = "灯状态")
+    private String led_Status;
 
-    private String led_status;
-
-    private String led_bright;
+    private String led_Bright;
 
     private String screen_wide;
 
@@ -13,28 +16,28 @@ public class LED {
 
     private String screen_status;
 
-    public String getLed_id() {
-        return led_id;
+    public int getLed_id() {
+        return Led_id;
     }
 
-    public void setLed_id(String led_id) {
-        this.led_id = led_id;
+    public void setLed_id(int led_id) {
+        this.Led_id = led_id;
     }
 
     public String getLed_status() {
-        return led_status;
+        return led_Status;
     }
 
     public void setLed_status(String led_status) {
-        this.led_status = led_status;
+        this.led_Status = led_status;
     }
 
     public String getLed_bright() {
-        return led_bright;
+        return led_Bright;
     }
 
     public void setLed_bright(String led_bright) {
-        this.led_bright = led_bright;
+        this.led_Bright = led_bright;
     }
 
     public String getScreen_wide() {
@@ -64,9 +67,9 @@ public class LED {
     @Override
     public String toString() {
         return "LED{" +
-                "led_id='" + led_id + '\'' +
-                ", led_status='" + led_status + '\'' +
-                ", led_bright='" + led_bright + '\'' +
+                "led_id='" + Led_id + '\'' +
+                ", led_status='" + led_Status + '\'' +
+                ", led_bright='" + led_Bright + '\'' +
                 ", screen_wide='" + screen_wide + '\'' +
                 ", screen_high='" + screen_high + '\'' +
                 ", screen_status='" + screen_status + '\'' +

@@ -2,15 +2,15 @@ package com.ruoyi;
 
 
 import com.ruoyi.server.CheckServer;
+import com.ruoyi.iot.domain.receivedata;
+import com.ruoyi.iot.domain.senddata;
 import org.mybatis.spring.annotation.MapperScan;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-
 import java.net.InetSocketAddress;
 
 /**
@@ -27,8 +27,13 @@ public class RuoYiApplication implements CommandLineRunner {
     CheckServer checkServer;
 
     public static void main(String[] args) {
+
+
         // System.setProperty("spring.devtools.restart.enabled", "false");
-        SpringApplication.run(RuoYiApplication.class, args);
+          SpringApplication.run(RuoYiApplication.class, args);
+//        System.out.print("111111");
+//        receivedata a=new receivedata();
+//        System.out.print(a.receive());
 
     }
 

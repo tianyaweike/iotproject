@@ -1,16 +1,16 @@
 package com.ruoyi.iot.domain;
 
 public class LEDgetPa {
-    private String id;
+    private int id;
     private Integer limit;
     private String begintime;
     private String endtime;
 
-    public String getid() {
+    public int getid() {
         return id;
     }
 
-    public void setid(String id) {
+    public void setid(int id) {
         this.id = id;
     }
 

@@ -6,9 +6,18 @@ import java.util.List;
 
 public interface LEDMapper {
     /**
+     * 查询终端运转列表
+     *
+     * @param led 终端运转信息
+     * @return 终端运转集合
+     */
+    public List<LED> selectLedList(LED led);
+    public List<LED> selectLedAll();
+
+    /**
      * 查询终端运转信息
      *
-     * @param dataid 终端运转ID
+     * @param led_id 终端运转ID
      * @return 终端运转信息
      */
     public LED selectLedById(String led_id);
@@ -16,26 +25,20 @@ public interface LEDMapper {
     /**
      * 统计物联网数据条目
      *
-     * @param dataid 终端运转ID
+     * @param led_id 终端运转ID
      * @return 终端运转信息
      */
-    public int countall();
+    //public int countall();
 
     /**
      * 统计物联网设备数量
      *
-     * @param dataid 终端运转ID
+     * @param led_id 终端运转ID
      * @return 终端运转信息
      */
-    public int devicecount();
+    //public int devicecount();
 
-    /**
-     * 查询终端运转列表
-     *
-     * @param led 终端运转信息
-     * @return 终端运转集合
-     */
-    public List<LED> selectLedList(LED led);
+
 
     /**
      * 新增终端运转
@@ -56,26 +59,19 @@ public interface LEDMapper {
     /**
      * 删除终端运转
      *
-     * @param dataid 终端运转ID
+     * @param led_id 终端运转ID
      * @return 结果
      */
-    public int deleteLedById(String led_id);
+   public int deleteLedById(String led_id);
 
     /**
      * 批量删除终端运转
      *
-     * @param dataids 需要删除的数据ID
+     * @param led_ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteLedByIds(String led_ids);
+    public int deleteLedByIds(String[] led_ids);
 
 
-    /**
-     * 根据IMEI号和时间范围和查询条数统计物联网数据
-     *
-     * @param LEDgetPa 终端信息
-     * @return 终端信息集合
-     */
-    public List<LED> selectLedByitl(LEDgetPa LEDgetPa);
 }
 

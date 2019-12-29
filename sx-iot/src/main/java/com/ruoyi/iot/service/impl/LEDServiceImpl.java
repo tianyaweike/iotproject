@@ -4,13 +4,14 @@ import java.util.List;
 
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
-import com.ruoyi.iot.domain.LEDgetPa;
 import com.ruoyi.iot.mapper.LEDMapper;
 import com.ruoyi.iot.service.ILEDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.iot.domain.LED;
 import com.ruoyi.common.support.Convert;
+import com.ruoyi.common.exception.BusinessException;
+import com.ruoyi.common.utils.StringUtils;
 
 
 @Service
@@ -18,88 +19,111 @@ public class LEDServiceImpl implements ILEDService {
     @Autowired
     private LEDMapper LEDMapper;
     /**
-     * 查询终端运转信息
-     *
-     * @param LED_id 终端运转ID
-     * @return 终端运转信息
-     */
-    @Override
-    @DataSource(value = DataSourceType.SXINFOM)
-    public LED selectLedById(String LED_id)
-    {
-        return LEDMapper.selectLedById(LED_id);
-    }
-
-    /**
      * 查询终端运转列表
      *
-     * @param LED 终端运转信息
+     * @param led 终端运转信息
      * @return 终端运转集合
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public List<LED> selectLedList(LED LED)
+    public List<LED> selectLedList(LED led)
     {
-        return LEDMapper.selectLedList(LED);
+        return LEDMapper.selectLedList(led);
     }
+
+    /**
+     * 查询终端运转信息
+     *
+     * @param led_id 终端运转ID
+     * @return 终端运转信息
+     */
+    @Override
+    @DataSource(value = DataSourceType.SXINFOM)
+    public LED selectLedById(String led_id)
+    {
+        return LEDMapper.selectLedById(led_id);
+    }
+
+   /*@Override
+    @DataSource(value = DataSourceType.SXINFOM)
+    public List<LED> selectLedAll()
+    {
+        return LEDMapper.selectLedAll();
+    }*/
+
+
 
     /**
      * 新增终端运转
      *
-     * @param LED 终端运转信息
+     * @param led 终端运转信息
      * @return 结果
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int insertLed(LED LED)
+    public int insertLed(LED led)
     {
-        return LEDMapper.insertLed(LED);
+        return LEDMapper.insertLed(led);
     }
 
     /**
      * 修改终端运转
      *
-     * @param torrent 终端运转信息
+     * @param led 终端运转信息
      * @return 结果
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int updateLed(LED LED)
+    public int updateLed(LED led)
     {
-        return LEDMapper.updateLed(LED);
+        return LEDMapper.updateLed(led);
     }
 
     /**
      * 删除终端运转对象
      *
-     * @param id 需要删除的数据ID
+     * @param led_ids 需要删除的数据ID
      * @return 结果
-     */
-    @Override
-    @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteLedById(String id)
-    {
-        return LEDMapper.deleteLedById(id);
-    }
 
-    /**
-     * 删除终端运转对象
-     *
-     * @param ids 需要删除的数据ID
-     * @return 结果
-     */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
     public int deleteLedByIds(String led_ids)
     {
-        return LEDMapper.deleteLedByIds(led_ids);
+        String[] Led_ids = Convert.toLongArray(led_ids);
+         /*for (Long Led_id : Led_ids)
+        {
+            LED Led = selectLedById(Led_id);
+           if (countUserPostById(postId) > 0)
+            {
+                throw new BusinessException(String.format("%1$s已分配,不能删除", post.getPostName()));
+            }
+        }
+        return LEDMapper.deleteLedByIds(Led_ids);
+    }
+    /*public int deleteLedById(String led_id)
+    {
+        return LEDMapper.deleteLedById(led_id);
+    }*/
+
+    /**
+     * 删除终端运转对象
+     *
+     * @param led_ids 需要删除的数据ID
+     * @return 结果
+     */
+   @Override
+    @DataSource(value = DataSourceType.SXINFOM)
+    public int deleteLedByIds(String ids)
+    {
+        //return LEDMapper.deleteLedByIds(led_ids);
+        return LEDMapper.deleteLedByIds(Convert.toStrArray(ids));
     }
     /**
      * 统计物联网数据条目
      *
-     * @param dataid 终端运转ID
+     * @param led_id 终端运转ID
      * @return 终端运转信息
-     */
+
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
     public int countall(){
@@ -109,25 +133,14 @@ public class LEDServiceImpl implements ILEDService {
     /**
      * 统计物联网设备数量
      *
-     * @param dataid 终端运转ID
+     * @param led_id 终端运转ID
      * @return 终端运转信息
-     */
+
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
     public int devicecount(){
         return LEDMapper.devicecount();
-    }
+    }*/
 
-    /**
-     * 根据IMEI号和时间范围和查询条数统计物联网数据
-     *
-     * @param LED 终端信息
-     * @return 终端信息集合
-     */
-    @Override
-    @DataSource(value = DataSourceType.SXINFOM)
-    public List<LED> selectLedByitl(LEDgetPa ledgetPa)
-    {
-        return LEDMapper.selectLedByitl(ledgetPa);
-    }
+
 }

@@ -39,7 +39,7 @@
 
     function submitHandler() {
         if ($.validate.form()) {
-            $.operate.board(prefix + "/add", $('#form-board-add').serialize());
+            $.operate.save(prefix + "/add", $('#form-board-add').serialize());
         }
     }
 </script>

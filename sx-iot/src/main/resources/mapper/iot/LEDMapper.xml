@@ -4,71 +4,72 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.iot.mapper.LEDMapper">
 
-    <resultMap type="Led" id="LedResult">
-        <result property="led_id"    column="led_id"    />
-        <result property="led_status"    column="led_status"    />
-        <result property="led_bright"    column="led_bright"    />
+    <resultMap type="LED" id="LEDResult">
+        <result property="Led_id"    column="led_id"    />
+        <result property="led_Status"    column="led_status"    />
+        <result property="led_Bright"    column="led_bright"    />
         <result property="screen_wide"    column="screen_wide"    />
         <result property="screen_high"    column="screen_high"    />
         <result property="screen_status"    column="screen_status"    />
 
     </resultMap>
-    <!--定义selectLed为查询整表命令-->
-    <sql id="selectLed">
+
+    <sql id="selectLED">
     select led_id,led_status,led_bright,screen_wide,screen_high,screen_status from iot_led
     </sql>
-    <!--统计表中记录数
-    <select id="countall" resultType="Integer">
-        select
-               count(*)
-        from iot_led
-    </select>
-    -->
 
-    <!--查询表的所有列表信息-->
-    <select id="selectLedList" parameterType="Led" resultMap="LedResult">
-        <include refid="selectLed"/>
+
+
+    <select id="selectLedList" parameterType="LED" resultMap="LEDResult">
+        <include refid="selectLED"/>
         <where>
-            <if test="led_id != null and led_id='' "> and led_id = #{led_id}</if>
+        <if test="Led_id != null and Led_id != ''">
+            AND led_id like concat('%', #{Led_id}, '%')
+        </if>
+        <if test="led_Status != null and led_Status != ''">
+            AND led_status = #{led_Status}
+        </if>
+        </where>
+       <!-- <where>
+            <if test="led_id != null "> and led_id = #{led_id}</if>
             <if test="led_status!= null  and led_status!= '' "> and led_status= #{led_status}</if>
             <if test="led_bright != null  and led_bright != '' "> and led_bright = #{led_bright}</if>
             <if test="screen_wide != null  and screen_wide != '' "> and screen_wide = #{screen_wide}</if>
             <if test="screen_high != null  and screen_high != '' "> and screen_high = #{screen_high}</if>
             <if test="screen_status != null  and screen_status != '' "> and screen_status = #{screen_status}</if>
+
         </where>
-        order by led_id desc
+        order by led_id desc-->
     </select>
 
-    <!--根据ID查询信息-->
-    <select id="selectLedById" parameterType="Integer" resultMap="LedResult">
+
+    <select id="selectLedById" parameterType="String" resultMap="LEDResult">
+        <include refid="selectLED"/>
+        where led_id = #{Led_id}
+    </select>
+
+<!--
+    <select id="countall" resultType="Integer">
         select
-        a.led_id as led_id,
-        a.led_status as led_status,
-        a.led_bright as led_bright,
-        a.screen_wide as screen_wide,
-        a.screen_high as screen_high,
-        a.screen_status as screen_status
-        from iot_led a
-        <where>
-            <if test="led_id != null  and led_id != '' ">and a.led_id like CONCAT(#{led_id},'%')</if>
-            <!--<if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>-->
-        </where>
-    </select>
+               count(*)
+        from iot_led
+    </select>-->
 
-    <!--向表中插入新数据-->
-    <insert id="insertLed" parameterType="Led">
+
+    <insert id="insertLed" parameterType="LED">
         insert into iot_led
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="led_id != null and led_id!='' ">led_id,</if>
-            <if test="led_status!= null  and led_status!= ''  ">led_status,</if>
+            <if test="Led_id != null  ">led_id,</if>
+            <if test="led_Status!= null  and led_Status!= ''  ">led_status,</if>
             <if test="led_bright != null  and led_bright != ''  ">led_bright,</if>
             <if test="screen_wide != null  and screen_wide != ''  ">screen_wide,</if>
             <if test="screen_high != null  and screen_high != ''  ">screen_high,</if>
             <if test="screen_status != null  and screen_status != ''  ">screen_status,</if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="led_id != null and led_id!='' ">#{led_id},</if>
-            <if test="led_status != null  and led_status != ''  ">#{led_status},</if>
+            <if test="Led_id != null  ">#{led_id},</if>
+            <if test="led_Status != null  and led_Status != ''  ">#{led_status},</if>
             <if test="led_bright != null  and led_bright != ''  ">#{led_bright},</if>
             <if test="screen_wide != null  and screen_wide != ''  ">#{screen_wide},</if>
             <if test="screen_high != null  and screen_high != ''  ">#{screen_high},</if>
@@ -77,32 +78,43 @@
         </trim>
     </insert>
 
-    <!--更新数据-->
-    <update id="updateLed" parameterType="Led">
+
+    <update id="updateLed" parameterType="LED">
         update iot_led
-        <trim prefix="SET" suffixOverrides=",">
+        <set>
+            <if test="led_Status != null and led_Status != ''">led_status = #{led_Status},</if>
+            <if test="led_bright != null and led_bright != ''">led_bright = #{led_bright},</if>
+            <if test="screen_wide != null and screen_wide != ''">screen_wide = #{screen_wide},</if>
+            <if test="screen_high != null and screen_high != ''">screen_high = #{screen_high},</if>
+            <if test="screen_status != null and screen_status != ''">screen_status = #{screen_status},</if>
+            <!-- <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+             update_time = sysdate()-->
+        </set>
+
+       <!-- <trim prefix="SET" suffixOverrides=",">
             <if test="led_status != null  and led_status != ''  ">led_status = #{led_status},</if>
             <if test="led_bright != null  and led_bright != ''  ">led_bright = #{led_bright},</if>
             <if test="screen_wide != null  and screen_wide != ''  ">screen_wide = #{screen_wide},</if>
             <if test="screen_high != null  and screen_high != ''  ">screen_high = #{screen_high},</if>
             <if test="screen_status != null  and screen_status != ''  ">screen_status = #{screen_status},</if>
 
-        </trim>
+        </trim>-->
         where led_id = #{led_id}
     </update>
 
-    <!--根据ID删除-->
-    <delete id="deleteLedById" parameterType="Integer">
-        delete from iot_led where led_id = #{led_id}
-    </delete>
 
-    <!--批量删除
+    <!--<delete id="deleteLedById" parameterType="String">
+        delete from iot_led where led_id = #{led_id}
+    </delete>-->
+
+
     <delete id="deleteLedByIds" parameterType="String">
         delete from iot_led where led_id in
-        <foreach item="led_id" collection="array" open="(" separator="," close=")">
-            #{led_id}
+        <foreach item="Led_id" collection="array" open="(" separator="," close=")">
+            #{Led_id}
         </foreach>
     </delete>
-     -->
+
 
 </mapper>
+

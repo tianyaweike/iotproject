@@ -33,7 +33,7 @@ public class BlowdownServiceImpl implements BlowdownService {
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
     public int deleteBlowdownByids(String ids) {
-        return blowdownMapper.deleteBlowdownByids(ids);
+        return blowdownMapper.deleteBlowdownByids(Convert.toStrArray(ids));
     }
 
     /**

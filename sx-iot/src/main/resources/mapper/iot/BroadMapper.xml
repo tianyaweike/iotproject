@@ -5,30 +5,44 @@
 <mapper namespace="com.ruoyi.iot.mapper.BroadMapper">
 
     <resultMap type="Broad" id="BroadResult">
-        <id property="broad_id"    column="broad_id"    />
+        <result property="broad_id"    column="broad_id"    />
         <result property="address"    column="address"    />
         <result property="statue"    column="statue"    />
-        <result property="details"    column="details"    />
         <result property="runtime"    column="runtime"    />
+        <result property="details"    column="details"    />
+
     </resultMap>
 
     <!--定义selectBraod为查询整表命令-->
     <sql id="selectBroad">
-    select broad_id,address,statue,details,runtime from iot_broad
+    select broad_id,address,statue,runtime,details from iot_broad
     </sql>
-
-
-    <!--查询表的所有列表信息-->
+    <!--查询表的列表信息-->
     <select id="selectBroadList" parameterType="Broad" resultMap="BroadResult">
         <include refid="selectBroad"/>
+        <where>
+            <if test="broad_id != null and broad_id != ''">
+                AND broad_id like concat('%', #{broad_id}, '%')
+            </if>
+            <if test="statue != null and statue != ''">
+                AND statue = #{statue}
+            </if>
+            <if test="address != null and address != ''">
+                AND address like concat('%', #{address}, '%')
+            </if>
+
+            <if test="details != null and details != ''">
+                AND details like concat('%', #{details}, '%')
+            </if>
+
+        </where>
         <!--<where>
-            <if test="broad_id != null and broad_id='' "> and broad_id = #{broad_id}</if>
-            <if test="location != null  and location != '' "> and location = #{location}</if>
+            <if test="broad_id != null"> and broad_id = #{broad_id}</if>
+            <if test="address != null  and address != '' "> and address = #{address}</if>
             <if test="statue != null  and statue != '' "> and statue = #{statue}</if>
             <if test="details != null  and details != '' "> and details = #{details}</if>
         </where>
-        order by broad_id desc
-        -->
+        order by broad_id desc-->
     </select>
 
     <!--根据id查询信息-->
@@ -50,26 +64,24 @@
         </where>
         -->
     </select>
-
     <!--向表中插入新数据-->
     <insert id="insertBroad" parameterType="Broad">
         insert into iot_broad
-        (
+        <trim prefix="(" suffix=")" suffixOverrides=",">
         <if test="broad_id != null and broad_id!='' ">broad_id,</if>
         <if test="address != null  and address != ''  ">address,</if>
         <if test="statue != null  and statue != ''  ">statue,</if>
         <if test="details != null  and details != ''  ">details,</if>
         runtime
-        )
-        values(
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
         <if test="broad_id != null and broad_id!='' ">#{broad_id},</if>
         <if test="address != null  and address != ''  ">#{address},</if>
         <if test="statue != null  and statue != ''  ">#{statue},</if>
         <if test="details != null  and details != ''  ">#{details},</if>
         sysdate()
-        )
+        </trim>
     </insert>
-
     <!--更新数据-->
     <update id="updateBroad" parameterType="Broad">
         update iot_broad
@@ -84,7 +96,7 @@
 
     <!--根据id删除-->
     <delete id="deleteBroadByid" parameterType="String">
-        delete from iot_braod where broad_id = #{broad_id}
+        delete from iot_broad where broad_id = #{broad_id}
     </delete>
 
     <!--批量删除  -->

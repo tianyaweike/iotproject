@@ -2,7 +2,6 @@ package com.ruoyi.iot.service.impl;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
-import com.ruoyi.iot.service.*;
 import com.ruoyi.iot.domain.Environl;
 import com.ruoyi.iot.mapper.EnvironlMapper;
 import com.ruoyi.iot.service.EnvironlService;
@@ -33,8 +32,8 @@ public class EnvironlServiceImpl  implements EnvironlService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteEnvironlByid(String hid) {
-        return environlMapper.deleteEnvironlByid(hid);
+    public int deleteEnvironlByids(String ids) {
+        return environlMapper.deleteEnvironlByids(Convert.toStrArray(ids));
     }
 
     /**
@@ -53,8 +52,8 @@ public class EnvironlServiceImpl  implements EnvironlService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public Environl selectByhid(String hid) {
-        return environlMapper.selectByhid(hid);
+    public Environl selectByid(String hid) {
+        return environlMapper.selectByid(hid);
     }
 
     /**
@@ -63,8 +62,8 @@ public class EnvironlServiceImpl  implements EnvironlService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteEnvironlByids(String hid) {
-        return environlMapper.deleteEnvironlByids(hid);
+    public int deleteEnvironlByid(String hid) {
+        return environlMapper.deleteEnvironlByid(hid);
     }
 
     /**

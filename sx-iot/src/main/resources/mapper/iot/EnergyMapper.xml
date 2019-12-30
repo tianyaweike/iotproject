@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.iot.mapper.EnergyMapper">
+
     <resultMap type="Energy" id="EnergyResult">
         <result property="eid"    column="eid"    />
         <result property="bvoltage"    column="bvoltage"    />
@@ -27,6 +28,7 @@
         from iot_energy
     </select>
     -->
+
     <!--查询表的所有列表信息-->
     <select id="selectEnergyList" parameterType="Energy" resultMap="EnergyResult">
         <include refid="selectEnergy"/>
@@ -48,7 +50,9 @@
     </select>
 
     <!--根据id查询信息-->
-    <select id="selectByid" parameterType="String" resultMap="EnergyResult">
+
+    <select id="selectEnergyByid" parameterType="String" resultMap="EnergyResult">
+
         <include refid="selectEnergy"/>
         where eid=#{eid}
         <!-- select
@@ -67,36 +71,39 @@
         </where>
         -->
     </select>
+
+
     <!--向表中插入新数据-->
     <insert id="insertEnergy" parameterType="Energy">
         insert into iot_energy
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="eid != null and eid!='' ">eid,</if>
-            <if test="bvoltage!= null  and bvoltage!= ''  ">bvoltage,</if>
-            <if test="bpvoltage != null  and bpvoltage != ''  ">bpvoltage,</if>
-            <if test="ccurrent != null  and ccurrent != ''  ">ccurrent,</if>
-            <if test="lcurrent != null  and lcurrent != ''  ">lcurrent,</if>
-            <if test="ovoltage != null  and ovoltage != ''  ">ovoltage,</if>
-            <if test="epsvoltage != null and epsvoltage !='' ">epsvoltage,</if>
-            <if test="svoltage != null and svoltage != '' ">svoltage,</if>
-            <if test="workingtemperature != null and workingtemperature !='' ">workingtemperature,</if>
-            <if test="cstate !=null and cstate !=''">cstate,</if>
-            <if test="workingstatu !=null and workingstatu !='' ">workingstatu,</if>
-        </trim>
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="eid != null and eid!='' ">#{eid},</if>
-            <if test="bvoltage != null  and bvoltage != ''  ">#{bvoltage},</if>
-            <if test="bpvoltage != null  and bpvoltage != ''  ">#{bpvoltage},</if>
-            <if test="ccurrent != null  and ccurrent != ''  ">#{ccurrent},</if>
-            <if test="lcurrent != null  and lcurrent != ''  ">#{lcurrent},</if>
-            <if test="ovoltage != null  and ovoltage != ''  ">#{ovoltage},</if>
-            <if test="epsvoltage !=null and epsvoltage !='' ">#{epsvoltage},</if>
-            <if test="svoltage !=null and svoltage !='' ">#{svoltage},</if>
-            <if test="workingtemperature !=null and workingtemperature !=''">#{workingtemperature},</if>
-            <if test="cstate !=null and cstate !=''">#{cstate},</if>
-            <if test="workingstatu !=null and workingstatu !=''">#{workingstatu},</if>
-        </trim>
+        (
+        <if test="eid != null and eid!='' ">eid,</if>
+        <if test="bvoltage!= null  and bvoltage!= ''  ">bvoltage,</if>
+        <if test="bpvoltage != null  and bpvoltage != ''  ">bpvoltage,</if>
+        <if test="ccurrent != null  and ccurrent != ''  ">ccurrent,</if>
+        <if test="lcurrent != null  and lcurrent != ''  ">lcurrent,</if>
+        <if test="ovoltage != null  and ovoltage != ''  ">ovoltage,</if>
+        <if test="epsvoltage != null and epsvoltage !='' ">epsvoltage,</if>
+        <if test="svoltage != null and svoltage != '' ">svoltage,</if>
+        <if test="workingtemperature != null and workingtemperature !='' ">workingtemperature,</if>
+        <if test="cstate !=null and cstate !=''">cstate,</if>
+        <if test="workingstatu !=null and workingstatu !='' ">workingstatu,</if>
+        )
+        values(
+        <if test="eid != null and eid!='' ">#{eid},</if>
+        <if test="bvoltage != null  and bvoltage != ''  ">#{bvoltage},</if>
+        <if test="bpvoltage != null  and bpvoltage != ''  ">#{bpvoltage},</if>
+        <if test="ccurrent != null  and ccurrent != ''  ">#{ccurrent},</if>
+        <if test="lcurrent != null  and lcurrent != ''  ">#{lcurrent},</if>
+        <if test="ovoltage != null  and ovoltage != ''  ">#{ovoltage},</if>
+        <if test="epsvoltage !=null and epsvoltage !='' ">#{epsvoltage},</if>
+        <if test="svoltage !=null and svoltage !='' ">#{svoltage},</if>
+        <if test="workingtemperature !=null and workingtemperature !=''">#{workingtemperature},</if>
+        <if test="cstate !=null and cstate !=''">#{cstate},</if>
+        <if test="workingstatu !=null and workingstatu !=''">#{workingstatu},</if>
+        )
     </insert>
+
     <!--更新数据-->
     <update id="updateEnergy" parameterType="Energy">
         update iot_energy
@@ -113,7 +120,9 @@
             <if test="cstate !=null and cstate !='' ">cstate = #{cstate},</if>
             <if test="workingstatu !=null and workingstatu !=''">workingstatu =#{workingstatu},</if>
         </set>
-        where eid=#{eid}
+
+        where eid = #{eid}
+
     </update>
 
     <!--根据id删除-->

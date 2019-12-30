@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import com.ruoyi.common.utils.ExcelUtil;
+
 import java.util.List;
 
 @Controller
@@ -42,6 +44,20 @@ public class BroadController extends BaseController {
         startPage();
         List<Broad> list = BroadService.selectBroadList(broad);
         return getDataTable(list);
+    }
+
+    /**
+     * 导出终端运转列表
+     */
+    @Log(title = "Broad", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("iot:broadinfo:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(Broad broad)
+    {
+        List<Broad> list = BroadService.selectBroadList(broad);
+        ExcelUtil<Broad> util = new ExcelUtil<Broad>(Broad.class);
+        return util.exportExcel(list, "led");
     }
 
     @GetMapping("/add")

@@ -3,10 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.iot.mapper.SandboxMapper">
+
     <resultMap type="Sandbox" id="SandboxResult">
         <id property="switch_id"    column="switch_id"    />
         <result property="control"    column="control"    />
     </resultMap>
+
     <!--定义selectSandbox为查询整表命令-->
     <sql id="selectSandbox">
     select switch_id,control from iot_sandbox
@@ -18,20 +20,23 @@
         from iot_led
     </select>
     -->
+
+
     <!--查询表的所有列表信息-->
     <select id="selectSandboxList" parameterType="Sandbox" resultMap="SandboxResult">
-        <include refid="selectSandbox"/>  order by switch_id desc
-    </select>
-    <!--<where>
-        <if test="switch_id != null and switch_id='' "> and switch_id = #{switch_id}</if>
-        <if test="control!= null  and control!= '' "> and control= #{control}</if>
-    </where>
-    order by switch_id desc
-    -->
+        <include refid="selectSandbox"/>
+        <!--<where>
+            <if test="switch_id != null and switch_id='' "> and switch_id = #{switch_id}</if>
+            <if test="control!= null  and control!= '' "> and control= #{control}</if>
 
+        </where>
+        order by switch_id desc
+        -->
+    </select>
 
     <!--根据id查询信息-->
-    <select id="selectByid" parameterType="String" resultMap="SandboxResult">
+    <select id="selectSandboxByid" parameterType="String" resultMap="SandboxResult">
+
         <include refid="selectSandbox"/>
         where switch_id=#{switch_id}
         <!-- select
@@ -50,18 +55,20 @@
         </where>
         -->
     </select>
+
     <!--向表中插入新数据-->
-    <insert id="insertSandbox" parameterType="com.ruoyi.iot.domain.Sandbox">
+    <insert id="insertSandbox" parameterType="Sandbox">
         insert into iot_sandbox
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="switch_id != null and switch_id!='' ">switch_id,</if>
-            <if test="control!= null  and control!= ''  ">control,</if>
-        </trim>
-        <trim prefix="values(" suffix=")" suffixOverrides=",">
-            <if test="switch_id != null and switch_id!='' ">#{switch_id},</if>
-            <if test="control != null  and control != ''  ">#{control},</if>
-        </trim>
+        (
+        <if test="switch_id != null and switch_id!='' ">switch_id,</if>
+        <if test="control!= null  and control!= ''  ">control,</if>
+        )
+        values(
+        <if test="switch_id != null and switch_id!='' ">#{switch_id},</if>
+        <if test="control != null  and control != ''  ">#{control},</if>
+        )
     </insert>
+
     <!--更新数据-->
     <update id="updateSandbox" parameterType="Sandbox">
         update iot_sandbox

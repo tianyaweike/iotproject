@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.iot.mapper.PumpMapper">
+
     <resultMap type="Pump" id="PumpResult">
         <result property="id"    column="id"    />
         <result property="tid"    column="tid"    />
@@ -11,10 +12,12 @@
         <result property="WLHeight"    column="WLHeight"    />
         <result property="WLPressure" column="WLPressure" />
     </resultMap>
+
     <!--定义selectPump为查询整表命令-->
     <sql id="selectPump">
     select id,tid,PCurrent,PVoltage,WLHeight,WLPressure from iot_pump
     </sql>
+
     <!--查询表的所有列表信息-->
     <select id="selectPumpList" parameterType="Pump" resultMap="PumpResult">
         select id,tid,PCurrent,PVoltage,WLHeight,WLPressure from iot_pump
@@ -47,26 +50,31 @@
         </where>
         -->
     </select>
+
     <!--向表中插入新数据-->
     <insert id="insertPump" parameterType="Pump">
         insert into iot_pump
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null and id!='' ">id,</if>
-            <if test="tid != null  and tid != ''  ">tid,</if>
-            <if test="PCurrent != null  and PCurrent != ''  ">PCurrent,</if>
-            <if test="PVoltage != null  and PVoltage != ''  ">PVoltage,</if>
-            <if test="WLHeight != null  and WLHeight != ''  ">WLHeight,</if>
-            <if test="WLPressure != null  and WLPressure != ''  ">WLPressure,</if>
-        </trim>
-        values<trim prefix="(" suffix=")" suffixOverrides=",">
+        (
+        <if test="id != null and id!='' ">id,</if>
+        <if test="tid != null  and tid != ''  ">tid,</if>
+        <if test="PCurrent != null  and PCurrent != ''  ">PCurrent,</if>
+        <if test="PVoltage != null  and PVoltage != ''  ">PVoltage,</if>
+        <if test="WLHeight != null  and WLHeight != ''  ">WLHeight,</if>
+        <if test="WLPressure != null  and WLPressure != ''  ">WLPressure,</if>
+        )
+        values(
+
         <if test="id != null and id!='' ">#{id},</if>
         <if test="tid != null  and tid != ''  ">#{tid},</if>
         <if test="PCurrent != null  and PCurrent != ''  ">#{PCurrent},</if>
         <if test="PVoltage != null  and PVoltage != ''  ">#{PVoltage},</if>
         <if test="WLHeight != null  and WLHeight != ''  ">#{WLHeight},</if>
         <if test="WLPressure != null  and WLPressure != ''  ">#{WLPressure},</if>
-    </trim>
+
+        )
     </insert>
+
+
     <!--更新数据-->
     <update id="updatePump" parameterType="Pump">
         update iot_pump
@@ -80,7 +88,6 @@
         </set>
         where id = #{id}
     </update>
-
 
     <!--根据id删除-->
     <delete id="deletePumpByid" parameterType="String">

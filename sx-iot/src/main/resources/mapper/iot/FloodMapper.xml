@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.iot.mapper.FloodMapper">
+
     <resultMap type="Flood" id="FloodResult">
         <result property="place_id"    column="place_id"    />
         <result property="stage"    column="stage"    />
@@ -14,6 +15,7 @@
     <sql id="selectFlood">
     select place_id,stage,display,rainfall from iot_flood
     </sql>
+
     <!--查询表的所有列表信息-->
     <select id="selectFloodList" parameterType="Flood" resultMap="FloodResult">
         <include refid="selectFlood"/>
@@ -28,7 +30,9 @@
     </select>
 
     <!--根据id查询信息-->
-    <select id="selectByid" parameterType="String" resultMap="FloodResult">
+
+    <select id="selectFloodByid" parameterType="String" resultMap="FloodResult">
+
         <include refid="selectFlood"/>
         where place_id=#{place_id}
         <!-- select
@@ -46,22 +50,25 @@
         </where>
         -->
     </select>
+
+
     <!--向表中插入新数据-->
     <insert id="insertFlood" parameterType="Flood">
         insert into iot_flood
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="place_id != null and place_id!='' ">place_id,</if>
-            <if test="stage != null  and stage != ''  ">stage,</if>
-            <if test="display != null  and display != ''  ">display,</if>
-            <if test="rainfall != null  and rainfall != ''  ">rainfall,</if>
-        </trim>
-        <trim prefix="values(" suffix=")" suffixOverrides=",">
-            <if test="place_id != null and place_id!='' ">#{place_id},</if>
-            <if test="stage != null  and stage != ''  ">#{stage},</if>
-            <if test="display != null  and display != ''  ">#{display},</if>
-            <if test="rainfall != null  and rainfall != ''  ">#{rainfall},</if>
-        </trim>
+        (
+        <if test="place_id != null and place_id!='' ">place_id,</if>
+        <if test="stage != null  and stage != ''  ">stage,</if>
+        <if test="display != null  and display != ''  ">display,</if>
+        <if test="rainfall != null  and rainfall != ''  ">rainfall,</if>
+        )
+        values(
+        <if test="place_id != null and place_id!='' ">#{place_id},</if>
+        <if test="stage != null  and stage != ''  ">#{stage},</if>
+        <if test="display != null  and display != ''  ">#{display},</if>
+        <if test="rainfall != null  and rainfall != ''  ">#{rainfall},</if>
+        )
     </insert>
+
     <!--更新数据-->
     <update id="updateFlood" parameterType="Flood">
         update iot_flood

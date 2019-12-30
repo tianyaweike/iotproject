@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <resultMap type="ProApplyUser" id="ProApplyUserResult">
+        <result property="requires"    column="requires"    />
         <result property="paid"    column="paid"    />
         <result property="pname"    column="pname"    />
         <result property="uname"    column="uname"    />
@@ -73,14 +74,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectProrApplyUserList" parameterType="ProApplyUser" resultMap="ProApplyUserResult">
         select
+        pa.requires as requires,
         pa.paid as paid,
         pa.pname as pname,
         u.uname as uname,
+        u.userid as userid,
+        pa.isread as isread,
         pa.isemergency as isemergency,
         pa.timelimit as timelimit,
         pa.submittime as submittime,
         pa.iscancel as iscancel,
-        pa.isreply as isreply
+        pa.isreply as isreply,
+        pa.replyperson as replyperson,
+        pa.replytime as replytime
         from
         prore_apply as pa,
         userinfo as u
@@ -199,5 +205,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{paid}
         </foreach>
     </delete>
-    
+
+    <update id="recall">
+        update prore_apply set iscancel=b'1'
+        where paid=#{fid}
+    </update>
+
 </mapper>

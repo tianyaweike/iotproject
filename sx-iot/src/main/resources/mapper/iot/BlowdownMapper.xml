@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.iot.mapper.BlowdownMapper">
+
     <resultMap type="Blowdown" id="BlowdownResult">
         <id property="pid"    column="pid"    />
         <result property="monitortime"    column="monitortime"    />
@@ -17,6 +18,7 @@
     <sql id="selectBlowdown">
     select pid,monitortime,location,Hmental,PH,econdu from iot_blowdown
     </sql>
+
     <!--统计表中记录数
     <select id="countall" resultType="Integer">
         select
@@ -24,6 +26,7 @@
         from iot_led
     </select>
     -->
+
     <!--查询表的所有列表信息-->
     <select id="selectBlowdownList" parameterType="Blowdown" resultMap="BlowdownResult">
         <include refid="selectBlowdown"/>
@@ -39,7 +42,9 @@
     </select>
 
     <!--根据id查询信息-->
-    <select id="selectBypid" parameterType="String" resultMap="BlowdownResult">
+
+    <select id="selectBlowdownByid" parameterType="String" resultMap="BlowdownResult">
+
         <include refid="selectBlowdown"/>
         where pid=#{pid}
         <!-- select
@@ -57,24 +62,29 @@
         </where>
         -->
     </select>
+
+
     <!--向表中插入新数据-->
-    <insert id="insertBlowdown" parameterType="com.ruoyi.iot.domain.Blowdown">
-        insert into iot_blowdown
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pid != null and pid!='' ">pid,</if>
-            <if test="location != null  and location != ''  ">location,</if>
-            <if test="Hmental != null  and Hmental != ''  ">Hmental,</if>
-            <if test="PH != null  and PH != ''  ">PH,</if>
-            <if test="econdu != null  and econdu != ''  ">econdu,</if>
-        </trim>
-        <trim prefix="values(" suffix=")" suffixOverrides=",">
-            <if test="pid != null and pid!='' ">#{pid},</if>
-            <if test="location != null  and location != ''  ">#{location},</if>
-            <if test="Hmental != null  and Hmental != ''  ">#{Hmental},</if>
-            <if test="PH != null  and PH != ''  ">#{PH},</if>
-            <if test="econdu != null  and econdu != ''  ">#{econdu},</if>
-        </trim>
+    <insert id="insertBlowdown" parameterType="Blowdown">
+        insert into iot_blowndown
+        (
+        <if test="pid != null and pid!='' ">pid,</if>
+        <if test="location != null  and location != ''  ">location,</if>
+        <if test="Hmental != null  and Hmental != ''  ">Hmental,</if>
+        <if test="PH != null  and PH != ''  ">PH,</if>
+        <if test="econdu != null  and econdu != ''  ">econdu,</if>
+        monitortime
+        )
+        values(
+        <if test="pid != null and pid!='' ">#{pid},</if>
+        <if test="location != null  and location != ''  ">#{location},</if>
+        <if test="Hmental != null  and Hmental != ''  ">#{Hmental},</if>
+        <if test="PH != null  and PH != ''  ">#{PH},</if>
+        <if test="econdu != null  and econdu != ''  ">#{econdu},</if>
+        sysdate()
+        )
     </insert>
+
     <!--更新数据-->
     <update id="updateBlowdown" parameterType="Blowdown">
         update iot_blowdown
@@ -96,9 +106,11 @@
 
     <!--批量删除-->
     <delete id="deleteBlowdownByids" parameterType="String">
-        delete from iot_blowdown where ids in
-        <foreach item="ids" collection="array" open="(" separator="," close=")">
-            #{ids}
+
+        delete from iot_blowdown where pid in
+        <foreach item="pid" collection="array" open="(" separator="," close=")">
+            #{pid}
+
         </foreach>
     </delete>
 

@@ -1,6 +1,6 @@
 package com.ruoyi.iot.mapper;
 
-import com.ruoyi.iot.domain.LEDgetPa;
+
 import com.ruoyi.iot.domain.LED;
 import java.util.List;
 

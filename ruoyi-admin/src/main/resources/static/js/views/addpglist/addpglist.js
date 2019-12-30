@@ -734,20 +734,26 @@ function saves(){
         },
         dataType: 'json',
         success: function (data) {
-            console.log(data)
             if(data.code=="200"){
-                layer.msg("成功", {
-                    icon: $.modal.icon("success"),
-                    time: 1000,
+                layer.msg("保存成功,正在刷新数据请稍后……", {
+                    icon: 1,
+                    time: 500,
                     shade: [0.1, '#8F8F8F']
-                })
-                $.modal.openTab("节目播出单管理","/broad/proSinmanage");
+                },function() {
+                    $.modal.openTab("节目播出单管理","/broad/proSinmanage");
+                    location.reload();
+                });
             }else {
                 layer.msg("错误", {
                     icon: $.modal.icon("error"),
                     time: 1000,
                     shade: [0.1, '#8F8F8F']
-                })
+                }
+                // ,function() {
+                //     $.modal.openTab("节目播出单管理","/broad/proSinmanage");
+                //     location.reload();
+                // }
+                )
             }
         },
         error: function (res) {

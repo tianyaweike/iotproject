@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.iot.mapper.WaterMapper">
+
     <resultMap type="Water" id="WaterResult">
         <result property="wid"    column="wid"    />
         <result property="type"    column="type"    />
@@ -11,8 +12,10 @@
         <result property="color"    column="color"    />
         <result property="turbidity"    column="turbidity"    />
         <result property="PH"  column="PH"  />
-        <result property="electric" column="electric" />
+
         <result property="seston" column="seston" />
+        <result property="electric" column="electric" />
+
         <result property="oxygen" column="oxygen" />
         <result property="poison" column="poison" />
         <result property="creator" column="creator" />
@@ -30,6 +33,7 @@
         from iot_environl
     </select>
     -->
+
     <!--查询表的所有列表信息-->
     <select id="selectWaterList" parameterType="Water" resultMap="WaterResult">
         <include refid="selectWater"/>
@@ -50,7 +54,9 @@
     </select>
 
     <!--根据id查询信息-->
-    <select id="selectByid" parameterType="String" resultMap="WaterResult">
+
+    <select id="selectWaterByid" parameterType="String" resultMap="WaterResult">
+
         <include refid="selectWater"/>
         where wid=#{wid}
         <!-- select
@@ -69,40 +75,44 @@
         </where>
         -->
     </select>
+
+
     <!--向表中插入新数据-->
-    <insert id="insertWater" parameterType="com.ruoyi.iot.domain.Water">
+    <insert id="insertWater" parameterType="Water">
         insert into iot_water
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="wid != null and wid!='' ">wid,</if>
-            <if test="type!= null  and type!= ''  ">type,</if>
-            <if test="area != null  and area != ''  ">area,</if>
-            <if test="temperature != null  and temperature != ''  ">temperature,</if>
-            <if test="color != null  and color != ''  ">color,</if>
-            <if test="turbidity != null  and turbidity != ''  ">turbidity,</if>
-            <if test="PH != null and PH !='' ">PH,</if>
-            <if test="seston != null and seston != '' ">seston,</if>
-            <if test="electric != null and electric !='' ">electric,</if>
-            <if test="oxygen !=null and oxygen !=''">oxygen,</if>
-            <if test="poison !=null and poison !=''">poison,</if>
-            <if test="creator !=null and creator !=''">creator,</if>
-            creatime
-        </trim>
-        <trim prefix="values(" suffix=")" suffixOverrides=",">
-            <if test="wid != null and wid!='' ">#{wid},</if>
-            <if test="type != null  and type != ''  ">#{type},</if>
-            <if test="area != null  and area != ''  ">#{area},</if>
-            <if test="temperature != null  and temperature != ''  ">#{temperature},</if>
-            <if test="color != null  and color != ''  ">#{color},</if>
-            <if test="turbidity != null  and turbidity != ''  ">#{turbidity},</if>
-            <if test="PH !=null and PH !='' ">#{PH},</if>
-            <if test="seston !=null and seston !='' ">#{seston},</if>
-            <if test="electric !=null and electric !=''">#{electric},</if>
-            <if test="oxygen !=null and oxygen !=''">#{oxygen},</if>
-            <if test="poison !=null and poison !=''">#{poison},</if>
-            <if test="creator !=null and creator !=''">#{creator},</if>
-            sysdate()
-        </trim>
+        (
+        <if test="wid != null and wid!='' ">wid,</if>
+        <if test="type!= null  and type!= ''  ">type,</if>
+        <if test="area != null  and area != ''  ">area,</if>
+        <if test="temperature != null  and temperature != ''  ">temperature,</if>
+        <if test="color != null  and color != ''  ">color,</if>
+        <if test="turbidity != null  and turbidity != ''  ">turbidity,</if>
+        <if test="PH != null and PH !='' ">PH,</if>
+        <if test="seston != null and seston != '' ">seston,</if>
+        <if test="electric != null and electric !='' ">electric,</if>
+        <if test="oxygen !=null and oxygen !=''">oxygen,</if>
+        <if test="poison !=null and poison !=''">poison,</if>
+        <if test="creator !=null and creator !=''">creator,</if>
+        creatime
+        )
+        values(
+        <if test="wid != null and wid!='' ">#{wid},</if>
+        <if test="type != null  and type != ''  ">#{type},</if>
+        <if test="area != null  and area != ''  ">#{area},</if>
+        <if test="temperature != null  and temperature != ''  ">#{temperature},</if>
+        <if test="color != null  and color != ''  ">#{color},</if>
+        <if test="turbidity != null  and turbidity != ''  ">#{turbidity},</if>
+        <if test="PH !=null and PH !='' ">#{PH},</if>
+        <if test="seston !=null and seston !='' ">#{seston},</if>
+        <if test="electric !=null and electric !=''">#{electric},</if>
+        <if test="oxygen !=null and oxygen !=''">#{oxygen},</if>
+        <if test="poison !=null and poison !=''">#{poison},</if>
+        <if test="creator !=null and creator !=''">#{creator},</if>
+        sysdate()
+        )
     </insert>
+
+
     <!--更新数据-->
     <update id="updateWater" parameterType="Water">
         update iot_water
@@ -114,12 +124,12 @@
             <if test="color != null  and color != ''  ">color = #{color},</if>
             <if test="turbidity != null  and turbidity != ''  ">turbidity = #{turbidity},</if>
             <if test="PH !=null and PH != ''">PH = #{PH},</if>
-            <if test="electric !=null and electric !=''">#{electric},</if>
+
             <if test="seston != null and seston != ''">seston = #{seston},</if>
+            <if test="electric != null and workingtemperature !=''">workingtemperature = #{workingtemperature},</if>
             <if test="oxygen !=null and oxygen !='' ">oxygen = #{oxygen},</if>
             <if test="poison !=null and poison !='' ">poison = #{poison},</if>
-            <if test="creator != null and creator  !=''">creator  = #{creator },</if>
-            <if test="creatime != null and creatime  !=''">creatime  = #{creatime },</if>
+
         </set>
         where wid = #{wid}
     </update>

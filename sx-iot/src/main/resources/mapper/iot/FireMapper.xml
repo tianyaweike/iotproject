@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.iot.mapper.FireMapper">
+
     <resultMap type="Fire" id="FireResult">
         <result property="fid"    column="fid"    />
         <result property="Device_status"    column="Device_status"    />
@@ -11,10 +12,12 @@
         <result property="PM"    column="PM"    />
         <result property="current_sense" column="current_sense" />
     </resultMap>
+
     <!--定义selectFire为查询整表命令-->
     <sql id="selectFire">
     select fid,Device_status,temperature,ppm,PM,current_sense from iot_fire
     </sql>
+
     <!--查询表的所有列表信息-->
     <select id="selectFireList" parameterType="Fire" resultMap="FireResult">
         <include refid="selectFire"/>
@@ -29,7 +32,9 @@
     </select>
 
     <!--根据id查询信息-->
-    <select id="selectByid" parameterType="String" resultMap="FireResult">
+
+    <select id="selectFireByid" parameterType="String" resultMap="FireResult">
+
         <include refid="selectFire"/>
         where fid=#{fid}
         <!-- select
@@ -47,26 +52,30 @@
         </where>
         -->
     </select>
+
+
     <!--向表中插入新数据-->
-    <insert id="insertFire" parameterType="com.ruoyi.iot.domain.Fire">
+    <insert id="insertFire" parameterType="Fire">
         insert into iot_fire
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="fid != null and fid!='' ">fid,</if>
-            <if test="Device_status != null  and Device_status != ''  ">Device_status,</if>
-            <if test="temperature != null  and temperature != ''  ">temperature,</if>
-            <if test="ppm != null  and ppm != ''  ">ppm,</if>
-            <if test="PM != null  and PM != ''  ">PM,</if>
-            <if test="current_sense != null  and current_sense != ''  ">current_sense,</if>
-        </trim>
-        <trim prefix="values(" suffix=")" suffixOverrides=",">
-            <if test="fid != null and fid!='' ">#{fid},</if>
-            <if test="Device_status != null  and Device_status != ''  ">#{Device_status},</if>
-            <if test="temperature != null  and temperature != ''  ">#{temperature},</if>
-            <if test="ppm != null  and ppm != ''  ">#{ppm},</if>
-            <if test="PM != null  and PM != ''  ">#{PM},</if>
-            <if test="current_sense != null  and current_sense != ''  ">#{current_sense},</if>
-        </trim>
+        (
+        <if test="fid != null and fid!='' ">fid,</if>
+        <if test="Device_status != null  and Device_status != ''  ">Device_status,</if>
+        <if test="temperature != null  and temperature != ''  ">temperature,</if>
+        <if test="ppm != null  and ppm != ''  ">ppm,</if>
+        <if test="PM != null  and PM != ''  ">PM,</if>
+        <if test="current_sense != null  and current_sense != ''  ">current_sense,</if>
+        )
+        values(
+        <if test="fid != null and fid!='' ">#{fid},</if>
+        <if test="Device_status != null  and Device_status != ''  ">#{Device_status},</if>
+        <if test="temperature != null  and temperature != ''  ">#{temperature},</if>
+        <if test="ppm != null  and ppm != ''  ">#{ppm},</if>
+        <if test="PM != null  and PM != ''  ">#{PM},</if>
+        <if test="current_sense != null  and current_sense != ''  ">#{current_sense},</if>
+        )
     </insert>
+
+
     <!--更新数据-->
     <update id="updateFire" parameterType="Fire">
         update iot_fire

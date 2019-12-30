@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.iot.mapper.MeteorMapper">
     <resultMap type="Meteor" id="MeteorResult">
-        <result property="weather_id"    column="weather_id"    />
+        <id property="weather_id"    column="weather_id"    />
         <result property="monitortime"    column="monitortime"    />
         <result property="location"    column="location"    />
         <result property="windpower"    column="windpower"    />
@@ -29,6 +29,11 @@
     <!--查询表的所有列表信息-->
     <select id="selectMeteorList" parameterType="Meteor" resultMap="MeteorResult">
         <include refid="selectMeteor"/>
+        <where>
+            <if test="weather_id != null and weather_id != ''">
+                AND weather_id like concat('%', #{weather_id}, '%')
+            </if>
+        </where>
         <!--<where>
             <if test="weather_id != null and weather_id='' "> and weather_id = #{weather_id}</if>
             <if test="monitortime!= null  and monitortime!= '' "> and monitortime= #{monitortime}</if>

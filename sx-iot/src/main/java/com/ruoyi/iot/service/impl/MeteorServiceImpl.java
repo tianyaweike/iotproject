@@ -32,10 +32,9 @@ public class MeteorServiceImpl implements MeteorService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteMeteorByid(String weather_id) {
-        return meteorMapper.deleteMeteorByid(weather_id);
+    public int deleteMeteorByids(String ids) {
+        return meteorMapper.deleteMeteorByids(Convert.toStrArray(ids));
     }
-
     /**
      * 添加气象公告数据
      *
@@ -62,8 +61,8 @@ public class MeteorServiceImpl implements MeteorService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteMeteorByids(String weather_id) {
-        return meteorMapper.deleteMeteorByids(Convert.toStrArray(weather_id));
+    public int deleteMeteorByid(String weather_id) {
+        return meteorMapper.deleteMeteorByid(weather_id);
     }
 
     /**

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-led-add">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">灯编号：</label>
+            <div class="col-sm-8">
+                <input id="led_id" name="led_id" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">灯状态：</label>
+            <div class="col-sm-8">
+                <input id="led_status" name="led_status" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">亮度：</label>
+            <div class="col-sm-8">
+                <input id="led_bright" name="led_bright" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">屏宽：</label>
+            <div class="col-sm-8">
+                <input id="screen_wide" name="screen_wide" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">屏高：</label>
+            <div class="col-sm-8">
+                <input id="screen_high" name="screen_high" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">屏幕状态：</label>
+            <div class="col-sm-8">
+                <input id="screen_status" name="screen_status" class="form-control" type="text">
+            </div>
+        </div>
+    </form>
+</div>
+<div th:include="include::footer"></div>
+<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+<script type="text/javascript">
+    var prefix = ctx + "iot/led"
+
+    $("#form-energy-add").validate({
+        rules:{
+            xxxx:{
+                required:true,
+            },
+        }
+    });
+
+
+
+    function add() {
+        var led_id = $("input[name='led_id']").val();
+        var led_status = $("input[name='led_status']").val();
+        var led_bright = $("input[name='led_bright']").val();
+        var screen_wide = $("input[name='screen_wide']").val();
+        var screen_high = $("input[name='screen_high']").val();
+        var screen_status = $("input[name='screen_status']").val();
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : ctx + "iot/led",
+            data : {
+                "led_id": led_id,
+                "led_status": led_status,
+                "led_bright": led_bright,
+                "screen_wide": screen_wide,
+                "screen_high": screen_high,
+                "screen_status": screen_status,
+            },
+            async : false,
+            error : function(request) {
+                $.modal.alertError("系统错误");
+            },
+            success : function(data) {
+                $.operate.successCallback(data);
+            }
+        });
+    }
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            add();
+        }
+    }
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/add", $('#form-led-add').serialize());
+        }
+    }
+</script>
+</body>
+</html>

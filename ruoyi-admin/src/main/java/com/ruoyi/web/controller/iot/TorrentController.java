@@ -26,14 +26,14 @@ import com.ruoyi.common.utils.ExcelUtil;
  * @date 2019-03-03
  */
 @Controller
-@RequestMapping("/iot/torrent")
+@RequestMapping (value={"/iot/torrent"})
 public class TorrentController extends BaseController
 {
     private String prefix = "iot/torrent";
 	
 	@Autowired
 	private ITorrentService torrentService;
-	
+
 	@RequiresPermissions("iot:torrent:view")
 	@GetMapping()
 	public String torrent()

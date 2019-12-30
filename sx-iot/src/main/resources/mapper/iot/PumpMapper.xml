@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.iot.mapper.PumpMapper">
+    <resultMap type="Pump" id="PumpResult">
+        <result property="id"    column="id"    />
+        <result property="tid"    column="tid"    />
+        <result property="PCurrent"    column="PCurrent"    />
+        <result property="PVoltage"    column="PVoltage"    />
+        <result property="WLHeight"    column="WLHeight"    />
+        <result property="WLPressure" column="WLPressure" />
+    </resultMap>
+    <!--定义selectPump为查询整表命令-->
+    <sql id="selectPump">
+    select id,tid,PCurrent,PVoltage,WLHeight,WLPressure from iot_pump
+    </sql>
+    <!--查询表的所有列表信息-->
+    <select id="selectPumpList" parameterType="Pump" resultMap="PumpResult">
+        select id,tid,PCurrent,PVoltage,WLHeight,WLPressure from iot_pump
+        <!--<where>
+            <if test="id != null and id='' "> and id = #{id}</if>
+            <if test="location != null  and location != '' "> and location = #{location}</if>
+            <if test="PCurrent != null  and PCurrent != '' "> and PCurrent = #{PCurrent}</if>
+            <if test="PVoltage != null  and PVoltage != '' "> and PVoltage = #{PVoltage}</if>
+        </where>
+        order by id desc
+        -->
+    </select>
+
+    <!--根据id查询信息-->
+    <select id="selectPumpByid" parameterType="String" resultMap="PumpResult">
+        select id,tid,PCurrent,PVoltage,WLHeight,WLPressure from iot_pump
+        where id=#{id}
+        <!-- select
+         a.id as id,
+         a.location as location,
+         a.PCurrent as PCurrent,
+         a.PVoltage as PVoltage,
+         a.econdu as econdu
+         from iot_led a
+         -->
+        <!--
+        <where>
+            <if test="id != null  and id != '' ">and a.id like CONCAT(#{id},'%')</if>
+            <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
+        </where>
+        -->
+    </select>
+    <!--向表中插入新数据-->
+    <insert id="insertPump" parameterType="Pump">
+        insert into iot_pump
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id!='' ">id,</if>
+            <if test="tid != null  and tid != ''  ">tid,</if>
+            <if test="PCurrent != null  and PCurrent != ''  ">PCurrent,</if>
+            <if test="PVoltage != null  and PVoltage != ''  ">PVoltage,</if>
+            <if test="WLHeight != null  and WLHeight != ''  ">WLHeight,</if>
+            <if test="WLPressure != null  and WLPressure != ''  ">WLPressure,</if>
+        </trim>
+        values<trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null and id!='' ">#{id},</if>
+        <if test="tid != null  and tid != ''  ">#{tid},</if>
+        <if test="PCurrent != null  and PCurrent != ''  ">#{PCurrent},</if>
+        <if test="PVoltage != null  and PVoltage != ''  ">#{PVoltage},</if>
+        <if test="WLHeight != null  and WLHeight != ''  ">#{WLHeight},</if>
+        <if test="WLPressure != null  and WLPressure != ''  ">#{WLPressure},</if>
+    </trim>
+    </insert>
+    <!--更新数据-->
+    <update id="updatePump" parameterType="Pump">
+        update iot_pump
+        <set>
+            <if test="id !=null and id !=''">id = #{id},</if>
+            <if test="tid != null  and tid != ''  ">tid = #{tid},</if>
+            <if test="PCurrent != null  and PCurrent != ''  ">PCurrent = #{PCurrent},</if>
+            <if test="PVoltage != null  and PVoltage != ''  ">PVoltage = #{PVoltage},</if>
+            <if test="WLHeight != null  and WLHeight != ''  ">WLHeight = #{WLHeight},</if>
+            <if test="WLPressure != null  and WLPressure != ''  ">WLPressure = #{WLPressure},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <!--根据id删除-->
+    <delete id="deletePumpByid" parameterType="String">
+        delete from iot_pump where id = #{id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deletePumpByids" parameterType="String">
+        delete from iot_pump where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

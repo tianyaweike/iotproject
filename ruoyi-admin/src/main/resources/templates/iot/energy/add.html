@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-energy-add">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">编号：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="eid" id="eid">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label ">电池1电压：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="bvoltage" id="bvoltage"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">电池组电压：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="bpvoltage" id="bpvoltage">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">充电电流：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="ccurrent" id="ccurrent">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">负载电流：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="lcurrent" id="lcurrent">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">输出电压：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="ovoltage" id="ovoltage">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">外部电源电压：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="epsvoltage" id="epsvoltage">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">太阳能电压：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="svoltage" id="svoltage">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">工作温度：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="workingtemperature" id="workingtemperature">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">充电状态：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="cstate" id="cstate">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">工作状态：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="workingstatu" id="workingstatu">
+            </div>
+        </div>
+
+    </form>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    var prefix = ctx + "iot/energy";
+
+    $("#form-energy-add").validate({
+        rules:{
+            xxxx:{
+                required:true,
+            },
+        }
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/add", $('#form-energy-add').serialize());
+        }
+    }
+</script>
+</body>
+</html>

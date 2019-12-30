@@ -16,7 +16,6 @@
     select place_id,stage,display,rainfall from iot_flood
     </sql>
 
-
     <!--查询表的所有列表信息-->
     <select id="selectFloodList" parameterType="Flood" resultMap="FloodResult">
         <include refid="selectFlood"/>
@@ -31,7 +30,9 @@
     </select>
 
     <!--根据id查询信息-->
+
     <select id="selectFloodByid" parameterType="String" resultMap="FloodResult">
+
         <include refid="selectFlood"/>
         where place_id=#{place_id}
         <!-- select
@@ -49,6 +50,7 @@
         </where>
         -->
     </select>
+
 
     <!--向表中插入新数据-->
     <insert id="insertFlood" parameterType="Flood">

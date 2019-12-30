@@ -50,7 +50,9 @@
     </select>
 
     <!--根据id查询信息-->
+
     <select id="selectEnergyByid" parameterType="String" resultMap="EnergyResult">
+
         <include refid="selectEnergy"/>
         where eid=#{eid}
         <!-- select
@@ -69,6 +71,7 @@
         </where>
         -->
     </select>
+
 
     <!--向表中插入新数据-->
     <insert id="insertEnergy" parameterType="Energy">
@@ -117,7 +120,9 @@
             <if test="cstate !=null and cstate !='' ">cstate = #{cstate},</if>
             <if test="workingstatu !=null and workingstatu !=''">workingstatu =#{workingstatu},</if>
         </set>
+
         where eid = #{eid}
+
     </update>
 
     <!--根据id删除-->

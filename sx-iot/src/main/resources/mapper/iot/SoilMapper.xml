@@ -11,14 +11,18 @@
         <result property="depth"    column="depth"    />
         <result property="PH"    column="PH"    />
         <result property="water"    column="water"    />
+
         <result property="salinity"  column="salinity"  />
+
         <result property="creator" column="creator" />
         <result property="organic" column="organic" />
         <result property="creatime" column="creatime" />
     </resultMap>
     <!--定义selectSoil为查询整表命令-->
     <sql id="selectSoil">
+
     select sid,type,area,depth,PH,water,salinity,creator,organic,creatime from iot_soil
+
     </sql>
     <!--统计表中记录数
     <select id="countall" resultType="Integer">
@@ -68,6 +72,7 @@
         -->
     </select>
 
+
     <!--向表中插入新数据-->
     <insert id="insertSoil" parameterType="Soil">
         insert into iot_soil
@@ -97,6 +102,7 @@
         )
     </insert>
 
+
     <!--更新数据-->
     <update id="updateSoil" parameterType="Soil">
         update iot_soil
@@ -107,9 +113,11 @@
             <if test="depth != null  and depth != ''  ">depth = #{depth},</if>
             <if test="PH != null  and PH != ''  ">PH = #{PH},</if>
             <if test="water != null  and water != ''  ">water = #{water},</if>
-            <if test="salinity !=null and salinity != ''">salinity = #{salinity},</if>
+           
+<if test="salinity !=null and salinity != ''">salinity = #{salinity},</if>
 
             <if test="organic != null and workingtemperature !=''">workingtemperature = #{workingtemperature},</if>
+
 
         </set>
         where sid = #{sid}

@@ -21,7 +21,7 @@ var isstreamliving=2;
 // var  rtmpAddress = "rtmp://110.53.162.164:1936/live";
 
 // 陈霞 RED5流媒体
-var  rtmpAddress = "rtmp://110.53.162.165:1936/live";
+var  rtmpAddress = "rtmp://127.0.0.1";
 var list = new Array();
 var nameList = new Array();
 /**

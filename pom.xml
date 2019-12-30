@@ -56,6 +56,7 @@
         <module>sx-broadStreamSocket</module>
         <module>sx-iot</module>
         <module>sx-rivervis</module>
+        <module>sx-iotSocket</module>
     </modules>
     <packaging>pom</packaging>
 

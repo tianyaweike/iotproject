@@ -38,7 +38,9 @@
     </select>
 
     <!--根据id查询信息-->
+
     <select id="selectBoardByid" parameterType="String" resultMap="BoardResult">
+
         <include refid="selectBoard"/>
         where board_id=#{board_id}
         <!-- select
@@ -58,6 +60,7 @@
         -->
     </select>
 
+
     <!--向表中插入新数据-->
     <insert id="insertBoard" parameterType="Board">
         insert into iot_board
@@ -72,6 +75,7 @@
         <if test="working != null  and working != ''  ">#{working},</if>
         )
     </insert>
+
 
     <!--更新数据-->
     <update id="updateBoard" parameterType="Board">

@@ -11,12 +11,10 @@
         <result property="current"    column="current"  />
         <result property="voltage"    column="voltage"    />
     </resultMap>
-
     <!--定义selectLight为查询整表命令-->
     <sql id="selectLight">
     select nid,atemperature,windspeed,current,voltage from iot_light
     </sql>
-
 
     <!--查询表的所有列表信息-->
     <select id="selectLightList" parameterType="Light" resultMap="LightResult">
@@ -36,6 +34,7 @@
         <include refid="selectLight"/>
         where nid=#{nid}
         <!-- select
+
          a.nid as nid,
          a.location as location,
          a.windspeed as windspeed,
@@ -43,6 +42,7 @@
          a.econdu as econdu
          from iot_led a
          -->
+
         <!--
         <where>
             <if test="nid != null  and nid != '' ">and a.nid like CONCAT(#{nid},'%')</if>
@@ -50,6 +50,7 @@
         </where>
         -->
     </select>
+
 
     <!--向表中插入新数据-->
     <insert id="insertLight" parameterType="Light">
@@ -62,6 +63,7 @@
         <if test="voltage != null  and voltage != ''  ">voltage,</if>
         )
         values(
+
         <if test="nid != null and nid!='' ">#{nid},</if>
         <if test="atemperature != null  and atemperature != ''  ">#{atemperature},</if>
         <if test="windspeed != null  and windspeed != ''  ">#{windspeed},</if>
@@ -69,6 +71,7 @@
         <if test="voltage != null  and voltage != ''  ">#{voltage},</if>
         )
     </insert>
+
 
     <!--更新数据-->
     <update id="updateLight" parameterType="Light">
@@ -95,5 +98,6 @@
             #{nid}
         </foreach>
     </delete>
+
 
 </mapper>

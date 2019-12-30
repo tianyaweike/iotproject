@@ -221,7 +221,8 @@ public class LiveController extends BaseController {
 //        String note = "" ;
 //        if(type.equals("open")){
 //            logcontent = "开启直播";
-//            note = "直播编号:"+streamid+":"+request.getParameter("imeilist");
+//            note = "直播编号:"+streamid+":"+request.getParameter("
+//            imeilist");
 //        }else{
 //            logcontent = "关闭直播";
 //            note = "直播编号:"+streamid;

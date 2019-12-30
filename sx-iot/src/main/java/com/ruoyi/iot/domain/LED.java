@@ -1,3 +1,4 @@
+
 /*
 package com.ruoyi.iot.domain;
 
@@ -168,4 +169,6 @@ public class LED {
                 ", screen_status='" + screen_status + '\'' +
                 '}';
     }
+
 }
+

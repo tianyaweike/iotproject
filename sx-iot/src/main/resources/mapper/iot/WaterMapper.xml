@@ -12,13 +12,16 @@
         <result property="color"    column="color"    />
         <result property="turbidity"    column="turbidity"    />
         <result property="PH"  column="PH"  />
+
         <result property="seston" column="seston" />
         <result property="electric" column="electric" />
+
         <result property="oxygen" column="oxygen" />
         <result property="poison" column="poison" />
         <result property="creator" column="creator" />
         <result property="creatime" column="creatime" />
     </resultMap>
+
     <!--定义selectWater为查询整表命令-->
     <sql id="selectWater">
     select wid,type,area,temperature,color,turbidity,PH,seston,electric,oxygen,poison,creator,creatime from iot_water
@@ -51,7 +54,9 @@
     </select>
 
     <!--根据id查询信息-->
+
     <select id="selectWaterByid" parameterType="String" resultMap="WaterResult">
+
         <include refid="selectWater"/>
         where wid=#{wid}
         <!-- select
@@ -70,6 +75,7 @@
         </where>
         -->
     </select>
+
 
     <!--向表中插入新数据-->
     <insert id="insertWater" parameterType="Water">
@@ -106,6 +112,7 @@
         )
     </insert>
 
+
     <!--更新数据-->
     <update id="updateWater" parameterType="Water">
         update iot_water
@@ -117,10 +124,12 @@
             <if test="color != null  and color != ''  ">color = #{color},</if>
             <if test="turbidity != null  and turbidity != ''  ">turbidity = #{turbidity},</if>
             <if test="PH !=null and PH != ''">PH = #{PH},</if>
+
             <if test="seston != null and seston != ''">seston = #{seston},</if>
             <if test="electric != null and workingtemperature !=''">workingtemperature = #{workingtemperature},</if>
             <if test="oxygen !=null and oxygen !='' ">oxygen = #{oxygen},</if>
             <if test="poison !=null and poison !='' ">poison = #{poison},</if>
+
         </set>
         where wid = #{wid}
     </update>

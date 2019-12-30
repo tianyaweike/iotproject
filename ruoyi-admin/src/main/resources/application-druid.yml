@@ -66,6 +66,7 @@
             # 思信数据源 - 物联网系统
             sxinfom:
                 enabled: true
+
                 url: jdbc:mysql://127.0.0.1:3306/shuofang?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
                 username: root
                 password: hn123456Aa
@@ -81,7 +82,9 @@
                 url: jdbc:mysql://127.0.0.1:3306/village?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
                 username: root
                 password: hn123456Aa
+
             # 思信数据源 - 村务宝典 - baodian
+
             sxbaodian:
                 enabled: true
                 url: jdbc:mysql://127.0.0.1:3306/baodian_test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8

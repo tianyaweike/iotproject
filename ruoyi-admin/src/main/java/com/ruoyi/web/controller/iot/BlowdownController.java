@@ -91,7 +91,6 @@ public class BlowdownController extends BaseController {
     @ResponseBody
     public AjaxResult remove( String ids)
     {
-       // System.out.println("*******"+pid);
         return toAjax(BlowdownService.deleteBlowdownByids(ids));
     }
 }

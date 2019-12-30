@@ -16,7 +16,7 @@
     <!--定义selectBlowdown为查询整表命令-->
     <sql id="selectBlowdown">
     select pid,monitortime,location,Hmental,PH,econdu from iot_blowdown
-    </sql>
+</sql>
     <!--统计表中记录数
     <select id="countall" resultType="Integer">
         select
@@ -27,6 +27,11 @@
     <!--查询表的所有列表信息-->
     <select id="selectBlowdownList" parameterType="Blowdown" resultMap="BlowdownResult">
         <include refid="selectBlowdown"/>
+        <where>
+            <if test="pid != null and pid != ''">
+                AND pid like concat('%', #{pid}, '%')
+            </if>
+        </where>
         <!--<where>
             <if test="pid != null and pid='' "> and pid = #{pid}</if>
             <if test="location != null  and location != '' "> and location = #{location}</if>
@@ -96,9 +101,9 @@
 
     <!--批量删除-->
     <delete id="deleteBlowdownByids" parameterType="String">
-        delete from iot_blowdown where ids in
-        <foreach item="ids" collection="array" open="(" separator="," close=")">
-            #{ids}
+        delete from iot_blowdown where pid in
+        <foreach item="pid" collection="array" open="(" separator="," close=")">
+            #{pid}
         </foreach>
     </delete>
 

@@ -7,35 +7,35 @@ public interface MeteorMapper {
      *
      * @return
      */
-    List<Meteor> selectMeteorList(Meteor meteor);
-    /**
-     * 根据weather_id批量删除数据
-     * @param weather_id
-     */
-    int deleteMeteorByids(String[] weather_id);
+    public List<Meteor> selectMeteorList(Meteor meteor);
     /**
      * 添加气象监测信息
      * @param meteor
      * @return
      */
-    int insertMeteor(Meteor meteor);
+    public int insertMeteor(Meteor meteor);
     /**
      * 根据weather_id选择数据
      * @param weather_id
      * @return
      */
-    Meteor selectByweather_id(String weather_id);
+    public Meteor selectByweather_id(String weather_id);
 
     /**
      * 保存用户修改
      * @param meteor
      * @return
      */
-    int updateMeteor(Meteor meteor);
+    public int updateMeteor(Meteor meteor);
     /**
      * 删除气象监测信息
      * @param weather_id
      * @return
      */
-    int deleteMeteorByid(String weather_id);
+    public int deleteMeteorByid(String weather_id);
+    /**
+     * 根据weather_id批量删除数据
+     * @param weather_ids
+     */
+    public int deleteMeteorByids(String[] weather_ids);
 }

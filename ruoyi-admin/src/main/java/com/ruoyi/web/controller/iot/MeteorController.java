@@ -87,11 +87,10 @@ public class MeteorController extends BaseController {
     @RequiresPermissions("iot:meteorinfo:remove")
     @Log(title = "删除Meteor信息", businessType = BusinessType.DELETE)
 
-    @PostMapping( "/remove/{weather_id}")
+    @PostMapping( "/remove")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("weather_id") String weather_id)
+    public AjaxResult remove(String ids)
     {
-       // System.out.println("*******"+weather_id);
-        return toAjax(MeteorService.deleteMeteorByids(weather_id));
+        return toAjax(MeteorService.deleteMeteorByids(ids));
     }
 }

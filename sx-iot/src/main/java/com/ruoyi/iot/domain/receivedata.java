@@ -17,7 +17,7 @@ public class receivedata {
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             s = bufferedReader.readLine();
             System.out.println("Client receive msg: " + s);
-            inputStreamReader.close();
+            socketClient.close();
 
         }
         catch (Exception e) {

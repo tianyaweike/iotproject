@@ -44,12 +44,12 @@ public class LEDServiceImpl implements ILEDService {
         return LEDMapper.selectLedById(led_id);
     }
 
-   /*@Override
+   @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public List<LED> selectLedAll()
+    public void openled()
     {
-        return LEDMapper.selectLedAll();
-    }*/
+        //return LEDMapper.openled();
+    }
 
 
 

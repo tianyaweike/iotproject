@@ -15,33 +15,6 @@
                             编号：<input type="text" name="hid"/>
                         </li>
                         <li>
-                            环境温度：<input type="text" name="Ambient temperature"/>
-                        </li>
-                        <li>
-                            环境湿度：<input type="text" name="ambient humidity"/>
-                        </li>
-                        <li>
-                            风速：<input type="text" name="wind speed"/>
-                        </li>
-                        <li>
-                            风向：<input type="text" name="wind direction"/>
-                        </li>
-                        <li>
-                            光照强度：<input type="text" name="Light intensity"/>
-                        </li>
-                        <li>
-                            大气压强：<input type="time" name="atmospheric pressure"/>
-                        </li>
-                        <li>
-                            PM2.5浓度：<input type="time" name="PM"/>
-                        </li>
-                        <li>
-                            二氧化碳浓度：<input type="time" name="ppm"/>
-                        </li>
-                        <li>
-                            设备状态（0-关，1-开）：<input type="time" name="Device status"/>
-                        </li>
-                        <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                             <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
                         </li>
@@ -63,6 +36,7 @@
             <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:environlinfo:export">
                 <i class="fa fa-download"></i> 导出
             </a>
+
         </div>
 
         <div class="col-sm-12 select-table table-striped">
@@ -72,6 +46,7 @@
 </div>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
+    var receiveFlag;
     var editFlag = [[${@permission.hasPermi('iot:environlinfo:edit')}]];
     var removeFlag = [[${@permission.hasPermi('iot:environlinfo:remove')}]];
     var prefix = ctx + "iot/environl";
@@ -94,32 +69,32 @@
                     title: '编号'
                 },
                 {
-                    field: 'Ambient temperature',
+                    field: 'Ambient_temperature',
                     title: '环境温度',
                     sortable: true
                 },
                 {
-                    field: 'ambient humidity',
+                    field: 'ambient_humidity',
                     title: '环境湿度',
                     sortable: true
                 },
                 {
-                    field: 'wind speed',
+                    field: 'wind_speed',
                     title: '风速',
                     sortable: true
                 },
                 {
-                    field: 'wind direction',
+                    field: 'wind_direction',
                     title: '风向',
                     sortable: true
                 },
                 {
-                    field: 'Light intensity',
+                    field: 'Light_intensity',
                     title: '光照强度',
                     sortable: true
                 },
                 {
-                    field: 'atmospheric pressure',
+                    field: 'atmospheric_pressure',
                     title: '大气压强',
                     sortable: true
                 },

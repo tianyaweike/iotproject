@@ -19,6 +19,12 @@ public interface EnvironlService {
     public int deleteEnvironlByid(String hid);
 
     /**
+     * 开始接收数据
+     *
+     */
+//    public int receive(String s);
+
+    /**
      * 添加环境公告数据
      *
      */

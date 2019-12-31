@@ -13,11 +13,6 @@
                     <ul>
                         <li>
                             终端IEMI：<input type="text" name="postCode"/>
-                        </li>
-                       <!-- <li>
-                            岗位名称：<input type="text" name="postName"/>
-                        </li>-->
-                        <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                             <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
                         </li>
@@ -60,6 +55,7 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
+            openUrl:prefix + "/open",
             //sortName: "ledSort",
             modalName: "LED",
             search: false,
@@ -107,8 +103,9 @@
                     align: 'center',
                     formatter: function(value, row, index) {
                         var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs " href="#" onclick="on()"><i class="fa fa-plus"></i>开灯</a> ');
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.led_id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.led_id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.led_id + '\')"><i class="fa fa-remove"></i>删除</a>');;
                         return actions.join('');
                     }
                 }]
@@ -118,3 +115,25 @@
 </script>
 </body>
 </html>
+
+<script>
+    function on() {
+        var config = {
+            url: "http:127.0.0.1:1080/iot/led/open",
+            type: "get",
+            dataType: "json",
+             beforeSend: function () {
+                $.modal.loading("正在处理中，请稍后...");
+            },
+            success: function(result) {
+                console.log(result)
+                $.modal.closeLoading();
+            },
+            error:function (data) {
+                console.log("error:"+result)
+                $.modal.closeLoading();
+            }
+        };
+        $.ajax(config)
+    }
+</script>

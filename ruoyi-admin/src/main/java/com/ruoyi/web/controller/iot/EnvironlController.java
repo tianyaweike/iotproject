@@ -81,6 +81,7 @@ public class EnvironlController extends BaseController {
     {
         return toAjax(EnvironlService.updateEnvironl(environl));
     }
+
     /**
      * 删除Environl信息
      */

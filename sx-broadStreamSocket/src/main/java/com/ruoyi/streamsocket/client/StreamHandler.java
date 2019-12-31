@@ -156,8 +156,10 @@ public class StreamHandler  implements WebSocketHandler {
             @Override
             public void run() {
                 try {
+                    log.info("12121212121212--------------------------------------");
 //                    面向 服务器上 SocketServer NettyServer 服务器 发送业务信息
-                    new NettyClient(conn,msg).start();
+                   // new NettyClient(conn,msg).start();
+
                 } catch (Exception e) {
                     log.error( "错误日志："+e.getMessage()+ " ");
                     try {

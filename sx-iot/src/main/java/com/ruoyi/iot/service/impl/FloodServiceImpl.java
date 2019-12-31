@@ -3,6 +3,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.iot.domain.Flood;
+import com.ruoyi.iot.domain.Floodbytl;
 import com.ruoyi.iot.mapper.FloodMapper;
 import com.ruoyi.iot.service.FloodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class FloodServiceImpl implements FloodService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteFloodByids(String place_id) {
-        return floodMapper.deleteFloodByids(Convert.toStrArray(place_id));
+    public int deleteFloodByids(String id) {
+        return floodMapper.deleteFloodByids(Convert.toStrArray(id));
     }
 
     /**
@@ -54,14 +55,14 @@ public class FloodServiceImpl implements FloodService {
     }
 
     /**
-     * 根据place_id选择数据
-     * @param place_id
+     * 根据id选择数据
+     * @param id
      * @return
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public Flood selectByid(String place_id) {
-        return floodMapper.selectByid(place_id);
+    public Flood selectByid(String id) {
+        return floodMapper.selectByid(id);
     }
 
     /**
@@ -71,8 +72,8 @@ public class FloodServiceImpl implements FloodService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteFloodByid(String place_id) {
-        return floodMapper.deleteFloodByid(place_id);
+    public int deleteFloodByid(String id) {
+        return floodMapper.deleteFloodByid(id);
     }
 
     /**
@@ -84,5 +85,49 @@ public class FloodServiceImpl implements FloodService {
     @DataSource(value = DataSourceType.SXINFOM)
     public int updateFlood(Flood flood) {
         return floodMapper.updateFlood(flood);
+    }
+
+    /**
+     * 查询山洪监测列表 前20条数据
+     *
+     * @param envData 山洪监测信息
+     * @return 山洪监测集合
+     */
+    @Override
+    @DataSource(value = DataSourceType.SXINFOM)
+    public List<Flood> selectFloodListLimit(String rid){
+        return floodMapper.selectFloodListLimit(rid);
+    }
+
+    /**
+     * 统计山洪数据总数
+     * @author 饶泽敏 teavamc
+     * @date 2019/12/30
+     * @param []
+     * @return int
+     */
+    @Override
+    @DataSource(value = DataSourceType.SXINFOM)
+    public int countall(String rid){
+        return floodMapper.countall(rid);
+    }
+
+
+    /**
+     * 根据时间范围和查询条数统计山洪数据
+     *
+     * @param envData 山洪监测信息
+     * @return 山洪监测集合
+     */
+    @Override
+    @DataSource(value = DataSourceType.SXINFOM)
+    public List<Flood> selectFloodListbytl(Floodbytl floodbytl){
+        return floodMapper.selectFloodListbytl(floodbytl);
+    }
+
+    @Override
+    @DataSource(value = DataSourceType.SXINFOM)
+    public List<Flood> selectFloodList1(Flood flood) {
+        return floodMapper.selectFloodList1(flood);
     }
 }

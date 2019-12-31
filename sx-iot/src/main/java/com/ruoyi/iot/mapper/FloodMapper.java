@@ -1,5 +1,6 @@
 package com.ruoyi.iot.mapper;
 import com.ruoyi.iot.domain.Flood;
+import com.ruoyi.iot.domain.Floodbytl;
 import java.util.List;
 public interface FloodMapper {
     /**
@@ -10,10 +11,10 @@ public interface FloodMapper {
     List<Flood> selectFloodList(Flood flood);
 
     /**
-     * 根据place_id批量删除数据
-     * @param place_id
+     * 根据id批量删除数据
+     * @param id
      */
-    int deleteFloodByids(String[] place_id);
+    int deleteFloodByids(String[] id);
     /**
      * 添加山洪灾害信息
      * @param flood
@@ -21,11 +22,11 @@ public interface FloodMapper {
      */
     int insertFlood(Flood flood);
     /**
-     * 根据place_id选择数据
-     * @param place_id
+     * 根据id选择数据
+     * @param id
      * @return
      */
-    Flood selectByid(String place_id);
+    Flood selectByid(String id);
 
     /**
      * 保存用户修改
@@ -35,8 +36,29 @@ public interface FloodMapper {
     int updateFlood(Flood flood);
     /**
      * 删除山洪灾害信息
-     * @param place_id
+     * @param id
      * @return
      */
-    int deleteFloodByid(String place_id);
+    int deleteFloodByid(String id);
+
+    /**
+     * 查询山洪监测列表 前20条数据
+     *
+     * @param flood 环境监测信息
+     * @return 环境监测集合
+     */
+    public List<Flood> selectFloodListLimit(String rid);
+
+    /**
+     * 统计山洪数据总数
+     * @author 饶泽敏 teavamc
+     * @date 2019/12/30
+     * @param []
+     * @return int
+     */
+    public int countall(String rid);
+
+    public List<Flood> selectFloodListbytl(Floodbytl floodbytl);
+
+    List<Flood> selectFloodList1(Flood flood);
 }

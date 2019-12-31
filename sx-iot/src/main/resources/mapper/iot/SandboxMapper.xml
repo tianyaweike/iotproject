@@ -20,14 +20,13 @@
     -->
     <!--查询表的所有列表信息-->
     <select id="selectSandboxList" parameterType="Sandbox" resultMap="SandboxResult">
-        <include refid="selectSandbox"/>  order by switch_id desc
-    </select>
-        <!--<where>
-            <if test="switch_id != null and switch_id='' "> and switch_id = #{switch_id}</if>
-            <if test="control!= null  and control!= '' "> and control= #{control}</if>
+        <include refid="selectSandbox"/>
+        <where>
+            <if test="switch_id != null and switch_id !='' "> AND  switch_id like concat('%' ,#{switch_id},'%')</if>
+            <if test="control!= null  and control!= '' ">AND  control like concat('%' ,#{control},'%')</if>
         </where>
-        order by switch_id desc
-        -->
+    </select>
+
 
 
     <!--根据id查询信息-->

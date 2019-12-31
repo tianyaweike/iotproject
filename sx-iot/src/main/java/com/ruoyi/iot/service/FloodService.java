@@ -1,5 +1,6 @@
 package com.ruoyi.iot.service;
 import com.ruoyi.iot.domain.Flood;
+import com.ruoyi.iot.domain.Floodbytl;
 
 import java.util.List;
 /**
@@ -17,10 +18,10 @@ public interface FloodService {
     public List<Flood> selectFloodList(Flood flood);
 
     /**
-     * 根据place_id批量删除数据
+     * 根据id批量删除数据
      * @param id
      */
-    public int deleteFloodByids(String place_id);
+    public int deleteFloodByids(String id);
 
     /**
      * 添加山洪公告数据
@@ -29,11 +30,11 @@ public interface FloodService {
      */
     public int insertFlood(Flood flood);
     /**
-     * 根据place_id选择数据
-     * @param place_id
+     * 根据id选择数据
+     * @param id
      * @return
      */
-    public Flood selectByid(String place_id);
+    public Flood selectByid(String id);
     /**
      * 保存用户修改
      * @param Flood
@@ -42,8 +43,16 @@ public interface FloodService {
     public int updateFlood(Flood flood);
     /**
      * 删除山洪信息
-     * @param place_id
+     * @param id
      * @return
      */
-    public int deleteFloodByid(String place_id);
+    public int deleteFloodByid(String id);
+
+    public List<Flood> selectFloodListLimit(String rid);
+
+    public int countall(String rid);
+
+    public List<Flood> selectFloodListbytl(Floodbytl Floodbytl);
+
+    public List<Flood> selectFloodList1(Flood flood);
 }

@@ -8,7 +8,7 @@ public class Blowdown {
 
     private String location;
     private String Hmental;
-    private String PH;
+    private String ph;
     private String econdu;
     private String updatetime;
     @Override
@@ -18,18 +18,18 @@ public class Blowdown {
                 ", monitortime='" + monitortime + '\'' +
                 ", location='" + location + '\'' +
                 ", Hmental='" + Hmental + '\'' +
-                ", PH='" + PH + '\'' +
+                ", ph='" + ph + '\'' +
                 ", econdu='" + econdu + '\'' +
                 ", updatetime='" + updatetime + '\'' +
                 '}';
     }
 
-    public Blowdown(String pid, String monitortime, String location, String hmental, String PH, String econdu, String updatetime) {
+    public Blowdown(String pid, String monitortime, String location, String Hmental, String ph, String econdu, String updatetime) {
             this.pid = pid;
             this.monitortime = monitortime;
             this.location = location;
-            Hmental = hmental;
-            this.PH = PH;
+            this.Hmental = Hmental;
+            this.ph = ph;
             this.econdu = econdu;
             this.updatetime = updatetime;
         }
@@ -61,14 +61,14 @@ public class Blowdown {
                 public String getHmental() {
                     return Hmental;
                 }
-                public void setHmental(String hmental) {
-                    Hmental = hmental;
+                public void setHmental(String Hmental) {
+                    Hmental = Hmental;
                 }
-                public String getPH() {
-                    return PH;
+                public String getph() {
+                    return ph;
                 }
-                public void setPH(String PH) {
-                    this.PH = PH;
+                public void setph(String ph) {
+                    this.ph = ph;
                 }
                 public String getEcondu() {
                     return econdu;

@@ -15,7 +15,7 @@
                             编号：<input type="text" name="eid"/>
                         </li>
                         <li>
-                            电池1电压：<input type="text" name="bvoltage"/>
+                            电池电压：<input type="text" name="bvoltage"/>
                         </li>
                         <li>
                             电池组电压：<input type="text" name="bpvoltage"/>
@@ -39,10 +39,21 @@
                             工作温度：<input type="text" name="workingtemperature"/>
                         </li>
                         <li>
-                            充电状态：<input type="text" name="cstate"/>
+                            充电状态：<input list="cstate"  name="cstate"/>
+                            <datalist id="cstate">
+                                <option value="1">涓流充电状态</option>
+                                <option value="2">浮充状态</option>
+                                <option value="3">大电流充电状态</option>
+                            </datalist>
                         </li>
                         <li>
-                            工作状态：<input type="text" name="workingstatu"/>
+                            工作状态：<input list="workingstatu"  name="workingstatu"/>
+                            <datalist id="workingstatu">
+                                <option value="1">涓流充电状态</option>
+                                <option value="2">浮充状态</option>
+                                <option value="3">大电流充电状态</option>
+                                <option value="未知">未知</option>
+                            </datalist>
                         </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -89,7 +100,7 @@
             sortName: "eid",
             modalName: "能源管理终端",
             search: false,
-            showExport: false,
+            showExport: true,
             columns: [{
                 checkbox: true
             },

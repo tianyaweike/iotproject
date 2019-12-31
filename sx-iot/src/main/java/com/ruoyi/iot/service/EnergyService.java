@@ -34,6 +34,7 @@ public interface EnergyService {
      * @return
      */
     public Energy selectByeid(String eid);
+   // public Energy selectBybvo(String bcoltage);
     /**
      * 保存用户修改
      * @param Energy

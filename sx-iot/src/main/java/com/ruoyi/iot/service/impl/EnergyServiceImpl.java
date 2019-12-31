@@ -65,6 +65,12 @@ public class EnergyServiceImpl implements EnergyService {
         return energyMapper.selectByid(eid);
     }
 
+    /**@Override
+    @DataSource(value = DataSourceType.SXINFOM)
+    public Energy selectBybvo(String bvoltage) {
+        return energyMapper.selectBybvo(bvoltage);
+    }*/
+
     /**
      * 删除能源管理信息
      * @param Energy

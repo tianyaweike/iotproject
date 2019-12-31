@@ -1,27 +1,29 @@
 package com.ruoyi.iot.domain;
 
+import com.ruoyi.common.annotation.Excel;
+
 public class Energy {
-
-    private int eid;
-
+    @Excel(name="编号")
+    private String  eid;
+    @Excel(name="电池电压")
     private String bvoltage;
-
+    @Excel(name="电池组电压")
     private String bpvoltage;
-
+    @Excel(name="充电电流")
     private String ccurrent;
-
+    @Excel(name="负载电流")
     private String lcurrent;
-
+    @Excel(name="输出电压")
     private String ovoltage;
-
+    @Excel(name="外部电源电压")
     private String epsvoltage;
-
+    @Excel(name="太阳能电压")
     private String svoltage;
-
+    @Excel(name="工作温度")
     private String workingtemperature;
-
+    @Excel(name="充电状态")
     private String cstate;
-
+    @Excel(name="工作状态")
     private String workingstatu;
 
     @Override
@@ -41,7 +43,7 @@ public class Energy {
                 '}';
     }
 
-    public Energy(int eid, String bvoltage, String bpvoltage, String ccurrent, String lcurrent, String ovoltage, String epsvoltage, String svoltage, String workingtemperature, String cstate, String workingstatu) {
+    public Energy(String eid, String bvoltage, String bpvoltage, String ccurrent, String lcurrent, String ovoltage, String epsvoltage, String svoltage, String workingtemperature, String cstate, String workingstatu) {
         this.eid = eid;
         this.bvoltage = bvoltage;
         this.bpvoltage = bpvoltage;
@@ -59,11 +61,11 @@ public class Energy {
         super();
     }
 
-    public int getEid() {
+    public String getEid() {
         return eid;
     }
 
-    public void setEid(int eid) {
+    public void setEid(String eid) {
         this.eid = eid;
     }
 

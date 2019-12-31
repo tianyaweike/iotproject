@@ -25,6 +25,7 @@ public interface EnergyMapper {
      * @return
      */
     Energy selectByid(String eid);
+    //Energy selectBybvo(String bvoltage);
 
     /**
      * 保存用户修改

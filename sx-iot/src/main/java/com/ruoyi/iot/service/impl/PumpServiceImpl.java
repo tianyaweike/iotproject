@@ -32,7 +32,6 @@ public class PumpServiceImpl implements PumpService{
     public List<Pump> selectPumpList(Pump pump) {
         return pumpMapper.selectPumpList(pump);
     }
-
     /**
      * 根据id批量删除数据
      * @param id

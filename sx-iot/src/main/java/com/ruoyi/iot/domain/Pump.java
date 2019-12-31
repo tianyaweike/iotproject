@@ -1,38 +1,40 @@
 package com.ruoyi.iot.domain;
 
+import com.ruoyi.common.annotation.Excel;
+
 public class Pump {
-
+    @Excel(name="序号")
     private String id;
-
+    @Excel(name="型号")
     private String tid;
-
-    private String PCurrent;
-
-    private String PVoltage;
-
-    private String WLHeight;
-
-    private String WLPressure;
+    @Excel(name="水泵电流")
+    private String pcurrent;
+    @Excel(name="水泵电压")
+    private String pvoltage;
+    @Excel(name="水位高度")
+    private String wlheight;
+    @Excel(name="水位压力")
+    private String wlpressure;
 
     @Override
     public String toString() {
         return "Pump{" +
                 "id='" + id + '\'' +
                 ", tid='" + tid + '\'' +
-                ", PCurrent='" + PCurrent + '\'' +
-                ", PVoltage='" + PVoltage + '\'' +
-                ", WLHeight='" + WLHeight + '\'' +
-                ", WLPressure='" + WLPressure + '\'' +
+                ", pcurrent='" + pcurrent + '\'' +
+                ", pvoltage='" + pvoltage + '\'' +
+                ", wlheight='" + wlheight + '\'' +
+                ", wlpressure='" + wlpressure + '\'' +
                 '}';
     }
 
-    public Pump(String id, String tid, String PCurrent, String PVoltage, String WLHeight, String WLPressure) {
+    public Pump(String id, String tid, String pcurrent, String pvoltage, String wlheight, String wlpressure) {
         this.id = id;
         this.tid = tid;
-        this.PCurrent = PCurrent;
-        this.PVoltage = PVoltage;
-        this.WLHeight = WLHeight;
-        this.WLPressure = WLPressure;
+        this.pcurrent = pcurrent;
+        this.pvoltage = pvoltage;
+        this.wlheight = wlheight;
+        this.wlpressure = wlpressure;
     }
 
     public Pump() {
@@ -55,35 +57,35 @@ public class Pump {
         this.tid = tid;
     }
 
-    public String getPCurrent() {
-        return PCurrent;
+    public String getPcurrent() {
+        return pcurrent;
     }
 
-    public void setPCurrent(String PCurrent) {
-        this.PCurrent = PCurrent;
+    public void setPcurrent(String pcurrent) {
+        this.pcurrent = pcurrent;
     }
 
-    public String getPVoltage() {
-        return PVoltage;
+    public String getPvoltage() {
+        return pvoltage;
     }
 
-    public void setPVoltage(String PVoltage) {
-        this.PVoltage = PVoltage;
+    public void setPvoltage(String pvoltage) {
+        this.pvoltage = pvoltage;
     }
 
-    public String getWLHeight() {
-        return WLHeight;
+    public String getWlheight() {
+        return wlheight;
     }
 
-    public void setWLHeight(String WLHeight) {
-        this.WLHeight = WLHeight;
+    public void setWlheight(String wlheight) {
+        this.wlheight = wlheight;
     }
 
-    public String getWLPressure() {
-        return WLPressure;
+    public String getWlpressure() {
+        return wlpressure;
     }
 
-    public void setWLPressure(String WLPressure) {
-        this.WLPressure = WLPressure;
+    public void setWlpressure(String wlpressure) {
+        this.wlpressure = wlpressure;
     }
 }

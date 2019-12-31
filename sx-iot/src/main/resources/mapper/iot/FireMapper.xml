@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.iot.mapper.FireMapper">
+    <resultMap type="Fire" id="FireResult">
+        <result property="fid"    column="fid"    />
+        <result property="Device_status"    column="Device_status"    />
+        <result property="temperature"    column="temperature"    />
+        <result property="ppm"    column="ppm"    />
+        <result property="PM"    column="PM"    />
+        <result property="current_sense" column="current_sense" />
+    </resultMap>
+    <!--定义selectFire为查询整表命令-->
+    <sql id="selectFire">
+    select fid,Device_status,temperature,ppm,PM,current_sense from iot_fire
+    </sql>
+    <!--查询表的所有列表信息-->
+    <select id="selectFireList" parameterType="Fire" resultMap="FireResult">
+        <include refid="selectFire"/>
+        <where>
+            <if test="fid != null and fid != '' "> AND fid like concat('%', #{fid}, '%')</if>
+            <if test="Device_status != null  and Device_status != '' "> AND Device_status like concat('%', #{Device_status}, '%')</if>
+            <if test="temperature != null  and temperature != '' "> AND temperature like concat('%', #{temperature}, '%')</if>
+            <if test="ppm != null  and ppm != '' "> AND ppm like concat('%', #{ppm}, '%')</if>
+            <if test="PM != null  and PM != '' "> AND PM like concat('%', #{PM}, '%')</if>
+            <if test="current_sense != null  and current_sense != '' "> AND current_sense like concat('%', #{current_sense}, '%')</if>
+        </where>
+        order by fid desc
+        -->
+    </select>
+
+    <!--根据id查询信息-->
+    <select id="selectByid" parameterType="String" resultMap="FireResult">
+        <include refid="selectFire"/>
+        where fid=#{fid}
+        <!-- select
+         a.fid as fid,
+         a.location as location,
+         a.temperature as temperature,
+         a.ppm as ppm,
+         a.econdu as econdu
+         from iot_led a
+         -->
+        <!--
+        <where>
+            <if test="fid != null  and fid != '' ">and a.fid like CONCAT(#{fid},'%')</if>
+            <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
+        </where>
+        -->
+    </select>
+    <!--向表中插入新数据-->
+    <insert id="insertFire" parameterType="com.ruoyi.iot.domain.Fire">
+        insert into iot_fire
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fid != null and fid!='' ">fid,</if>
+            <if test="Device_status != null  and Device_status != ''  ">Device_status,</if>
+            <if test="temperature != null  and temperature != ''  ">temperature,</if>
+            <if test="ppm != null  and ppm != ''  ">ppm,</if>
+            <if test="PM != null  and PM != ''  ">PM,</if>
+            <if test="current_sense != null  and current_sense != ''  ">current_sense,</if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="fid != null and fid!='' ">#{fid},</if>
+            <if test="Device_status != null  and Device_status != ''  ">#{Device_status},</if>
+            <if test="temperature != null  and temperature != ''  ">#{temperature},</if>
+            <if test="ppm != null  and ppm != ''  ">#{ppm},</if>
+            <if test="PM != null  and PM != ''  ">#{PM},</if>
+            <if test="current_sense != null  and current_sense != ''  ">#{current_sense},</if>
+        </trim>
+    </insert>
+    <!--更新数据-->
+    <update id="updateFire" parameterType="Fire">
+        update iot_fire
+        <set>
+            <if test="fid !=null and fid !=''">fid = #{fid},</if>
+            <if test="Device_status != null  and Device_status != ''  ">Device_status = #{Device_status},</if>
+            <if test="temperature != null  and temperature != ''  ">temperature = #{temperature},</if>
+            <if test="ppm != null  and ppm != ''  ">ppm = #{ppm},</if>
+            <if test="PM != null  and PM != ''  ">PM = #{PM},</if>
+            <if test="current_sense != null  and current_sense != ''  ">current_sense = #{current_sense},</if>
+        </set>
+        where fid = #{fid}
+    </update>
+
+    <!--根据id删除-->
+    <delete id="deleteFireByid" parameterType="String">
+        delete from iot_fire where fid = #{fid}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteFireByids" parameterType="String">
+        delete from iot_fire where fid in
+        <foreach item="fid" collection="array" open="(" separator="," close=")">
+            #{fid}
+        </foreach>
+    </delete>
+
+</mapper>

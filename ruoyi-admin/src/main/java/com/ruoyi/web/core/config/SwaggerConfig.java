@@ -3,6 +3,7 @@ package com.ruoyi.web.core.config;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Function;
+import com.ruoyi.streamsocket.client.NettyClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.RequestHandler;
@@ -25,6 +26,7 @@ public class SwaggerConfig
 
     // 定义分隔符,配置Swagger多包
     private static final String splitor = ";";
+
 
     /**
      * 创建API

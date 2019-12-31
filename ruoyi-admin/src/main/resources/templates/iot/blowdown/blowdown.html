@@ -42,16 +42,16 @@
         </div>
 
         <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="iot:blowdown:add">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="iot:blowdowninfo:add">
                 <i class="fa fa-plus"></i> 新增
             </a>
-            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="iot:blowdown:edit">
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="iot:blowdowninfo:edit">
                 <i class="fa fa-edit"></i> 修改
             </a>
-            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="iot:blowdown:remove">
+            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="iot:blowdowninfo:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:blowdown:export">
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:blowdowninfo:export">
                 <i class="fa fa-download"></i> 导出
             </a>
         </div>
@@ -63,8 +63,8 @@
 </div>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('iot:blowdown:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('iot:blowdown:remove')}]];
+    var editFlag = [[${@permission.hasPermi('iot:blowdowninfo:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('iot:blowdowninfo:remove')}]];
     var prefix = ctx + "iot/blowdown";
 
     $(function() {
@@ -74,7 +74,7 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-            sortName: "blowdownSort",
+            // sortName: "blowdownSort",
             modalName: "排污监测",
             search: false,
             showExport: false,

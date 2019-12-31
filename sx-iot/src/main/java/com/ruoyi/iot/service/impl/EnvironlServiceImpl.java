@@ -2,7 +2,6 @@ package com.ruoyi.iot.service.impl;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
-import com.ruoyi.iot.service.*;
 import com.ruoyi.iot.domain.Environl;
 import com.ruoyi.iot.mapper.EnvironlMapper;
 import com.ruoyi.iot.service.EnvironlService;
@@ -36,6 +35,16 @@ public class EnvironlServiceImpl  implements EnvironlService {
     public int deleteEnvironlByid(String hid) {
         return environlMapper.deleteEnvironlByid(hid);
     }
+
+//    /**
+//     * 开始接受数据
+//     *
+//     */
+//    @Override
+//    @DataSource(value = DataSourceType.SXINFOM)
+//    public int receive(String s) {
+//        return environlMapper.receive(s);
+//    }
 
     /**
      * 添加环境公告数据

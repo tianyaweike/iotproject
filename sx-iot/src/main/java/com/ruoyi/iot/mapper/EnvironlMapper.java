@@ -9,10 +9,16 @@ public interface EnvironlMapper {
      */
     List<Environl> selectEnvironlList(Environl environl);
     /**
+     * 开始接收数据
+     * @param hid
+     */
+//    int receive(String s);
+    /**
      * 根据hid批量删除数据
      * @param hid
      */
     int deleteEnvironlByids(String hid);
+
     /**
      * 添加环境终端检测信息
      * @param environl

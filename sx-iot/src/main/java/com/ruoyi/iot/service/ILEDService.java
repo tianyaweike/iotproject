@@ -23,6 +23,15 @@ public interface ILEDService {
      */
     public LED selectLedById(String led_id);
 
+    /**
+     * 开灯
+     *
+     * @param led_id 终端运转ID
+     * @return 终端运转信息
+     */
+    public void  openled();
+
+
 
     /**
      * 统计物联网数据条目

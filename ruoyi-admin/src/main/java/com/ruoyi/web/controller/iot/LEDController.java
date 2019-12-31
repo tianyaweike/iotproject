@@ -3,6 +3,7 @@ package com.ruoyi.web.controller.iot;
 import java.util.List;
 
 import com.ruoyi.iot.service.ILEDService;
+import com.ruoyi.streamsocket.client.NettyClient;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +39,8 @@ public class LEDController extends BaseController
 
     @RequiresPermissions("iot:ledinfo:view")
     @GetMapping()
-    public String operlog() { return prefix + "/led"; }
+    public String operlog()
+    { return prefix + "/led"; }
 
     /**
      * 查询终端运转列表
@@ -74,6 +76,19 @@ public class LEDController extends BaseController
     public String add()
     {
         return prefix + "/add";
+    }
+
+    /**
+     * 开灯
+     */
+    @GetMapping("/open")
+    @ResponseBody
+    public AjaxResult openled()
+    {
+        //System.out.printf(NettyClient.channel.remoteAddress().toString()+"--"+NettyClient.channel.isOpen());;
+        //NettyClient.channel.writeAndFlush("Sopen_led1E");
+        NettyClient.writeDate("Sopen_led1E");
+        return toAjax(1);
     }
 
     /**

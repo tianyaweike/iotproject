@@ -63,7 +63,7 @@
 
     function submitHandler() {
         if ($.validate.form()) {
-            $.operate.blowdown(prefix + "/add", $('#form-blowdown-add').serialize());
+            $.operate.save(prefix + "/add", $('#form-blowdown-add').serialize());
         }
     }
 </script>

@@ -15,6 +15,7 @@
         <result property="ppm" column="ppm" />
         <result property="Device_status" column="Device_status" />
     </resultMap>
+
     <!--定义selectEnvironl为查询整表命令-->
     <sql id="selectEnvironl">
     select hid,Ambient_temperature,ambient_humidity,wind_speed,wind_direction,Light_intensity,atmospheric_pressure,PM,ppm,Device_status from iot_environl
@@ -27,7 +28,7 @@
     </select>
     -->
     <!--查询表的所有列表信息-->
-    <select id="selectEnvironlList" parameterType="com.ruoyi.iot.domain.Environl" resultMap="EnvironlResult">
+    <select id="selectEnvironlList" parameterType="Environl" resultMap="EnvironlResult">
         <include refid="selectEnvironl"/>
         <!--<where>
             <if test="hid != null and hid='' "> and hid = #{hid}</if>
@@ -94,7 +95,7 @@
         </trim>
     </insert>
     <!--更新数据-->
-    <update id="updateEnvironl" parameterType="com.ruoyi.iot.domain.Environl">
+    <update id="updateEnvironl" parameterType="Environl">
         update iot_environl
         <set>
             <if test="hid != null and hid !=''">hid = #{hid},</if>
@@ -124,4 +125,14 @@
         </foreach>
     </delete>
 
+    <!--向表中插入新数据-->
+    <insert id="receive" parameterType="String">
+        insert into iotdata
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Ambient_temperature!= null  and Ambient_temperature!= ''  ">Ambient_temperature,</if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="Ambient_temperature != null  and Ambient_temperature != ''  ">#{Ambient_temperature},</if>
+        </trim>
+    </insert>
 </mapper>

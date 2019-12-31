@@ -1,15 +1,17 @@
 package com.ruoyi.iot.domain;
 
+import com.ruoyi.common.annotation.Excel;
+
 public class Light {
-
+    @Excel(name="路灯编号")
     private String nid;
-
+    @Excel(name="环境温度")
     private String atemperature;
-
+    @Excel(name="风速")
     private String windspeed;
-
+    @Excel(name="工作电流")
     private String current;
-
+    @Excel(name="工作电压")
     private String voltage;
 
     @Override

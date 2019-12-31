@@ -17,6 +17,23 @@
     <!--查询表的所有列表信息-->
     <select id="selectLightList" parameterType="Light" resultMap="LightResult">
         <include refid="selectLight"/>
+        <where>
+            <if test="nid !=null and nid !='' ">
+                AND nid like concat('%', #{nid},'%')
+            </if>
+            <if test="atemperature !=null and atemperature !='' ">
+                AND atemperature like concat('%', #{atemperature},'%')
+            </if>
+            <if test="windspeed !=null and windspeed !='' ">
+                AND windspeed like concat('%', #{windspeed},'%')
+            </if>
+            <if test="current !=null and current !='' ">
+                AND current like concat('%', #{current},'%')
+            </if>
+            <if test="voltage !=null and voltage !='' ">
+                AND voltage like concat('%', #{voltage},'%')
+            </if>
+        </where>
     </select>
         <!--<where>
             <if test="nid != null and nid='' "> and nid = #{nid}</if>

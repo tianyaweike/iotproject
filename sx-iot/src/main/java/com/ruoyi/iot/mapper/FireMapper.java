@@ -1,6 +1,5 @@
 package com.ruoyi.iot.mapper;
 import com.ruoyi.iot.domain.Fire;
-
 import java.util.List;
 public interface FireMapper {
     /**
@@ -15,14 +14,12 @@ public interface FireMapper {
      * @param fid
      */
     int deleteFireByids(String[] fid);
-
     /**
      * 添加火灾探头终端信息
      * @param fire
      * @return
      */
     int insertFire(Fire fire);
-
     /**
      * 根据fid选择数据
      * @param fid
@@ -36,7 +33,6 @@ public interface FireMapper {
      * @return
      */
     int updateFire(Fire fire);
-
     /**
      * 删除火灾探头终端信息
      * @param fid

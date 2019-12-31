@@ -1,6 +1,5 @@
 package com.ruoyi.iot.mapper;
 import com.ruoyi.iot.domain.Water;
-
 import java.util.List;
 public interface WaterMapper {
     /**
@@ -15,14 +14,12 @@ public interface WaterMapper {
      * @param wid
      */
     int deleteWaterByids(String[] wid);
-
     /**
      * 添加水质信息
      * @param water
      * @return
      */
     int insertWater(Water water);
-
     /**
      * 根据wid选择数据
      * @param wid
@@ -36,7 +33,6 @@ public interface WaterMapper {
      * @return
      */
     int updateWater(Water water);
-
     /**
      * 删除水质信息
      * @param wid

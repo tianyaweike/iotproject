@@ -8,14 +8,14 @@
         <result property="monitortime"    column="monitortime"    />
         <result property="location"    column="location"    />
         <result property="Hmental"    column="Hmental"    />
-        <result property="PH"    column="PH"    />
+        <result property="ph"    column="ph"    />
         <result property="econdu"    column="econdu"    />
         <result property="updatetime" column="updatetime" />
     </resultMap>
 
     <!--定义selectBlowdown为查询整表命令-->
     <sql id="selectBlowdown">
-    select pid,monitortime,location,Hmental,PH,econdu from iot_blowdown
+    select pid,monitortime,location,Hmental,ph,econdu from iot_blowdown
 </sql>
     <!--统计表中记录数
     <select id="countall" resultType="Integer">
@@ -36,7 +36,7 @@
             <if test="pid != null and pid='' "> and pid = #{pid}</if>
             <if test="location != null  and location != '' "> and location = #{location}</if>
             <if test="Hmental != null  and Hmental != '' "> and Hmental = #{Hmental}</if>
-            <if test="PH != null  and PH != '' "> and PH = #{PH}</if>
+            <if test="ph != null  and ph != '' "> and ph = #{ph}</if>
             <if test="econdu != null  and econdu != '' "> and econdu = #{econdu}</if>
         </where>
         order by pid desc
@@ -51,7 +51,7 @@
          a.pid as pid,
          a.location as location,
          a.Hmental as Hmental,
-         a.PH as PH,
+         a.ph as ph,
          a.econdu as econdu
          from iot_led a
          -->
@@ -69,14 +69,14 @@
         <if test="pid != null and pid!='' ">pid,</if>
         <if test="location != null  and location != ''  ">location,</if>
         <if test="Hmental != null  and Hmental != ''  ">Hmental,</if>
-        <if test="PH != null  and PH != ''  ">PH,</if>
+        <if test="ph != null  and ph != ''  ">ph,</if>
         <if test="econdu != null  and econdu != ''  ">econdu,</if>
         </trim>
         <trim prefix="values(" suffix=")" suffixOverrides=",">
         <if test="pid != null and pid!='' ">#{pid},</if>
         <if test="location != null  and location != ''  ">#{location},</if>
         <if test="Hmental != null  and Hmental != ''  ">#{Hmental},</if>
-        <if test="PH != null  and PH != ''  ">#{PH},</if>
+        <if test="ph != null  and ph != ''  ">#{ph},</if>
         <if test="econdu != null  and econdu != ''  ">#{econdu},</if>
         </trim>
     </insert>
@@ -87,7 +87,7 @@
             <if test="pid !=null and pid !=''">pid = #{pid},</if>
             <if test="location != null  and location != ''  ">location = #{location},</if>
             <if test="Hmental != null  and Hmental != ''  ">Hmental = #{Hmental},</if>
-            <if test="PH != null  and PH != ''  ">PH = #{PH},</if>
+            <if test="ph != null  and ph != ''  ">ph = #{ph},</if>
             <if test="econdu != null  and econdu != ''  ">econdu = #{econdu},</if>
             updatetime= sysdate()
         </set>

@@ -9,10 +9,12 @@
         <result property="windspeed"    column="windspeed"    />
         <result property="current"    column="current"  />
         <result property="voltage"    column="voltage"    />
+        <result property="tstart"    column="tstart"    />
+        <result property="tdown"    column="tdown"    />
     </resultMap>
     <!--定义selectLight为查询整表命令-->
     <sql id="selectLight">
-    select nid,atemperature,windspeed,current,voltage from iot_light
+    select nid,atemperature,windspeed,current,voltage,tstart,tdown from iot_light
     </sql>
     <!--查询表的所有列表信息-->
     <select id="selectLightList" parameterType="Light" resultMap="LightResult">
@@ -73,6 +75,8 @@
         <if test="windspeed != null  and windspeed != ''  ">windspeed,</if>
         <if test="current != null  and current != ''  ">current,</if>
         <if test="voltage != null  and voltage != ''  ">voltage,</if>
+        <if test="tstart != null  and tstart != ''  ">tstart,</if>
+        <if test="tdown != null  and tdown != ''  ">tdown,</if>
         </trim>
         values<trim prefix="(" suffix=")" suffixOverrides=",">
         <if test="nid != null and nid!='' ">#{nid},</if>
@@ -80,6 +84,8 @@
         <if test="windspeed != null  and windspeed != ''  ">#{windspeed},</if>
         <if test="current != null  and current != ''  ">#{current},</if>
         <if test="voltage != null  and voltage != ''  ">#{voltage},</if>
+        <if test="tstart != null  and tstart != ''  ">#{tstart},</if>
+        <if test="tdown != null  and tdown != ''  ">#{tdown},</if>
     </trim>
     </insert>
     <!--更新数据-->
@@ -91,6 +97,8 @@
             <if test="windspeed != null  and windspeed != ''  ">windspeed = #{windspeed},</if>
             <if test="current != null  and current != ''  ">current = #{current},</if>
             <if test="voltage != null  and voltage != ''  ">voltage = #{voltage},</if>
+            <if test="tstart != null  and tstart != ''  ">tstart = #{tstart},</if>
+            <if test="tdown != null  and tdown != ''  ">tdown = #{tdown},</if>
         </set>
         where nid = #{nid}
     </update>

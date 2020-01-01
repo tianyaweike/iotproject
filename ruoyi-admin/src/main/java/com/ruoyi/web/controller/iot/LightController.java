@@ -23,7 +23,7 @@ public class LightController extends BaseController {
     private String prefix = "iot/light";
 
     @Autowired
-    private LightService LightService;
+    private  LightService;
 
     @RequiresPermissions("iot:lightinfo:view")
     @GetMapping()

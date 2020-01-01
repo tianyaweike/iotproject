@@ -1,21 +1,24 @@
 package com.ruoyi.iot.domain;
 
+import com.ruoyi.common.annotation.Excels;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.base.BaseEntity;
 import java.util.Date;
+import com.ruoyi.common.annotation.Excel;
 public class Flood  extends BaseEntity{
     private static final long serialVersionUID = 1L;
+    @Excel(name="数据编号")
     private String id;
-
+    @Excel(name="数据类型")
     private String type;
-
+    @Excel(name="地域编号")
     private String rid;
-
+    @Excel(name="地域名称")
     private String rname;
-
+    @Excel(name="数据大小")
     private String data;
-
+    @Excel(name="采集日期时间")
     private String time;
 
     public String getId() {

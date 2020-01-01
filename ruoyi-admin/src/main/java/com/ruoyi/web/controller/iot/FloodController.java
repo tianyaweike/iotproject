@@ -122,4 +122,20 @@ public class FloodController extends BaseController {
         //System.out.println("*******"+id);
         return toAjax(FloodService.deleteFloodByids(ids));
     }
+
+
+
+    /**
+     * 导出终端运转列表
+     */
+    @Log(title = "Flood", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("iot:floodinfo:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(Flood flood)
+    {
+        List<Flood> list = FloodService.selectFloodList(flood);
+        ExcelUtil<Flood> util = new ExcelUtil<Flood>(Flood.class);
+        return util.exportExcel(list, "flood");
+    }
 }

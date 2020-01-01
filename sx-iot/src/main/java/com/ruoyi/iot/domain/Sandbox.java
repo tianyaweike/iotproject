@@ -1,30 +1,18 @@
 package com.ruoyi.iot.domain;
 import com.ruoyi.common.base.BaseEntity;
 import org.springframework.stereotype.Component;
-
+import com.ruoyi.common.annotation.Excel;
 import javax.persistence.Id;
-
+import com.ruoyi.common.annotation.Excel;
 public class Sandbox extends BaseEntity {
-
+    private static final long serialVersionUID = 1L;
+    @Excel(name="开关编号")
     private String switch_id;
-
+    @Excel(name="远程开关控制")
     private String control;
 
-    @Override
-    public String toString() {
-        return "Sandbox{" +
-                "switch_id='" + switch_id + '\'' +
-                ", control='" + control + '\'' +
-                '}';
-    }
-
-    public Sandbox(String switch_id, String control) {
-        this.switch_id = switch_id;
-        this.control = control;
-    }
-
-    public Sandbox() {
-        super();
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public String getSwitch_id() {
@@ -43,5 +31,11 @@ public class Sandbox extends BaseEntity {
         this.control = control;
     }
 
-
+    @Override
+    public String toString() {
+        return "Sandbox{" +
+                "switch_id='" + switch_id + '\'' +
+                ", control='" + control + '\'' +
+                "} " + super.toString();
+    }
 }

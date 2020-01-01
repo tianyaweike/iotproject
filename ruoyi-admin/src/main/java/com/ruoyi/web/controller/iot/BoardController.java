@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
+import com.ruoyi.common.utils.ExcelUtil;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -95,5 +95,20 @@ public class BoardController extends BaseController {
     {
        // System.out.println("*******"+board_id);
         return toAjax(BoardService.deleteBoardByids(ids));
+    }
+
+
+    /**
+     * 导出终端运转列表
+     */
+    @Log(title = "Board", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("iot:boardinfo:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(Board board)
+    {
+        List<Board> list = BoardService.selectBoardList(board);
+        ExcelUtil<Board> util = new ExcelUtil<Board>(Board.class);
+        return util.exportExcel(list, "board");
     }
 }

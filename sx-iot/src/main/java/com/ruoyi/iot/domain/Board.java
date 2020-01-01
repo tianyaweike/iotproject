@@ -3,13 +3,14 @@ package com.ruoyi.iot.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-
+import com.ruoyi.common.annotation.Excel;
 public class Board {
-
+    @Excel(name="广告牌编号")
     private String board_id;
-
+    @Excel(name="远程开关控制")
     private String control;
    // private Date gradtime;
+   @Excel(name="自动运行时间")
     private String working;
 
     @Override

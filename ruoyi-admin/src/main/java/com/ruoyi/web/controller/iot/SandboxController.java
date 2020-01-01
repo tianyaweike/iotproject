@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import com.ruoyi.common.utils.ExcelUtil;
+
 
 import java.util.List;
 @Controller
@@ -89,4 +91,19 @@ public class SandboxController extends BaseController {
           //  System.out.println("*******"+switch_id);
             return toAjax(SandboxService.deleteSandboxByids(ids));
         }
+
+
+    /**
+     * 导出终端运转列表
+     */
+    @Log(title = "Sandbox", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("iot:sandboxinfo:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(Sandbox sandbox)
+    {
+        List<Sandbox> list = SandboxService.selectSandboxList(sandbox);
+        ExcelUtil<Sandbox> util = new ExcelUtil<Sandbox>(Sandbox.class);
+        return util.exportExcel(list, "sandbox");
+    }
     }

@@ -1,11 +1,10 @@
 package com.ruoyi.iot.domain;
 
-import java.util.Date;
+import com.ruoyi.common.annotation.Excel;
 
 public class Soil {
 
     private String sid;
-
     private String type;
 
     private String area;
@@ -16,7 +15,7 @@ public class Soil {
 
     private String water;
 
-    private String salinity;
+    private String sailnity;
 
     private String organic;
 
@@ -33,11 +32,14 @@ public class Soil {
                 ", depth='" + depth + '\'' +
                 ", PH='" + PH + '\'' +
                 ", water='" + water + '\'' +
-                ", sailnity='" + salinity + '\'' +
+                ", sailnity='" + sailnity + '\'' +
                 ", organic='" + organic + '\'' +
                 ", creator='" + creator + '\'' +
                 ", creatime='" + creatime + '\'' +
                 '}';
+
+
+
     }
 
     public Soil(String sid, String type, String area, String depth, String PH, String water, String sailnity, String organic, String creator, String creatime) {
@@ -47,7 +49,7 @@ public class Soil {
         this.depth = depth;
         this.PH = PH;
         this.water = water;
-        this.salinity = sailnity;
+        this.sailnity = sailnity;
         this.organic = organic;
         this.creator = creator;
         this.creatime = creatime;
@@ -106,11 +108,11 @@ public class Soil {
     }
 
     public String getSailnity() {
-        return salinity;
+        return sailnity;
     }
 
     public void setSailnity(String sailnity) {
-        this.salinity = sailnity;
+        this.sailnity = sailnity;
     }
 
     public String getOrganic() {
@@ -129,9 +131,7 @@ public class Soil {
         this.creator = creator;
     }
 
-    public String getCreatime() {
-        return creatime;
-    }
+    public String getCreatime() { return creatime; }
 
     public void setCreatime(String creatime) {
         this.creatime = creatime;

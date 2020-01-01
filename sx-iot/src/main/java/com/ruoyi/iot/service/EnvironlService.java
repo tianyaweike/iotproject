@@ -13,18 +13,6 @@ public interface EnvironlService {
     public List<Environl> selectEnvironlList(Environl environl);
 
     /**
-     * 根据hid批量删除数据
-     *
-     */
-    public int deleteEnvironlByid(String hid);
-
-    /**
-     * 开始接收数据
-     *
-     */
-//    public int receive(String s);
-
-    /**
      * 添加环境公告数据
      *
      */
@@ -33,7 +21,7 @@ public interface EnvironlService {
      * 根据hid选择数据
      *
      */
-    public Environl selectByhid(String hid);
+    public Environl selectByid(String hid);
     /**
      * 保存用户修改
      *
@@ -43,5 +31,12 @@ public interface EnvironlService {
      * 删除环境信息
      *
      */
-    public int deleteEnvironlByids(String hid);
+    public int deleteEnvironlByid(String hid);
+
+    /**
+     * 根据hid批量删除数据
+     *
+     */
+    public int deleteEnvironlByids(String ids);
+
 }

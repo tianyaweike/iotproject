@@ -25,7 +25,7 @@ public interface LightMapper {
      * @param nid
      * @return
      */
-    Light selectLightByid(String nid);
+    Light selectByid(String nid);
 
     /**
      * 保存用户修改

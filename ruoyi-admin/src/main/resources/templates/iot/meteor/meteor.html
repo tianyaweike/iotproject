@@ -15,7 +15,7 @@
                             编号：<input type="text" name="weather_id"/>
                         </li>
                         <li>
-                            监测时间：<input type="time" name="monitortime"/>
+                            监测时间：<input type="datetime-local" name="monitortime"/>
                         </li>
                         <li>
                             监测地点：<input type="text" name="location"/>
@@ -30,7 +30,7 @@
                             降雨量：<input type="text" name="raincapacity"/>
                         </li>
                         <li>
-                            温度：<input type="text" name="temprature"/>
+                            温度：<input type="text" name="temperature"/>
                         </li>
                         <li>
                             湿度：<input type="text" name="humidity"/>
@@ -39,7 +39,7 @@
                             空气质量等级：<input type="text" name="airlevel"/>
                         </li>
                         <li>
-                            更新时间：<input type="time" name="updatetime"/>
+                            更新时间：<input type="datetime-local" name="updatetime"/>
                         </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -83,7 +83,7 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-            sortName: "meteorSort",
+          //  sortName: "meteorSort",
             modalName: "气象监测",
             search: false,
             showExport: false,
@@ -120,7 +120,7 @@
                     sortable: true
                 },
                 {
-                    field: 'temprature',
+                    field: 'temperature',
                     title: '温度',
                     sortable: true
                 },

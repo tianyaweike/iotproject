@@ -44,12 +44,12 @@ public class LEDServiceImpl implements ILEDService {
         return LEDMapper.selectLedById(led_id);
     }
 
-   @Override
+   /*@Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public void openled()
+    public List<LED> selectLedAll()
     {
-        //return LEDMapper.openled();
-    }
+        return LEDMapper.selectLedAll();
+    }*/
 
 
 
@@ -108,7 +108,7 @@ public class LEDServiceImpl implements ILEDService {
     /**
      * 删除终端运转对象
      *
-     * @param led_ids 需要删除的数据ID
+     * @param ids 需要删除的数据ID
      * @return 结果
      */
    @Override

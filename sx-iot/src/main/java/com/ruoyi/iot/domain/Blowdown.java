@@ -7,8 +7,8 @@ public class Blowdown {
     private String monitortime;
 
     private String location;
-    private String Hmental;
-    private String PH;
+    private String hmental;
+    private String ph;
     private String econdu;
     private String updatetime;
     @Override
@@ -17,69 +17,69 @@ public class Blowdown {
                 "pid='" + pid + '\'' +
                 ", monitortime='" + monitortime + '\'' +
                 ", location='" + location + '\'' +
-                ", Hmental='" + Hmental + '\'' +
-                ", PH='" + PH + '\'' +
+                ", hmental='" + hmental + '\'' +
+                ", ph='" + ph + '\'' +
                 ", econdu='" + econdu + '\'' +
                 ", updatetime='" + updatetime + '\'' +
                 '}';
     }
 
-    public Blowdown(String pid, String monitortime, String location, String hmental, String PH, String econdu, String updatetime) {
-        this.pid = pid;
-        this.monitortime = monitortime;
-        this.location = location;
-        Hmental = hmental;
-        this.PH = PH;
-        this.econdu = econdu;
-        this.updatetime = updatetime;
-    }
+    public Blowdown(String pid, String monitortime, String location, String hmental, String ph, String econdu, String updatetime) {
+            this.pid = pid;
+            this.monitortime = monitortime;
+            this.location = location;
+            this.hmental = hmental;
+            this.ph = ph;
+            this.econdu = econdu;
+            this.updatetime = updatetime;
+        }
     public Blowdown() {
-        super();
-    }
+            super();
+        }
 
-    public String getPid() {
-        return pid;
-    }
+            public String getpid() {
+                return pid;
+            }
 
 
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
+                public void setpid(String pid) {
+                    this.pid = pid;
+                }
 
-    public String getMonitortime() {
-        return monitortime;
-    }
-    public void setMonitortime(String monitortime) {
-        this.monitortime = monitortime;
-    }
-    public String getLocation() {
-        return location;
-    }
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    public String getHmental() {
-        return Hmental;
-    }
-    public void setHmental(String hmental) {
-        Hmental = hmental;
-    }
-    public String getPH() {
-        return PH;
-    }
-    public void setPH(String PH) {
-        this.PH = PH;
-    }
-    public String getEcondu() {
-        return econdu;
-    }
-    public void setEcondu(String econdu) {
-        this.econdu = econdu;
-    }
-    public String getUpdatetime() {
-        return updatetime;
-    }
-    public void setUpdatetime(String updatetime) {
-        this.updatetime = updatetime;
-    }
-}
+                public String getmonitortime() {
+                    return monitortime;
+                }
+                public void setmonitortime(String monitortime) {
+                    this.monitortime = monitortime;
+                }
+                public String getLocation() {
+                    return location;
+                }
+                public void setLocation(String location) {
+                    this.location = location;
+                }
+                public String gethmental() {
+                    return hmental;
+                }
+                public void sethmental(String hmental) {
+                    this.hmental = hmental;
+                }
+                public String getph() {
+                    return ph;
+                }
+                public void setph(String ph) {
+                    this.ph = ph;
+                }
+                public String getecondu() {
+                    return econdu;
+                }
+                public void setecondu(String econdu) {
+                    this.econdu = econdu;
+                }
+                public String getupdatetime() {
+                    return updatetime;
+                }
+                public void setupdatetime(String updatetime) {
+                    this.updatetime = updatetime;
+                }
+            }

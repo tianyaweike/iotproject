@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org"
-      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:s="http://java.sun.com/jsf/composite">
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
@@ -18,16 +18,16 @@
                             型号：<input type="text" name="tid"/>
                         </li>
                         <li>
-                            水泵电流：<input type="text" name="PCurent"/>
+                            水泵电流：<input type="text" name="pcurrent"/>
                         </li>
                         <li>
-                            水泵电压：<input type="text" name="PVoltage"/>
+                            水泵电压：<input type="text" name="pvoltage"/>
                         </li>
                         <li>
-                            水位高度：<input type="text" name="WLHeight"/>
+                            水位高度：<input type="text" name="wlheight"/>
                         </li>
                         <li>
-                            水位压力：<input type="text" name="WLPressure"/>
+                            水位压力：<input type="text" name="wlpressure"/>
                         </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -74,7 +74,7 @@
             sortName: "id",
             modalName: "水泵管理",
             search: false,
-            showExport: false,
+            showExport: true,
             columns: [{
                 checkbox: true
             },
@@ -88,22 +88,22 @@
                     sortable: true
                 },
                 {
-                    field: 'PCurrent',
+                    field: 'pcurrent',
                     title: '水泵电流',
                     sortable: true
                 },
                 {
-                    field: 'PVoltage',
+                    field: 'pvoltage',
                     title: '水泵电压',
                     sortable: true
                 },
                 {
-                    field: 'WLHeight',
+                    field: 'wlheight',
                     title: '水位高度',
                     sortable: true
                 },
                 {
-                    field: 'WLPressure',
+                    field: 'wlpressure',
                     title: '水位压力',
                     sortable: true
                 },

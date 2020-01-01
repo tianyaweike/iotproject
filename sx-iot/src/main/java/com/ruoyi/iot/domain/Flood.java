@@ -1,65 +1,83 @@
 package com.ruoyi.iot.domain;
 
-public class Flood {
+import com.ruoyi.common.annotation.Excels;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import com.ruoyi.common.base.BaseEntity;
+import java.util.Date;
+import com.ruoyi.common.annotation.Excel;
+public class Flood  extends BaseEntity{
+    private static final long serialVersionUID = 1L;
+    @Excel(name="数据编号")
+    private String id;
+    @Excel(name="数据类型")
+    private String type;
+    @Excel(name="地域编号")
+    private String rid;
+    @Excel(name="地域名称")
+    private String rname;
+    @Excel(name="数据大小")
+    private String data;
+    @Excel(name="采集日期时间")
+    private String time;
 
-    private String place_id;
+    public String getId() {
+        return id;
+    }
 
-    private String stage;
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    private String display;
+    public String getType() {
+        return type;
+    }
 
-    private String rainfall;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getRid() {
+        return rid;
+    }
+
+    public void setRid(String rid) {
+        this.rid = rid;
+    }
+
+    public String getRname() {
+        return rname;
+    }
+
+    public void setRname(String rname) {
+        this.rname = rname;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     @Override
     public String toString() {
         return "Flood{" +
-                "place_id='" + place_id + '\'' +
-                ", stage='" + stage + '\'' +
-                ", display='" + display + '\'' +
-                ", rainfall='" + rainfall + '\'' +
-                '}';
-    }
-
-    public Flood(String place_id, String stage, String display, String rainfall) {
-        this.place_id = place_id;
-        this.stage = stage;
-        this.display = display;
-        this.rainfall = rainfall;
-    }
-
-    public Flood() {
-        super();
-    }
-
-    public String getPlace_id() {
-        return place_id;
-    }
-
-    public void setPlace_id(String place_id) {
-        this.place_id = place_id;
-    }
-
-    public String getStage() {
-        return stage;
-    }
-
-    public void setStage(String stage) {
-        this.stage = stage;
-    }
-
-    public String getDisplay() {
-        return display;
-    }
-
-    public void setDisplay(String display) {
-        this.display = display;
-    }
-
-    public String getRainfall() {
-        return rainfall;
-    }
-
-    public void setRainfall(String rainfall) {
-        this.rainfall = rainfall;
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", rid='" + rid + '\'' +
+                ", rname='" + rname + '\'' +
+                ", data='" + data + '\'' +
+                ", time='" + time + '\'' +
+                "} " + super.toString();
     }
 }

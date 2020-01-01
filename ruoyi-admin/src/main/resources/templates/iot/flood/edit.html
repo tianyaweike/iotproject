@@ -5,23 +5,35 @@
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
     <form class="form-horizontal m" id="form-flood-edit" th:object="${flood}">
-        <input id="place_id" name="place_id" type="hidden" th:field="*{place_id}"/>
+        <input id="id" name="id" type="hidden" th:field="*{id}"/>
         <div class="form-group">
-            <label class="col-sm-3 control-label ">水位：</label>
+            <label class="col-sm-3 control-label ">数据类型：</label>
             <div class="col-sm-8">
-                <input class="form-control" type="text" name="stage" id="stage" th:field="*{stage}"/>
+                <input class="form-control" type="text" name="type" id="type" th:field="*{type}"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">图形显示：</label>
+            <label class="col-sm-3 control-label">地域编号：</label>
             <div class="col-sm-8">
-                <input class="form-control" type="text" name="display" id="display" th:field="*{display}">
+                <input class="form-control" type="text" name="rid" id="rid" th:field="*{rid}">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">雨量：</label>
+            <label class="col-sm-3 control-label">地域名称：</label>
             <div class="col-sm-8">
-                <input class="form-control" type="text" name="rainfall" id="rainfall" th:field="*{rainfall}">
+                <input class="form-control" type="text" name="rname" id="rname" th:field="*{rname}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">数据大小：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="data" id="data" th:field="*{data}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">采集日期时间：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="time" id="time" th:field="*{time}">
             </div>
         </div>
 

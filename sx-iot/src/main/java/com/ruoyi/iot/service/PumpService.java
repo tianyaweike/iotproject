@@ -20,7 +20,7 @@ public interface PumpService {
      * 根据id批量删除数据
      * @param id
      */
-    public int deletePumpByids(String[] id);
+    public int deletePumpByids(String id);
 
     /**
      * 添加水泵公告数据

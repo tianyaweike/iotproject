@@ -31,82 +31,82 @@ public class Meteor {
     }
 
     public Meteor(String weather_id, String monitortime, String location, String windpower, String winderaction, String raincapacity, String temperature, String humidity, String airlevel, String updatetime) {
-        this.weather_id = weather_id;
-        this.monitortime = monitortime;
-        this.location = location;
-        this.windpower = windpower;
-        this.winderaction = winderaction;
-        this.raincapacity = raincapacity;
-        this.temperature = temperature;
-        this.humidity = humidity;
-        this.airlevel = airlevel;
-        this.updatetime = updatetime;
-    }
+            this.weather_id = weather_id;
+            this.monitortime = monitortime;
+            this.location = location;
+            this.windpower = windpower;
+            this.winderaction = winderaction;
+            this.raincapacity = raincapacity;
+            this.temperature = temperature;
+            this.humidity = humidity;
+            this.airlevel = airlevel;
+            this.updatetime = updatetime;
+        }
     public Meteor() {
-        super();
-    }
+            super();
+        }
 
-    public String getWeather_id() {
-        return weather_id;
-    }
+            public String getWeather_id() {
+                return weather_id;
+            }
 
 
-    public void setWeather_id(String weather_id) {
-        this.weather_id = weather_id;
-    }
+                public void setWeather_id(String weather_id) {
+                    this.weather_id = weather_id;
+                }
 
-    public String getMonitortime() {
-        return monitortime;
-    }
-    public void setMonitortime(String monitortime) {
-        this.monitortime = monitortime;
-    }
-    public String getLocation() {
-        return location;
-    }
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    public String getWindpower() {
-        return windpower;
-    }
-    public void setWindpower(String windpower) {
-        this.windpower = windpower;
-    }
-    public String getWinderaction() {
-        return winderaction;
-    }
-    public void setWinderaction(String winderaction) {
-        this.winderaction = winderaction;
-    }
-    public String getRaincapacity() {
-        return raincapacity;
-    }
-    public void setRaincapacity(String raincapacity) {
-        this.raincapacity = raincapacity;
-    }
-    public String gettemperature() {
-        return temperature;
-    }
-    public void settemperature(String temperature) {
-        this.temperature = temperature;
-    }
-    public String getHumidity() {
-        return humidity;
-    }
-    public void setHumidity(String humidity) {
-        this.humidity = humidity;
-    }
-    public String getAirlevel() {
-        return airlevel;
-    }
-    public void setAirlevel(String airlevel) {
-        this.airlevel = airlevel;
-    }
-    public String getUpdatetime() {
-        return updatetime;
-    }
-    public void setUpdatetime(String updatetime) {
-        this.updatetime = updatetime;
-    }
-}
+                public String getmonitortime() {
+                    return monitortime;
+                }
+                public void setmonitortime(String monitortime) {
+                    this.monitortime = monitortime;
+                }
+                public String getLocation() {
+                    return location;
+                }
+                public void setLocation(String location) {
+                    this.location = location;
+                }
+                public String getWindpower() {
+                    return windpower;
+                }
+                public void setWindpower(String windpower) {
+                    this.windpower = windpower;
+                }
+                public String getWinderaction() {
+                    return winderaction;
+                }
+                public void setWinderaction(String winderaction) {
+                    this.winderaction = winderaction;
+                }
+                public String getRaincapacity() {
+                    return raincapacity;
+                }
+                public void setRaincapacity(String raincapacity) {
+                    this.raincapacity = raincapacity;
+                }
+                public String gettemperature() {
+                    return temperature;
+                }
+                public void settemperature(String temperature) {
+                    this.temperature = temperature;
+                }
+                public String getHumidity() {
+                    return humidity;
+                }
+                public void setHumidity(String humidity) {
+                    this.humidity = humidity;
+                }
+                public String getAirlevel() {
+                    return airlevel;
+                }
+                public void setAirlevel(String airlevel) {
+                    this.airlevel = airlevel;
+                }
+                public String getupdatetime() {
+                    return updatetime;
+                }
+                public void setupdatetime(String updatetime) {
+                    this.updatetime = updatetime;
+                }
+            }

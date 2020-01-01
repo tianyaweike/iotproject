@@ -22,16 +22,14 @@
     <!--查询表的所有列表信息-->
     <select id="selectBoardList" parameterType="Board" resultMap="BoardResult">
         <include refid="selectBoard"/>
-        <!--<where>
-            <if test="board_id != null and board_id='' "> and board_id = #{board_id}</if>
-            <if test="control!= null  and control!= '' "> and control= #{control}</if>
-            <if test="working != null  and working != '' "> and working = #{working}</if>
-            <if test="screen_wide != null  and screen_wide != '' "> and screen_wide = #{screen_wide}</if>
-            <if test="screen_high != null  and screen_high != '' "> and screen_high = #{screen_high}</if>
-            <if test="screen_status != null  and screen_status != '' "> and screen_status = #{screen_status}</if>
-        </where>
-        order by board_id desc
-        -->
+         <where>
+           <if test="board_id != null and board_id !='' ">AND  board_id  like concat('%' ,#{board_id },'%')</if>
+           <if test="control!= null  and control!= '' ">AND  control like concat('%' ,#{control},'%')</if>
+           <if test="working != null  and working != '' ">AND  working like concat('%' ,#{working},'%')</if>
+      </where>
+      <!--
+  order by board_id desc
+  -->
     </select>
 
     <!--根据id查询信息-->
@@ -58,14 +56,14 @@
     <insert id="insertBoard" parameterType="Board">
         insert into iot_board
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="board_id != null and board_id!='' ">board_id,</if>
-            <if test="control!= null  and control!= ''  ">control,</if>
-            <if test="working != null  and working != ''  ">working,</if>
+        <if test="board_id != null and board_id!='' ">board_id,</if>
+        <if test="control!= null  and control!= ''  ">control,</if>
+        <if test="working != null  and working != ''  ">working,</if>
         </trim>
         <trim prefix="values(" suffix=")" suffixOverrides=",">
-            <if test="board_id != null and board_id!='' ">#{board_id},</if>
-            <if test="control != null  and control != ''  ">#{control},</if>
-            <if test="working != null  and working != ''  ">#{working},</if>
+        <if test="board_id != null and board_id!='' ">#{board_id},</if>
+        <if test="control != null  and control != ''  ">#{control},</if>
+        <if test="working != null  and working != ''  ">#{working},</if>
         </trim>
     </insert>
     <!--更新数据-->

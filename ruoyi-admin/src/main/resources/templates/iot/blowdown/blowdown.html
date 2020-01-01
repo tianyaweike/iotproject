@@ -15,22 +15,22 @@
                             编号：<input type="text" name="pid"/>
                         </li>
                         <li>
-                            监测时间：<input type="time" name="monitortime"/>
+                            监测时间：<input type="datetime-local" name="monitortime"/>
                         </li>
                         <li>
                             监测地点：<input type="text" name="location"/>
                         </li>
                         <li>
-                            重金属含量：<input type="text" name="Hmental"/>
+                            重金属含量：<input type="text" name="hmental"/>
                         </li>
                         <li>
-                            PH值：<input type="text" name="PH"/>
+                            PH值：<input type="text" name="ph"/>
                         </li>
                         <li>
                             电导率：<input type="text" name="econdu"/>
                         </li>
                         <li>
-                            更新时间：<input type="time" name="updatetime"/>
+                            更新时间：<input type="datetime-local" name="updatetime"/>
                         </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -74,7 +74,7 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-            // sortName: "blowdownSort",
+           // sortName: "blowdownSort",
             modalName: "排污监测",
             search: false,
             showExport: false,
@@ -96,12 +96,12 @@
                     sortable: true
                 },
                 {
-                    field: 'Hmental',
+                    field: 'hmental',
                     title: '重金属含量',
                     sortable: true
                 },
                 {
-                    field: 'PH',
+                    field: 'ph',
                     title: 'PH值',
                     sortable: true
                 },

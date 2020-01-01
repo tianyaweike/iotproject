@@ -39,8 +39,8 @@ public class EnergyServiceImpl implements EnergyService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteEnergyByids(String[] eid) {
-        return energyMapper.deleteEnergyByids(eid);
+    public int deleteEnergyByids(String eid) {
+        return energyMapper.deleteEnergyByids(Convert.toStrArray(eid));
     }
 
     /**
@@ -61,9 +61,15 @@ public class EnergyServiceImpl implements EnergyService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public Energy selectByid(String eid) {
+    public Energy selectByeid(String eid) {
         return energyMapper.selectByid(eid);
     }
+
+    /**@Override
+    @DataSource(value = DataSourceType.SXINFOM)
+    public Energy selectBybvo(String bvoltage) {
+        return energyMapper.selectBybvo(bvoltage);
+    }*/
 
     /**
      * 删除能源管理信息

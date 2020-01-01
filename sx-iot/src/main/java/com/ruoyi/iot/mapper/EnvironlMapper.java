@@ -7,41 +7,35 @@ public interface EnvironlMapper {
      *
      * @return
      */
-    List<Environl> selectEnvironlList(Environl environl);
-    /**
-     * 开始接收数据
-     * @param hid
-     */
-//    int receive(String s);
-    /**
-     * 根据hid批量删除数据
-     * @param hid
-     */
-    int deleteEnvironlByids(String hid);
-
+    public List<Environl> selectEnvironlList(Environl environl);
     /**
      * 添加环境终端检测信息
      * @param environl
      * @return
      */
-    int insertEnvironl(Environl environl);
+    public int insertEnvironl(Environl environl);
     /**
      * 根据hid选择数据
      * @param hid
      * @return
      */
-    Environl selectByhid(String hid);
+    public Environl selectByid(String hid);
 
     /**
      * 保存用户修改
      * @param environl
      * @return
      */
-    int updateEnvironl(Environl environl);
+    public int updateEnvironl(Environl environl);
     /**
      * 删除环境终端检测信息
      * @param hid
      * @return
      */
-    int deleteEnvironlByid(String hid);
+    public int deleteEnvironlByid(String hid);
+    /**
+     * 根据hid批量删除数据
+     * @param hids
+     */
+    public int deleteEnvironlByids(String[] hids);
 }

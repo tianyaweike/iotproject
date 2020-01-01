@@ -1,15 +1,17 @@
 package com.ruoyi.iot.domain;
 
+import com.ruoyi.common.annotation.Excel;
+
 public class Broad {
-
+    @Excel(name="广播编号")
     private String broad_id;
-
+    @Excel(name="设备地址")
     private String address;
-
+    @Excel(name="运行状态",readConverterExp = "0=停用,1=正常")
     private String statue;
-
+    @Excel(name="运行时间")
     private String runtime;
-
+    @Excel(name="广播状态")
     private String details;
 
     @Override

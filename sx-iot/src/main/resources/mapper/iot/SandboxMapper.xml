@@ -20,14 +20,13 @@
     -->
     <!--查询表的所有列表信息-->
     <select id="selectSandboxList" parameterType="Sandbox" resultMap="SandboxResult">
-        <include refid="selectSandbox"/>  order by switch_id desc
+        <include refid="selectSandbox"/>
+        <where>
+            <if test="switch_id != null and switch_id !='' "> AND  switch_id like concat('%' ,#{switch_id},'%')</if>
+            <if test="control!= null  and control!= '' ">AND  control like concat('%' ,#{control},'%')</if>
+        </where>
     </select>
-    <!--<where>
-        <if test="switch_id != null and switch_id='' "> and switch_id = #{switch_id}</if>
-        <if test="control!= null  and control!= '' "> and control= #{control}</if>
-    </where>
-    order by switch_id desc
-    -->
+
 
 
     <!--根据id查询信息-->
@@ -54,12 +53,12 @@
     <insert id="insertSandbox" parameterType="com.ruoyi.iot.domain.Sandbox">
         insert into iot_sandbox
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="switch_id != null and switch_id!='' ">switch_id,</if>
-            <if test="control!= null  and control!= ''  ">control,</if>
+        <if test="switch_id != null and switch_id!='' ">switch_id,</if>
+        <if test="control!= null  and control!= ''  ">control,</if>
         </trim>
         <trim prefix="values(" suffix=")" suffixOverrides=",">
-            <if test="switch_id != null and switch_id!='' ">#{switch_id},</if>
-            <if test="control != null  and control != ''  ">#{control},</if>
+        <if test="switch_id != null and switch_id!='' ">#{switch_id},</if>
+        <if test="control != null  and control != ''  ">#{control},</if>
         </trim>
     </insert>
     <!--更新数据-->

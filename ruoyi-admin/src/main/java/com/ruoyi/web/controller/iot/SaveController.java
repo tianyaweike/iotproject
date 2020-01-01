@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
+import com.ruoyi.common.utils.ExcelUtil;
 import java.util.List;
 
 @Controller
@@ -59,6 +59,20 @@ public class SaveController extends BaseController {
     public AjaxResult addSave(Save Save)
     {
         return toAjax(saveService.insertSave(Save));
+    }
+
+    /**
+     * 导出终端运转列表
+     */
+    @Log(title = "Save", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("iot:saveinfo:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(Save save)
+    {
+        List<Save> list = saveService.selectSaveList(save);
+        ExcelUtil<Save> util = new ExcelUtil<Save>(Save.class);
+        return util.exportExcel(list, "save");
     }
     /**
      * 修改Save信息

@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.page.TableDataInfo;
+import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.iot.domain.Light;
 import com.ruoyi.iot.service.LightService;
@@ -29,7 +30,19 @@ public class LightController extends BaseController {
     public String Light(){
         return prefix+"/light";
     }
-
+    /**
+     * 导出终端运转列表
+     */
+    @Log(title = "Light", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("iot:lightinfo:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(Light light)
+    {
+        List<Light> list = LightService.selectLightList(light);
+        ExcelUtil<Light> util = new ExcelUtil<Light>(Light.class);
+        return util.exportExcel(list, "light");
+    }
     /**
      * Light列表
      * @param light
@@ -89,7 +102,7 @@ public class LightController extends BaseController {
 
     @PostMapping( "/remove")
     @ResponseBody
-    public AjaxResult remove( String[] ids)
+    public AjaxResult remove( String ids)
     {
         System.out.println("*******"+ids);
         return toAjax(LightService.deleteLightByids(ids));

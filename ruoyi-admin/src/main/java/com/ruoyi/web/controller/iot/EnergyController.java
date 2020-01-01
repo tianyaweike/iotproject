@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.page.TableDataInfo;
+import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.iot.domain.Energy;
 import com.ruoyi.iot.service.EnergyService;
@@ -28,6 +29,20 @@ public class EnergyController extends BaseController {
     @GetMapping()
     public String Energy(){
         return prefix+"/energy";
+    }
+
+    /**
+     * 导出终端运转列表
+     */
+    @Log(title = "Energy", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("iot:energyinfo:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(Energy energy)
+    {
+        List<Energy> list = EnergyService.selectEnergyList(energy);
+        ExcelUtil<Energy> util = new ExcelUtil<Energy>(Energy.class);
+        return util.exportExcel(list, "energy");
     }
 
     /**
@@ -66,7 +81,7 @@ public class EnergyController extends BaseController {
     @GetMapping("/edit/{eid}")
     public String edit(@PathVariable("eid") String eid, ModelMap mmap)
     {
-        Energy energy = EnergyService.selectByid(eid);
+        Energy energy = EnergyService.selectByeid(eid);
         mmap.put("energy", energy);
         return prefix + "/edit";
     }
@@ -89,9 +104,9 @@ public class EnergyController extends BaseController {
 
     @PostMapping( "/remove")
     @ResponseBody
-    public AjaxResult remove( String[] ids)
+    public AjaxResult remove( String ids)
     {
-        System.out.println("*******"+ids);
+        //System.out.println("*******"+ids);
         return toAjax(EnergyService.deleteEnergyByids(ids));
     }
 }

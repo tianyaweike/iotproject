@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.page.TableDataInfo;
+import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.iot.domain.Pump;
 import com.ruoyi.iot.service.PumpService;
@@ -70,6 +71,20 @@ public class PumpController extends BaseController {
         mmap.put("pump", pump);
         return prefix + "/edit";
     }
+
+    /**
+     * 导出终端运转列表
+     */
+    @Log(title = "Pump", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("iot:pumpinfo:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(Pump pump)
+    {
+        List<Pump> list = PumpService.selectPumpList(pump);
+        ExcelUtil<Pump> util = new ExcelUtil<Pump>(Pump.class);
+        return util.exportExcel(list, "pump");
+    }
     /**
      * 修改保存Pump信息
      */
@@ -89,7 +104,7 @@ public class PumpController extends BaseController {
 
     @PostMapping( "/remove")
     @ResponseBody
-    public AjaxResult remove( String[] ids)
+    public AjaxResult remove( String ids)
     {
         System.out.println("*******"+ids);
         return toAjax(PumpService.deletePumpByids(ids));

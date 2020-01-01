@@ -30,6 +30,43 @@
     <!--查询表的所有列表信息-->
     <select id="selectEnergyList" parameterType="Energy" resultMap="EnergyResult">
         <include refid="selectEnergy"/>
+        <where>
+            <if test="eid != null and eid !='' ">
+                AND eid like concat('%', #{eid},'%')
+            </if>
+            <if test="bvoltage !=null and bvoltage !='' ">
+                AND bvoltage like concat('%', #{bvoltage},'%')
+            </if>
+            <if test="bpvoltage !=null and bpvoltage !='' ">
+                AND bpvoltage like concat('%', #{bpvoltage},'%')
+            </if>
+            <if test="ccurrent !=null and ccurrent !='' ">
+                AND ccurrent like concat('%', #{ccurrent},'%')
+            </if>
+            <if test="lcurrent !=null and lcurrent !='' ">
+                AND lcurrent like concat('%', #{lcurrent},'%')
+            </if>
+            <if test="ovoltage !=null and ovoltage !='' ">
+                AND ovoltage like concat('%', #{ovoltage},'%')
+            </if>
+            <if test="epsvoltage !=null and epsvoltage !='' ">
+                AND epsvoltage like concat('%', #{epsvoltage},'%')
+            </if>
+            <if test="svoltage !=null and svoltage !='' ">
+                AND svoltage like concat('%', #{svoltage},'%')
+            </if>
+            <if test="workingtemperature !=null and workingtemperature !='' ">
+                AND workingtemperature like concat('%', #{workingtemperature},'%')
+            </if>
+            <if test="cstate !=null and cstate !='' ">
+                AND cstate like concat('%', #{cstate},'%')
+            </if>
+            <if test="workingstatu !=null and workingstatu !='' ">
+                AND workingstatu like concat('%', #{workingstatu},'%')
+            </if>
+
+        </where>
+    </select>
         <!--<where>
             <if test="eid != null and eid='' "> and eid = #{eid}</if>
             <if test="bvoltage!= null  and bvoltage!= '' "> and bvoltage= #{bvoltage}</if>
@@ -45,12 +82,24 @@
         </where>
         order by eid desc
         -->
-    </select>
+
 
     <!--根据id查询信息-->
+
     <select id="selectByid" parameterType="String" resultMap="EnergyResult">
         <include refid="selectEnergy"/>
-        where eid=#{eid}
+        <where>
+            eid = #{eid}
+        </where>
+    </select>
+
+    <!--<select id="selectBybvo" parameterType="String" resultMap="EnergyResult">
+        <include refid="selectEnergy"/>
+        <where>
+            bvoltage=#{bvoltage}
+        </where>
+    </select>
+    -->
         <!-- select
          a.eid as eid,
          a.bvoltage as bvoltage,
@@ -66,54 +115,54 @@
             <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
         </where>
         -->
-    </select>
+
     <!--向表中插入新数据-->
     <insert id="insertEnergy" parameterType="Energy">
         insert into iot_energy
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="eid != null and eid!='' ">eid,</if>
-            <if test="bvoltage!= null  and bvoltage!= ''  ">bvoltage,</if>
-            <if test="bpvoltage != null  and bpvoltage != ''  ">bpvoltage,</if>
-            <if test="ccurrent != null  and ccurrent != ''  ">ccurrent,</if>
-            <if test="lcurrent != null  and lcurrent != ''  ">lcurrent,</if>
-            <if test="ovoltage != null  and ovoltage != ''  ">ovoltage,</if>
-            <if test="epsvoltage != null and epsvoltage !='' ">epsvoltage,</if>
-            <if test="svoltage != null and svoltage != '' ">svoltage,</if>
-            <if test="workingtemperature != null and workingtemperature !='' ">workingtemperature,</if>
-            <if test="cstate !=null and cstate !=''">cstate,</if>
-            <if test="workingstatu !=null and workingstatu !='' ">workingstatu,</if>
+        <if test="eid != null and eid !='' ">eid,</if>
+        <if test="bvoltage!= null  and bvoltage!= ''  ">bvoltage,</if>
+        <if test="bpvoltage != null  and bpvoltage != ''  ">bpvoltage,</if>
+        <if test="ccurrent != null  and ccurrent != ''  ">ccurrent,</if>
+        <if test="lcurrent != null  and lcurrent != ''  ">lcurrent,</if>
+        <if test="ovoltage != null  and ovoltage != ''  ">ovoltage,</if>
+        <if test="epsvoltage != null and epsvoltage !='' ">epsvoltage,</if>
+        <if test="svoltage != null and svoltage != '' ">svoltage,</if>
+        <if test="workingtemperature != null and workingtemperature !='' ">workingtemperature,</if>
+        <if test="cstate !=null and cstate !=''">cstate,</if>
+        <if test="workingstatu !=null and workingstatu !='' ">workingstatu,</if>
         </trim>
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="eid != null and eid!='' ">#{eid},</if>
-            <if test="bvoltage != null  and bvoltage != ''  ">#{bvoltage},</if>
-            <if test="bpvoltage != null  and bpvoltage != ''  ">#{bpvoltage},</if>
-            <if test="ccurrent != null  and ccurrent != ''  ">#{ccurrent},</if>
-            <if test="lcurrent != null  and lcurrent != ''  ">#{lcurrent},</if>
-            <if test="ovoltage != null  and ovoltage != ''  ">#{ovoltage},</if>
-            <if test="epsvoltage !=null and epsvoltage !='' ">#{epsvoltage},</if>
-            <if test="svoltage !=null and svoltage !='' ">#{svoltage},</if>
-            <if test="workingtemperature !=null and workingtemperature !=''">#{workingtemperature},</if>
-            <if test="cstate !=null and cstate !=''">#{cstate},</if>
-            <if test="workingstatu !=null and workingstatu !=''">#{workingstatu},</if>
-        </trim>
+        values<trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="eid != null and eid !='' ">#{eid},</if>
+        <if test="bvoltage != null  and bvoltage != ''  ">#{bvoltage},</if>
+        <if test="bpvoltage != null  and bpvoltage != ''  ">#{bpvoltage},</if>
+        <if test="ccurrent != null  and ccurrent != ''  ">#{ccurrent},</if>
+        <if test="lcurrent != null  and lcurrent != ''  ">#{lcurrent},</if>
+        <if test="ovoltage != null  and ovoltage != ''  ">#{ovoltage},</if>
+        <if test="epsvoltage !=null and epsvoltage !='' ">#{epsvoltage},</if>
+        <if test="svoltage !=null and svoltage !='' ">#{svoltage},</if>
+        <if test="workingtemperature !=null and workingtemperature !=''">#{workingtemperature},</if>
+        <if test="cstate !=null and cstate !=''">#{cstate},</if>
+        <if test="workingstatu !=null and workingstatu !=''">#{workingstatu},</if>
+    </trim>
     </insert>
     <!--更新数据-->
     <update id="updateEnergy" parameterType="Energy">
         update iot_energy
         <set>
-            <if test="eid != null and eid !=''">eid = #{eid},</if>
+            <if test="eid != null  and eid != ''  ">eid = #{eid},</if>
             <if test="bvoltage != null  and bvoltage != ''  ">bvoltage = #{bvoltage},</if>
             <if test="bpvoltage != null  and bpvoltage != ''  ">bpvoltage = #{bpvoltage},</if>
             <if test="ccurrent != null  and ccurrent != ''  ">ccurrent = #{ccurrent},</if>
             <if test="lcurrent != null  and lcurrent != ''  ">lcurrent = #{lcurrent},</if>
             <if test="ovoltage != null  and ovoltage != ''  ">ovoltage = #{ovoltage},</if>
-            <if test="epsvoltage !=null and epsvoltage != ''">epsvoltage = #{epsvoltage},</if>
-            <if test="svoltage != null and svoltage != ''">svoltage = #{svoltage},</if>
-            <if test="workingtemperature != null and workingtemperature !=''">workingtemperature = #{workingtemperature},</if>
-            <if test="cstate !=null and cstate !='' ">cstate = #{cstate},</if>
-            <if test="workingstatu !=null and workingstatu !=''">workingstatu =#{workingstatu},</if>
+            <if test="epsvoltage != null  and epsvoltage != ''  ">epsvoltage = #{epsvoltage},</if>
+            <if test="svoltage != null  and svoltage != ''  ">svoltage = #{svoltage},</if>
+            <if test="workingtemperature != null  and workingtemperature != ''  ">workingtemperature = #{workingtemperature},</if>
+            <if test="cstate != null  and cstate != ''  ">cstate = #{cstate},</if>
+            <if test="workingstatu != null  and workingstatu != ''  ">workingstatu = #{workingstatu}，</if>
         </set>
-        where eid=#{eid}
+        where eid =#{eid}
     </update>
 
     <!--根据id删除-->

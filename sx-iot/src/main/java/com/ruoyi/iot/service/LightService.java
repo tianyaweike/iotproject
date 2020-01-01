@@ -20,7 +20,7 @@ public interface LightService {
      * 根据nid批量删除数据
      * @param id
      */
-    public int deleteLightByids(String[] nid);
+    public int deleteLightByids(String nid);
 
     /**
      * 添加路灯公告数据

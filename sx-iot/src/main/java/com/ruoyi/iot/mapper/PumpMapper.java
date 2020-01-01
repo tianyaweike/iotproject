@@ -25,7 +25,7 @@ public interface PumpMapper {
      * @param id
      * @return
      */
-    Pump selectPumpByid(String id);
+    Pump selectByid(String id);
     /**
      * 保存用户修改
      * @param pump

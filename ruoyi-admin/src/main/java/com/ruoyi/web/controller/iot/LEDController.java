@@ -29,7 +29,7 @@ import com.ruoyi.framework.util.ShiroUtils;
  * @date 2019-03-03
  */
 @Controller
-@RequestMapping (value={"/iot/led"})
+@RequestMapping ("/iot/led")
 public class LEDController extends BaseController
 {
     private String prefix = "iot/led";
@@ -39,8 +39,7 @@ public class LEDController extends BaseController
 
     @RequiresPermissions("iot:ledinfo:view")
     @GetMapping()
-    public String operlog()
-    { return prefix + "/led"; }
+    public String LED() { return prefix + "/led"; }
 
     /**
      * 查询终端运转列表
@@ -79,19 +78,6 @@ public class LEDController extends BaseController
     }
 
     /**
-     * 开灯
-     */
-    @GetMapping("/open")
-    @ResponseBody
-    public AjaxResult openled()
-    {
-        //System.out.printf(NettyClient.channel.remoteAddress().toString()+"--"+NettyClient.channel.isOpen());;
-        //NettyClient.channel.writeAndFlush("Sopen_led1E");
-        NettyClient.writeDate("Sopen_led1E");
-        return toAjax(1);
-    }
-
-    /**
      * 新增保存
      */
     @RequiresPermissions("iot:ledinfo:add")
@@ -103,6 +89,31 @@ public class LEDController extends BaseController
         return toAjax(ledService.insertLed(led));
     }
 
+
+    /**
+     * 开灯
+     */
+    @GetMapping("/open")
+    @RequiresPermissions("iot:ledinfo:open")
+    @ResponseBody
+    public AjaxResult openled()
+    {
+        NettyClient.writeDate("Sopen_led1E");
+        return toAjax(1);
+    }
+
+
+    /**
+     * 关灯
+     */
+    @GetMapping("/close")
+    @RequiresPermissions("iot:ledinfo:close")
+    @ResponseBody
+    public AjaxResult closeled()
+    {
+        NettyClient.writeDate("Sclose_led1E");
+        return toAjax(1);
+    }
     /**
      * 修改终端运转
      */

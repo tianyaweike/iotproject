@@ -21,10 +21,11 @@ public interface EnergyMapper {
     int insertEnergy(Energy energy);
     /**
      * 根据eid选择数据
-     * @param id
+     * @param eid
      * @return
      */
     Energy selectByid(String eid);
+    //Energy selectBybvo(String bvoltage);
 
     /**
      * 保存用户修改

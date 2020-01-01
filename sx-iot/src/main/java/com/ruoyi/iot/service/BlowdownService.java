@@ -20,7 +20,7 @@ public interface BlowdownService {
      * 根据pid选择数据
      *
      */
-    public Blowdown selectBypid(String pid);
+    public Blowdown selectByid(String pid);
     /**
      * 保存用户修改
      *

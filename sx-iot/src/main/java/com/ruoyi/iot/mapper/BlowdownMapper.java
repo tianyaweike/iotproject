@@ -19,7 +19,7 @@ public interface BlowdownMapper {
      * @param pid
      * @return
      */
-    public Blowdown selectBypid(String pid);
+    public Blowdown selectByid(String pid);
 
     /**
      * 保存用户修改

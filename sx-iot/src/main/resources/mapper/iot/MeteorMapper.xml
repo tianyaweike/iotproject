@@ -17,7 +17,7 @@
     </resultMap>
     <!--定义selecMeteor为查询整表命令-->
     <sql id="selectMeteor">
-    select weather_id,monitortime,location,windpower,winderaction,raincapacity,temperature,humidity,airlevel from iot_Meteor
+    select weather_id,monitortime,location,windpower,winderaction,raincapacity,temperature,humidity,airlevel,updatetime from iot_Meteor
     </sql>
     <!--统计表中记录数
     <select id="countall" resultType="Integer">
@@ -74,6 +74,7 @@
         insert into iot_Meteor
         <trim prefix="(" suffix=")" suffixOverrides=",">
         <if test="weather_id != null and weather_id!='' ">weather_id,</if>
+        <if test="monitortime != null  and monitortime != ''  ">monitortime,</if>
         <if test="location != null  and location != ''  ">location,</if>
         <if test="windpower != null  and windpower != ''  ">windpower,</if>
         <if test="winderaction != null  and winderaction != ''  ">winderaction,</if>
@@ -84,6 +85,7 @@
         </trim>
         <trim prefix="values(" suffix=")" suffixOverrides=",">
         <if test="weather_id != null and weather_id!='' ">#{weather_id},</if>
+        <if test="monitortime != null  and monitortime != ''  ">#{monitortime},</if>
         <if test="location != null  and location != ''  ">#{location},</if>
         <if test="windpower != null  and windpower != ''  ">#{windpower},</if>
         <if test="winderaction != null  and winderaction != ''  ">#{winderaction},</if>
@@ -98,13 +100,14 @@
         update iot_Meteor
         <set>
             <if test="weather_id != null and weather_id !=''">weather_id = #{weather_id},</if>
+            <if test="monitortime != null  and monitortime != ''  ">monitortime = #{monitortime},</if>
             <if test="location != null  and location != ''  ">location = #{location},</if>
-            <if test="windpower != null  and windpower != ''  ">windpower = #{winderaction},</if>
+            <if test="windpower != null  and windpower != ''  ">windpower = #{windpower},</if>
             <if test="winderaction != null  and winderaction != ''  ">winderaction = #{winderaction},</if>
             <if test="raincapacity != null  and raincapacity != ''  ">raincapacity = #{raincapacity},</if>
             <if test="temperature !=null and temperature != ''">temperature = #{temperature},</if>
             <if test="humidity != null and humidity != ''">humidity = #{humidity},</if>
-            <if test="airlevel != null and workingtemperature !=''">workingtemperature = #{workingtemperature},</if>
+            <if test="airlevel != null and airlevel !=''">airlevel = #{airlevel},</if>
             updatetime=sysdate()
         </set>
         where weather_id = #{weather_id}

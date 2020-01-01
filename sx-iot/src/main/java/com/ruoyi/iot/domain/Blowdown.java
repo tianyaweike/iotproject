@@ -7,7 +7,7 @@ public class Blowdown {
     private String monitortime;
 
     private String location;
-    private String Hmental;
+    private String hmental;
     private String ph;
     private String econdu;
     private String updatetime;
@@ -17,18 +17,18 @@ public class Blowdown {
                 "pid='" + pid + '\'' +
                 ", monitortime='" + monitortime + '\'' +
                 ", location='" + location + '\'' +
-                ", Hmental='" + Hmental + '\'' +
+                ", hmental='" + hmental + '\'' +
                 ", ph='" + ph + '\'' +
                 ", econdu='" + econdu + '\'' +
                 ", updatetime='" + updatetime + '\'' +
                 '}';
     }
 
-    public Blowdown(String pid, String monitortime, String location, String Hmental, String ph, String econdu, String updatetime) {
+    public Blowdown(String pid, String monitortime, String location, String hmental, String ph, String econdu, String updatetime) {
             this.pid = pid;
             this.monitortime = monitortime;
             this.location = location;
-            this.Hmental = Hmental;
+            this.hmental = hmental;
             this.ph = ph;
             this.econdu = econdu;
             this.updatetime = updatetime;
@@ -37,19 +37,19 @@ public class Blowdown {
             super();
         }
 
-            public String getPid() {
+            public String getpid() {
                 return pid;
             }
 
 
-                public void setPid(String pid) {
+                public void setpid(String pid) {
                     this.pid = pid;
                 }
 
-                public String getMonitortime() {
+                public String getmonitortime() {
                     return monitortime;
                 }
-                public void setMonitortime(String monitortime) {
+                public void setmonitortime(String monitortime) {
                     this.monitortime = monitortime;
                 }
                 public String getLocation() {
@@ -58,11 +58,11 @@ public class Blowdown {
                 public void setLocation(String location) {
                     this.location = location;
                 }
-                public String getHmental() {
-                    return Hmental;
+                public String gethmental() {
+                    return hmental;
                 }
-                public void setHmental(String Hmental) {
-                    Hmental = Hmental;
+                public void sethmental(String hmental) {
+                    this.hmental = hmental;
                 }
                 public String getph() {
                     return ph;
@@ -70,16 +70,16 @@ public class Blowdown {
                 public void setph(String ph) {
                     this.ph = ph;
                 }
-                public String getEcondu() {
+                public String getecondu() {
                     return econdu;
                 }
-                public void setEcondu(String econdu) {
+                public void setecondu(String econdu) {
                     this.econdu = econdu;
                 }
-                public String getUpdatetime() {
+                public String getupdatetime() {
                     return updatetime;
                 }
-                public void setUpdatetime(String updatetime) {
+                public void setupdatetime(String updatetime) {
                     this.updatetime = updatetime;
                 }
             }

@@ -11,6 +11,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import com.ruoyi.common.utils.ExcelUtil;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,14 +44,29 @@ public class BlowdownController extends BaseController {
         List<Blowdown> list = BlowdownService.selectBlowdownList(blowdown);
         return getDataTable(list);
     }
-
+    /**
+     * 导出终端运转列表
+     */
+    @Log(title = "Blowdown", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("iot:Blowdowninfo:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(Blowdown blowdown)
+    {
+        List<Blowdown> list = BlowdownService.selectBlowdownList(blowdown);
+        ExcelUtil<Blowdown> util = new ExcelUtil<Blowdown>(Blowdown.class);
+        return util.exportExcel(list, "blowdown");
+    }
+    /**
+     * 新增
+     */
     @GetMapping("/add")
     public String add(){
         return prefix+"/add";
     }
 
     /**
-     * 新增Blowdown信息
+     * 新增保存Blowdown信息
      */
     @RequiresPermissions("iot:blowdowninfo:add")
     @Log(title = "Blowdown信息", businessType = BusinessType.INSERT)
@@ -66,7 +82,7 @@ public class BlowdownController extends BaseController {
     @GetMapping("/edit/{pid}")
     public String edit(@PathVariable("pid") String pid, ModelMap mmap)
     {
-        Blowdown blowdown = BlowdownService.selectBypid(pid);
+        Blowdown blowdown = BlowdownService.selectByid(pid);
         mmap.put("blowdown", blowdown);
         return prefix + "/edit";
     }

@@ -7,7 +7,7 @@
         <id property="pid"    column="pid"    />
         <result property="monitortime"    column="monitortime"    />
         <result property="location"    column="location"    />
-        <result property="Hmental"    column="Hmental"    />
+        <result property="hmental"    column="hmental"    />
         <result property="ph"    column="ph"    />
         <result property="econdu"    column="econdu"    />
         <result property="updatetime" column="updatetime" />
@@ -15,7 +15,7 @@
 
     <!--定义selectBlowdown为查询整表命令-->
     <sql id="selectBlowdown">
-    select pid,monitortime,location,Hmental,ph,econdu from iot_blowdown
+    select pid,monitortime,location,hmental,ph,econdu,updatetime from iot_blowdown
 </sql>
     <!--统计表中记录数
     <select id="countall" resultType="Integer">
@@ -35,7 +35,7 @@
         <!--<where>
             <if test="pid != null and pid='' "> and pid = #{pid}</if>
             <if test="location != null  and location != '' "> and location = #{location}</if>
-            <if test="Hmental != null  and Hmental != '' "> and Hmental = #{Hmental}</if>
+            <if test="hmental != null  and hmental != '' "> and hmental = #{hmental}</if>
             <if test="ph != null  and ph != '' "> and ph = #{ph}</if>
             <if test="econdu != null  and econdu != '' "> and econdu = #{econdu}</if>
         </where>
@@ -44,13 +44,13 @@
     </select>
 
     <!--根据id查询信息-->
-    <select id="selectBypid" parameterType="String" resultMap="BlowdownResult">
+    <select id="selectByid" parameterType="String" resultMap="BlowdownResult">
         <include refid="selectBlowdown"/>
         where pid=#{pid}
         <!-- select
          a.pid as pid,
          a.location as location,
-         a.Hmental as Hmental,
+         a.hmental as hmental,
          a.ph as ph,
          a.econdu as econdu
          from iot_led a
@@ -67,15 +67,17 @@
         insert into iot_blowdown
         <trim prefix="(" suffix=")" suffixOverrides=",">
         <if test="pid != null and pid!='' ">pid,</if>
+        <if test="monitortime != null  and monitortime != ''  ">monitortime,</if>
         <if test="location != null  and location != ''  ">location,</if>
-        <if test="Hmental != null  and Hmental != ''  ">Hmental,</if>
+        <if test="hmental != null  and hmental != ''  ">hmental,</if>
         <if test="ph != null  and ph != ''  ">ph,</if>
         <if test="econdu != null  and econdu != ''  ">econdu,</if>
         </trim>
         <trim prefix="values(" suffix=")" suffixOverrides=",">
         <if test="pid != null and pid!='' ">#{pid},</if>
+        <if test="monitortime != null  and monitortime != ''  ">#{monitortime},</if>
         <if test="location != null  and location != ''  ">#{location},</if>
-        <if test="Hmental != null  and Hmental != ''  ">#{Hmental},</if>
+        <if test="hmental != null  and hmental != ''  ">#{hmental},</if>
         <if test="ph != null  and ph != ''  ">#{ph},</if>
         <if test="econdu != null  and econdu != ''  ">#{econdu},</if>
         </trim>
@@ -85,8 +87,9 @@
         update iot_blowdown
         <set>
             <if test="pid !=null and pid !=''">pid = #{pid},</if>
+            <if test="monitortime != null  and monitortime != ''  ">monitortime = #{monitortime},</if>
             <if test="location != null  and location != ''  ">location = #{location},</if>
-            <if test="Hmental != null  and Hmental != ''  ">Hmental = #{Hmental},</if>
+            <if test="hmental != null  and hmental != ''  ">hmental = #{hmental},</if>
             <if test="ph != null  and ph != ''  ">ph = #{ph},</if>
             <if test="econdu != null  and econdu != ''  ">econdu = #{econdu},</if>
             updatetime= sysdate()

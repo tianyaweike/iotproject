@@ -30,16 +30,16 @@
                             光照强度：<input type="text" name="Light_intensity"/>
                         </li>
                         <li>
-                            大气压强：<input type="time" name="atmospheric_pressure"/>
+                            大气压强：<input type="text" name="atmospheric_pressure"/>
                         </li>
                         <li>
-                            PM2.5浓度：<input type="time" name="PM"/>
+                            PM2.5浓度：<input type="text" name="PM"/>
                         </li>
                         <li>
-                            二氧化碳浓度：<input type="time" name="ppm"/>
+                            二氧化碳浓度：<input type="text" name="ppm"/>
                         </li>
                         <li>
-                            设备状态（0-关，1-开）：<input type="time" name="Device_status"/>
+                            设备状态（0-关，1-开）：<input type="text" name="Device_status"/>
                         </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -75,7 +75,6 @@
     var editFlag = [[${@permission.hasPermi('iot:environlinfo:edit')}]];
     var removeFlag = [[${@permission.hasPermi('iot:environlinfo:remove')}]];
     var prefix = ctx + "iot/environl";
-
     $(function() {
         var options = {
             url: prefix + "/list",
@@ -83,7 +82,7 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-           // sortName: "environlSort",
+            // sortName: "environlSort",
             modalName: "环境监测",
             search: false,
             showExport: false,

@@ -23,15 +23,6 @@ public interface ILEDService {
      */
     public LED selectLedById(String led_id);
 
-    /**
-     * 开灯
-     *
-     * @param led_id 终端运转ID
-     * @return 终端运转信息
-     */
-    public void  openled();
-
-
 
     /**
      * 统计物联网数据条目
@@ -78,11 +69,10 @@ public interface ILEDService {
     /**
      * 删除终端运转信息
      *
-     * @param led_ids 需要删除的数据ID
+     * @param ids 需要删除的数据ID
      * @return 结果
      * * @throws Exception 异常
      */
-    //public int deleteLedByIds(String led_ids);
     public int deleteLedByIds(String ids) ;
 
 

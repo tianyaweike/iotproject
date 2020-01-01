@@ -6,33 +6,33 @@ public class Pump {
 
     private String tid;
 
-    private String PCurrent;
+    private String pcurrent;
 
-    private String PVoltage;
+    private String pvoltage;
 
-    private String WLHeight;
+    private String wlheight;
 
-    private String WLPressure;
+    private String wlpressure;
 
     @Override
     public String toString() {
         return "Pump{" +
                 "id='" + id + '\'' +
                 ", tid='" + tid + '\'' +
-                ", PCurrent='" + PCurrent + '\'' +
-                ", PVoltage='" + PVoltage + '\'' +
-                ", WLHeight='" + WLHeight + '\'' +
-                ", WLPressure='" + WLPressure + '\'' +
+                ", pcurrent='" + pcurrent + '\'' +
+                ", pvoltage='" + pvoltage + '\'' +
+                ", wlheight='" + wlheight + '\'' +
+                ", wlpressure='" + wlpressure + '\'' +
                 '}';
     }
 
-    public Pump(String id, String tid, String PCurrent, String PVoltage, String WLHeight, String WLPressure) {
+    public Pump(String id, String tid, String pcurrent, String pvoltage, String wlheight, String wlpressure) {
         this.id = id;
         this.tid = tid;
-        this.PCurrent = PCurrent;
-        this.PVoltage = PVoltage;
-        this.WLHeight = WLHeight;
-        this.WLPressure = WLPressure;
+        this.pcurrent = pcurrent;
+        this.pvoltage = pvoltage;
+        this.wlheight = wlheight;
+        this.wlpressure = wlpressure;
     }
 
     public Pump() {
@@ -55,35 +55,35 @@ public class Pump {
         this.tid = tid;
     }
 
-    public String getPCurrent() {
-        return PCurrent;
+    public String getpcurrent() {
+        return pcurrent;
     }
 
-    public void setPCurrent(String PCurrent) {
-        this.PCurrent = PCurrent;
+    public void setpcurrent(String pcurrent) {
+        this.pcurrent = pcurrent;
     }
 
-    public String getPVoltage() {
-        return PVoltage;
+    public String getpvoltage() {
+        return pvoltage;
     }
 
-    public void setPVoltage(String PVoltage) {
-        this.PVoltage = PVoltage;
+    public void setpvoltage(String pvoltage) {
+        this.pvoltage = pvoltage;
     }
 
-    public String getWLHeight() {
-        return WLHeight;
+    public String getwlheight() {
+        return wlheight;
     }
 
-    public void setWLHeight(String WLHeight) {
-        this.WLHeight = WLHeight;
+    public void setwlheight(String wlheight) {
+        this.wlheight = wlheight;
     }
 
-    public String getWLPressure() {
-        return WLPressure;
+    public String getwlpressure() {
+        return wlpressure;
     }
 
-    public void setWLPressure(String WLPressure) {
-        this.WLPressure = WLPressure;
+    public void setwlpressure(String wlpressure) {
+        this.wlpressure = wlpressure;
     }
 }

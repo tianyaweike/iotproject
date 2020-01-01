@@ -15,7 +15,7 @@
                             路灯编号：<input type="text" name="nid"/>
                         </li>
                         <li>
-                            环境温度：<input type="time" name="atemperature"/>
+                            环境温度：<input type="text" name="atemperature"/>
                         </li>
                         <li>
                             风速：<input type="text" name="windspeed"/>
@@ -35,16 +35,16 @@
         </div>
 
         <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="iot:light:add">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="iot:lightinfo:add">
                 <i class="fa fa-plus"></i> 新增
             </a>
-            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="iot:light:edit">
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="iot:lightinfo:edit">
                 <i class="fa fa-edit"></i> 修改
             </a>
-            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="iot:light:remove">
+            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="iot:lightinfo:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:light:export">
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:lightinfo:export">
                 <i class="fa fa-download"></i> 导出
             </a>
         </div>
@@ -56,8 +56,8 @@
 </div>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('iot:light:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('iot:light:remove')}]];
+    var editFlag = [[${@permission.hasPermi('iot:lightinfo:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('iot:lightinfo:remove')}]];
     var prefix = ctx + "iot/light";
 
     $(function() {
@@ -67,10 +67,10 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-            //sortName: "lightSort",
+            sortName: "nid",
             modalName: "路灯管理",
             search: false,
-            showExport: false,
+            showExport: true,
             columns: [{
                 checkbox: true
             },
@@ -96,6 +96,16 @@
                 {
                     field: 'voltage',
                     title: '工作电压',
+                    sortable: true
+                },
+                {
+                    field: 'tstart',
+                    title: '亮灯时间',
+                    sortable: true
+                },
+                {
+                    field: 'tdown',
+                    title: '熄灯时间',
                     sortable: true
                 },
                 {

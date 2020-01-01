@@ -6,18 +6,39 @@
     <resultMap type="Pump" id="PumpResult">
         <result property="id"    column="id"    />
         <result property="tid"    column="tid"    />
-        <result property="PCurrent"    column="PCurrent"    />
-        <result property="PVoltage"    column="PVoltage"    />
-        <result property="WLHeight"    column="WLHeight"    />
-        <result property="WLPressure" column="WLPressure" />
+        <result property="pcurrent"    column="pcurrent"    />
+        <result property="pvoltage"    column="pvoltage"    />
+        <result property="wlheight"    column="wlheight"    />
+        <result property="wlpressure" column="wlpressure" />
     </resultMap>
     <!--定义selectPump为查询整表命令-->
     <sql id="selectPump">
-    select id,tid,PCurrent,PVoltage,WLHeight,WLPressure from iot_pump
+    select id,tid,pcurrent,pvoltage,wlheight,wlpressure from iot_pump
     </sql>
     <!--查询表的所有列表信息-->
     <select id="selectPumpList" parameterType="Pump" resultMap="PumpResult">
-        select id,tid,PCurrent,PVoltage,WLHeight,WLPressure from iot_pump
+        <include refid="selectPump"/>
+        <where>
+        <if test="id !=null and id !='' ">
+            AND id like concat('%', #{id},'%')
+        </if>
+        <if test="tid !=null and tid !='' ">
+            AND tid like concat('%', #{tid},'%')
+        </if>
+        <if test="pcurrent !=null and pcurrent !='' ">
+            AND pcurrent like concat('%', #{pcurrent},'%')
+        </if>
+        <if test="pvoltage !=null and pvoltage !='' ">
+            AND pvoltage like concat('%', #{pvoltage},'%')
+        </if>
+        <if test="wlheight !=null and wlheight !='' ">
+            AND wlheight like concat('%', #{wlheight},'%')
+        </if>
+        <if test="wlpressure !=null and wlpressure !='' ">
+            AND wlpressure like concat('%', #{wlpressure},'%')
+        </if>
+        </where>
+    </select>
         <!--<where>
             <if test="id != null and id='' "> and id = #{id}</if>
             <if test="location != null  and location != '' "> and location = #{location}</if>
@@ -26,11 +47,11 @@
         </where>
         order by id desc
         -->
-    </select>
+
 
     <!--根据id查询信息-->
-    <select id="selectPumpByid" parameterType="String" resultMap="PumpResult">
-        select id,tid,PCurrent,PVoltage,WLHeight,WLPressure from iot_pump
+    <select id="selectByid" parameterType="String" resultMap="PumpResult">
+        select id,tid,pcurrent,pvoltage,wlheight,wlpressure from iot_pump
         where id=#{id}
         <!-- select
          a.id as id,
@@ -51,32 +72,32 @@
     <insert id="insertPump" parameterType="Pump">
         insert into iot_pump
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null and id!='' ">id,</if>
-            <if test="tid != null  and tid != ''  ">tid,</if>
-            <if test="PCurrent != null  and PCurrent != ''  ">PCurrent,</if>
-            <if test="PVoltage != null  and PVoltage != ''  ">PVoltage,</if>
-            <if test="WLHeight != null  and WLHeight != ''  ">WLHeight,</if>
-            <if test="WLPressure != null  and WLPressure != ''  ">WLPressure,</if>
+        <if test="id != null and id!='' ">id,</if>
+        <if test="tid != null  and tid != ''  ">tid,</if>
+        <if test="pcurrent != null  and pcurrent != ''  ">pcurrent,</if>
+        <if test="pvoltage != null  and pvoltage != ''  ">pvoltage,</if>
+        <if test="wlheight != null  and wlheight != ''  ">wlheight,</if>
+        <if test="wlpressure != null  and wlpressure != ''  ">wlpressure,</if>
         </trim>
         values<trim prefix="(" suffix=")" suffixOverrides=",">
         <if test="id != null and id!='' ">#{id},</if>
         <if test="tid != null  and tid != ''  ">#{tid},</if>
-        <if test="PCurrent != null  and PCurrent != ''  ">#{PCurrent},</if>
-        <if test="PVoltage != null  and PVoltage != ''  ">#{PVoltage},</if>
-        <if test="WLHeight != null  and WLHeight != ''  ">#{WLHeight},</if>
-        <if test="WLPressure != null  and WLPressure != ''  ">#{WLPressure},</if>
+        <if test="pcurrent != null  and pcurrent != ''  ">#{pcurrent},</if>
+        <if test="pvoltage != null  and pvoltage != ''  ">#{pvoltage},</if>
+        <if test="wlheight != null  and wlheight != ''  ">#{wlheight},</if>
+        <if test="wlpressure != null  and wlpressure != ''  ">#{wlpressure},</if>
     </trim>
     </insert>
     <!--更新数据-->
     <update id="updatePump" parameterType="Pump">
         update iot_pump
         <set>
-            <if test="id !=null and id !=''">id = #{id},</if>
+            <if test="id !=null and id !='' ">id = #{id},</if>
             <if test="tid != null  and tid != ''  ">tid = #{tid},</if>
-            <if test="PCurrent != null  and PCurrent != ''  ">PCurrent = #{PCurrent},</if>
-            <if test="PVoltage != null  and PVoltage != ''  ">PVoltage = #{PVoltage},</if>
-            <if test="WLHeight != null  and WLHeight != ''  ">WLHeight = #{WLHeight},</if>
-            <if test="WLPressure != null  and WLPressure != ''  ">WLPressure = #{WLPressure},</if>
+            <if test="pcurrent != null  and pcurrent != ''  ">pcurrent = #{pcurrent},</if>
+            <if test="pvoltage != null  and pvoltage != ''  ">pvoltage = #{pvoltage},</if>
+            <if test="wlheight != null  and wlheight != ''  ">wlheight = #{wlheight},</if>
+            <if test="wlpressure != null  and wlpressure != ''  ">wlpressure = #{wlpressure},</if>
         </set>
         where id = #{id}
     </update>

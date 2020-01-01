@@ -32,19 +32,9 @@ public class EnvironlServiceImpl  implements EnvironlService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteEnvironlByid(String hid) {
-        return environlMapper.deleteEnvironlByid(hid);
+    public int deleteEnvironlByids(String ids) {
+        return environlMapper.deleteEnvironlByids(Convert.toStrArray(ids));
     }
-
-//    /**
-//     * 开始接受数据
-//     *
-//     */
-//    @Override
-//    @DataSource(value = DataSourceType.SXINFOM)
-//    public int receive(String s) {
-//        return environlMapper.receive(s);
-//    }
 
     /**
      * 添加环境公告数据
@@ -62,8 +52,8 @@ public class EnvironlServiceImpl  implements EnvironlService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public Environl selectByhid(String hid) {
-        return environlMapper.selectByhid(hid);
+    public Environl selectByid(String hid) {
+        return environlMapper.selectByid(hid);
     }
 
     /**
@@ -72,8 +62,8 @@ public class EnvironlServiceImpl  implements EnvironlService {
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteEnvironlByids(String hid) {
-        return environlMapper.deleteEnvironlByids(hid);
+    public int deleteEnvironlByid(String hid) {
+        return environlMapper.deleteEnvironlByid(hid);
     }
 
     /**

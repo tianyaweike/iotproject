@@ -11,13 +11,6 @@ public interface BlowdownService {
      * @return
      */
     public List<Blowdown> selectBlowdownList(Blowdown blowdown);
-
-    /**
-     * 根据pid批量删除数据
-     *
-     */
-    public int deleteBlowdownByids(String ids);
-
     /**
      * 添加排污公告数据
      *
@@ -27,7 +20,7 @@ public interface BlowdownService {
      * 根据pid选择数据
      *
      */
-    public Blowdown selectBypid(String pid);
+    public Blowdown selectByid(String pid);
     /**
      * 保存用户修改
      *
@@ -38,4 +31,10 @@ public interface BlowdownService {
      *
      */
     public int deleteBlowdownByid(String pid);
+    /**
+     * 根据pid批量删除数据
+     *
+     */
+    public int deleteBlowdownByids(String ids);
+
 }

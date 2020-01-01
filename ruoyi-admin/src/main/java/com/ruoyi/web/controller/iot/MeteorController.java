@@ -35,7 +35,7 @@ public class MeteorController extends BaseController {
      * @param meteor
      * @return
      */
-    @RequiresPermissions("iot:meteorinfo:list")
+    //@RequiresPermissions("iot:meteorinfo:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Meteor meteor){
@@ -63,10 +63,10 @@ public class MeteorController extends BaseController {
     /**
      * 修改Meteor信息
      */
-    @GetMapping("/edit/{meteor_id}")
-    public String edit(@PathVariable("meteor_id") String meteor_id, ModelMap mmap)
+    @GetMapping("/edit/{weather_id}")
+    public String edit(@PathVariable("weather_id") String weather_id, ModelMap mmap)
     {
-        Meteor meteor = MeteorService.selectByid(meteor_id);
+        Meteor meteor = MeteorService.selectByweather_id(weather_id);
         mmap.put("meteor", meteor);
         return prefix + "/edit";
     }
@@ -87,11 +87,10 @@ public class MeteorController extends BaseController {
     @RequiresPermissions("iot:meteorinfo:remove")
     @Log(title = "删除Meteor信息", businessType = BusinessType.DELETE)
 
-    @PostMapping( "/remove/{meteor_id}")
+    @PostMapping( "/remove")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("meteor_id") String[] meteor_id)
+    public AjaxResult remove(String ids)
     {
-        System.out.println("*******"+meteor_id);
-        return toAjax(MeteorService.deleteMeteorByids(meteor_id));
+        return toAjax(MeteorService.deleteMeteorByids(ids));
     }
 }

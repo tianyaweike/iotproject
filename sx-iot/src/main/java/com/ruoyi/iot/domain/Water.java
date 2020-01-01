@@ -1,6 +1,9 @@
 package com.ruoyi.iot.domain;
 
+import com.ruoyi.common.annotation.Excel;
+
 public class Water {
+
     private String wid;
 
     private String type;

@@ -38,23 +38,8 @@ public interface LEDMapper {
      */
     //public int devicecount();
 
-    /**
-     * 开启led灯
-     *
-     * @param led_id 终端运转ID
-     * @return 终端运转信息
-     */
-//    public LED openled();
 
 
-
-    /**
-     * 新增终端运转
-     *
-     * @param led 终端运转信息
-     * @return 结果
-     */
-    public void openled();
     /**
      * 新增终端运转
      *

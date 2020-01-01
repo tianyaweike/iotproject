@@ -18,7 +18,12 @@
                             设备地址：<input type="text" name="address"/>
                         </li>
                         <li>
-                            运行状态：<input type="text" name="statue"/>
+                            运行状态：
+                       <select name="statue" th:with="type=${@dict.getType('sys_normal_disable')}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                        </select>
+                    </li>
                         </li>
                         <!--<li>
                             <input class="laydate-icon  layer-date"
@@ -66,6 +71,7 @@
 <script th:inline="javascript">
     var editFlag = [[${@permission.hasPermi('iot:broadinfo:edit')}]];
     var removeFlag = [[${@permission.hasPermi('iot:broadinfo:remove')}]];
+    var datas = [[${@dict.getType('sys_normal_disable')}]];
     var prefix = ctx + "iot/broad";
 
     $(function() {
@@ -84,18 +90,21 @@
             },
                 {
                     field: 'broad_id',
-                    title: '广播编号'
-                    //visible: false
+                    title: '广播编号',
+                    sortable: true
                 },
                 {
                     field: 'address',
                     title: '设备地址',
-                    sortable: true
+                    //sortable: true
                 },
                 {
                     field: 'statue',
                     title: '运行状态',
-                    sortable: true
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
 
                 },
                 {
@@ -106,7 +115,7 @@
                 {
                     field: 'details',
                     title: '广播内容',
-                    sortable: true
+                    //sortable: true
                 },
                 {
                     title: '操作',

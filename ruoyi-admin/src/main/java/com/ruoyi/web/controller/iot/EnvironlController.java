@@ -66,7 +66,7 @@ public class EnvironlController extends BaseController {
     @GetMapping("/edit/{hid}")
     public String edit(@PathVariable("hid") String hid, ModelMap mmap)
     {
-        Environl environl = EnvironlService.selectByhid(hid);
+        Environl environl = EnvironlService.selectByid(hid);
         mmap.put("environl", environl);
         return prefix + "/edit";
     }
@@ -81,18 +81,17 @@ public class EnvironlController extends BaseController {
     {
         return toAjax(EnvironlService.updateEnvironl(environl));
     }
-
     /**
      * 删除Environl信息
      */
     @RequiresPermissions("iot:environlinfo:remove")
     @Log(title = "删除Environl信息", businessType = BusinessType.DELETE)
 
-    @PostMapping( "/remove/{hid}")
+    @PostMapping( "/remove")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("hid") String hid)
+    public AjaxResult remove(String ids)
     {
         //System.out.println("*******"+hid);
-        return toAjax(EnvironlService.deleteEnvironlByids(hid));
+        return toAjax(EnvironlService.deleteEnvironlByids(ids));
     }
 }

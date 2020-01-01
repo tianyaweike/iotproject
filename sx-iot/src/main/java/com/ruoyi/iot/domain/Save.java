@@ -1,14 +1,17 @@
 package com.ruoyi.iot.domain;
 
+import com.ruoyi.common.annotation.Excel;
+
 public class Save {
-
+    @Excel(name="信号编号")
     private String info_id;
-
+    @Excel(name="用户地址")
     private String user_adress;
-
+    @Excel(name="报警状态",readConverterExp = "0=停用,1=正常")
+    private String warnstatus;
+    @Excel(name="接收状态",readConverterExp = "0=停用,1=正常")
     private String ray;
 
-    private String warnstatus;
 
     @Override
     public String toString() {

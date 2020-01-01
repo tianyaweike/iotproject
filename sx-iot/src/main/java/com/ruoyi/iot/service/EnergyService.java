@@ -20,7 +20,7 @@ public interface EnergyService {
      * 根据eid批量删除数据
      * @param id
      */
-    public int deleteEnergyByids(String[] eid);
+    public int deleteEnergyByids(String eid);
 
     /**
      * 添加能源管理公告数据
@@ -33,7 +33,8 @@ public interface EnergyService {
      * @param eid
      * @return
      */
-    public Energy selectByid(String eid);
+    public Energy selectByeid(String eid);
+   // public Energy selectBybvo(String bcoltage);
     /**
      * 保存用户修改
      * @param Energy

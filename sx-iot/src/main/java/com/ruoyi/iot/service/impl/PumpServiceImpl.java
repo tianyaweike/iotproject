@@ -32,15 +32,14 @@ public class PumpServiceImpl implements PumpService{
     public List<Pump> selectPumpList(Pump pump) {
         return pumpMapper.selectPumpList(pump);
     }
-
     /**
      * 根据id批量删除数据
      * @param id
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deletePumpByids(String[] ids) {
-        return pumpMapper.deletePumpByids(ids);
+    public int deletePumpByids(String id) {
+        return pumpMapper.deletePumpByids(Convert.toStrArray(id));
     }
 
     /**
@@ -62,7 +61,7 @@ public class PumpServiceImpl implements PumpService{
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
     public Pump selectByid(String id) {
-        return pumpMapper.selectPumpByid(id);
+        return pumpMapper.selectByid(id);
     }
 
     /**

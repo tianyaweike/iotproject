@@ -4,87 +4,127 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.iot.mapper.FloodMapper">
     <resultMap type="Flood" id="FloodResult">
-        <result property="place_id"    column="place_id"    />
-        <result property="stage"    column="stage"    />
-        <result property="display"    column="display"    />
-        <result property="rainfall"    column="rainfall"    />
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="rid"    column="rid"    />
+        <result property="rname"    column="rname"    />
+        <result property="data"    column="data"    />
+        <result property="time"    column="time"    />
     </resultMap>
 
     <!--定义selectFlood为查询整表命令-->
     <sql id="selectFlood">
-    select place_id,stage,display,rainfall from iot_flood
+    select id,type,rid,rname,data,time from rain_data1
     </sql>
     <!--查询表的所有列表信息-->
     <select id="selectFloodList" parameterType="Flood" resultMap="FloodResult">
         <include refid="selectFlood"/>
-        <!--<where>
-            <if test="place_id != null and place_id='' "> and place_id = #{place_id}</if>
-            <if test="location != null  and location != '' "> and location = #{location}</if>
-            <if test="display != null  and display != '' "> and display = #{display}</if>
-            <if test="rainfall != null  and rainfall != '' "> and rainfall = #{rainfall}</if>
+        <where>
+            <if test="id != null and id !=''"> AND  id like concat('%' ,#{id},'%')</if>
+            <if test="type != null  and type != '' ">AND  type like concat('%' ,#{type},'%')</if>
+            <if test="rid != null  and rid != '' "> AND  rid like concat('%',#{rid},'%')</if>
+            <if test="rname != null  and rname != '' "> AND  rname like concat('%' ,#{rname},'%')</if>
+            <if test="data != null  and data != '' "> AND  data like concat('%',#{data},'%')</if>
+            <if test="time != null  and time != '' "> AND  time like concat('%' ,#{time},'%')</if>
         </where>
-        order by place_id desc
+
+        <!--
+        order by id desc
         -->
     </select>
 
     <!--根据id查询信息-->
     <select id="selectByid" parameterType="String" resultMap="FloodResult">
         <include refid="selectFlood"/>
-        where place_id=#{place_id}
+        where id=#{id}
         <!-- select
-         a.place_id as place_id,
+         a.id as id,
          a.location as location,
-         a.display as display,
-         a.rainfall as rainfall,
+         a.rid as rid,
+         a.rname as rname,
          a.econdu as econdu
          from iot_led a
          -->
         <!--
         <where>
-            <if test="place_id != null  and place_id != '' ">and a.place_id like CONCAT(#{place_id},'%')</if>
+            <if test="id != null  and id != '' ">and a.id like CONCAT(#{id},'%')</if>
             <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
         </where>
         -->
     </select>
     <!--向表中插入新数据-->
     <insert id="insertFlood" parameterType="Flood">
-        insert into iot_flood
+        insert into rain_data1
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="place_id != null and place_id!='' ">place_id,</if>
-            <if test="stage != null  and stage != ''  ">stage,</if>
-            <if test="display != null  and display != ''  ">display,</if>
-            <if test="rainfall != null  and rainfall != ''  ">rainfall,</if>
+        <if test="id != null and id!='' ">id,</if>
+        <if test="type != null  and type != ''  ">type,</if>
+        <if test="rid != null  and rid != ''  ">rid,</if>
+        <if test="rname != null  and rname != ''  ">rname,</if>
+        <if test="data != null  and data != ''  ">data,</if>
+        <if test="time != null  and time != ''  ">time,</if>
         </trim>
         <trim prefix="values(" suffix=")" suffixOverrides=",">
-            <if test="place_id != null and place_id!='' ">#{place_id},</if>
-            <if test="stage != null  and stage != ''  ">#{stage},</if>
-            <if test="display != null  and display != ''  ">#{display},</if>
-            <if test="rainfall != null  and rainfall != ''  ">#{rainfall},</if>
+        <if test="id != null and id!='' ">#{id},</if>
+        <if test="type != null  and type != ''  ">#{type},</if>
+        <if test="rid != null  and rid != ''  ">#{rid},</if>
+        <if test="rname != null  and rname != ''  ">#{rname},</if>
+            <if test="data != null  and data != ''  ">#{data},</if>
+            <if test="time != null  and time != ''  ">#{time},</if>
         </trim>
     </insert>
     <!--更新数据-->
     <update id="updateFlood" parameterType="Flood">
-        update iot_flood
+        update rain_data1
         <set>
-            <if test="place_id !=null and place_id !=''">place_id = #{place_id},</if>
-            <if test="stage != null  and stage != ''  ">stage = #{stage},</if>
-            <if test="display != null  and display != ''  ">display = #{display},</if>
-            <if test="rainfall != null  and rainfall != ''  ">rainfall = #{rainfall},</if>
+            <if test="id !=null and id !=''">id = #{id},</if>
+            <if test="type != null  and type != ''  ">type = #{type},</if>
+            <if test="rid != null  and rid != ''  ">rid = #{rid},</if>
+            <if test="rname != null  and rname != ''  ">rname = #{rname},</if>
+            <if test="data != null  and data != ''  ">data = #{data},</if>
+            <if test="time != null  and time != ''  ">time = #{time},</if>
         </set>
-        where place_id = #{place_id}
+        where id = #{id}
     </update>
 
     <!--根据id删除-->
     <delete id="deleteFloodByid" parameterType="String">
-        delete from iot_flood where place_id = #{place_id}
+        delete from rain_data1 where id = #{id}
     </delete>
 
     <!--批量删除-->
     <delete id="deleteFloodByids" parameterType="String">
-        delete from iot_flood where place_id in
-        <foreach item="place_id" collection="array" open="(" separator="," close=")">
-            #{place_id}
+        delete from rain_data1 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
         </foreach>
     </delete>
 
+    <select id="selectFloodListLimit" parameterType="String" resultMap="FloodResult">
+        select id,type,rid,rname,data,time
+        from rain_data1
+        <where>
+            rid=#{rid}
+        </where>
+        <!--where rid=#{rid}-->
+        order by time
+        limit 0,20
+  </select>
+
+    <select id="countall" parameterType="String" resultType="Integer">
+        select
+            count(*)
+        from rain_data1
+        where rid=#{rid}
+    </select>
+
+    <select id="selectFloodListbytl" parameterType="FloodBytl" resultMap="FloodResult">
+        <include refid="selectFlood"/>
+        where  time between #{begintime} AND #{endtime}
+        order by time asc
+        limit 0,#{limit}
+    </select>
+
+    <select id="selectFloodList1" parameterType="Flood" resultMap="FloodResult">
+     select distinct rid,rname from rain_data1
+    </select>
 </mapper>

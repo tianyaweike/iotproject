@@ -1,5 +1,6 @@
 package com.ruoyi.streamsocket.client;
 
+import com.ruoyi.framework.web.domain.server.Sys;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
@@ -106,8 +107,7 @@ public class NettyClient {
     public static void writeDate(String data){
         channel.writeAndFlush(Unpooled.copiedBuffer(data+System.getProperty("line.separator"), CharsetUtil.UTF_8)).addListener(new ChannelFutureListener() {
             @Override
-
-            public void operationComplete(ChannelFuture channelFuture) throws Exception {
+            public void operationComplete(ChannelFuture channelFuture) throws Exception {//确定发送结果
                 if(channelFuture.isSuccess()){
                     System.out.printf("发送成功");
                 }else {

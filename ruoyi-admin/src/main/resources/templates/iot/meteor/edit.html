@@ -9,7 +9,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label ">监测时间：</label>
             <div class="col-sm-8">
-                <input class="form-control" type="time" name="monitortime" id="monitortime" th:field="*{monitortime}"/>
+                <input class="form-control" type="datetime-local" name="monitortime" id="monitortime" th:field="*{monitortime}"/>
             </div>
         </div>
         <div class="form-group">
@@ -39,7 +39,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">温度：</label>
             <div class="col-sm-8">
-                <input class="form-control" type="text" name="temprature" id="temprature" th:field="*{temprature}">
+                <input class="form-control" type="text" name="temperature" id="temperature" th:field="*{temperature}">
             </div>
         </div>
         <div class="form-group">
@@ -57,7 +57,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">更新时间：</label>
             <div class="col-sm-8">
-                <input class="form-control" type="time" name="updatetime" id="updatetime" th:field="*{updatetime}">
+                <input class="form-control" type="datetime-local" name="updatetime" id="updatetime" th:field="*{updatetime}">
             </div>
         </div>
     </form>
@@ -76,7 +76,7 @@
 
     function submitHandler() {
         if ($.validate.form()) {
-            $.operate.meteor(prefix + "/edit", $('#form-meteor-edit').serialize());
+            $.operate.save(prefix + "/edit", $('#form-meteor-edit').serialize());
         }
     }
 </script>

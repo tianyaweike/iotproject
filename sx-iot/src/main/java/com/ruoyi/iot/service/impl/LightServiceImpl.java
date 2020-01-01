@@ -35,12 +35,12 @@ public class LightServiceImpl implements LightService {
 
     /**
      * 根据id批量删除数据
-     * @param nid
+     * @param id
      */
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
-    public int deleteLightByids(String[] nid) {
-        return lightMapper.deleteLightByids(nid);
+    public int deleteLightByids(String nid) {
+        return lightMapper.deleteLightByids(Convert.toStrArray(nid));
     }
 
     /**
@@ -62,7 +62,7 @@ public class LightServiceImpl implements LightService {
     @Override
     @DataSource(value = DataSourceType.SXINFOM)
     public Light selectBynid(String nid) {
-        return lightMapper.selectLightByid(nid);
+        return lightMapper.selectByid(nid);
     }
 
     /**

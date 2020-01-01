@@ -18,10 +18,17 @@
                             用户住址：<input type="text" name="user_adress"/>
                         </li>
                         <li>
-                            报警状态：<input type="text" name="warnstatus"/>
+                            报警状态：<select name="warnstatus" th:with="type=${@dict.getType('sys_normal_disable')}">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                        </select>
                         </li>
                         <li>
-                            红外线检测：<input type="text" name="ray">
+                            红外线检测：<select name="ray" th:with="type=${@dict.getType('sys_normal_disable')}">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                        </select>
+                        </li>
                             <!--<select>
 
                            <option>-请选择-</option>
@@ -31,7 +38,7 @@
                             <option>停用</option>
 
                         </select>-->
-                        </li>
+
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                             <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -42,16 +49,16 @@
         </div>
 
         <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="iot:save:add">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="iot:saveinfo:add">
                 <i class="fa fa-plus"></i> 新增
             </a>
-            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="iot:save:edit">
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="iot:saveinfo:edit">
                 <i class="fa fa-edit"></i> 修改
             </a>
-            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="iot:post:remove">
+            <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="iot:saveinfo:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:post:export">
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="iot:saveinfo:export">
                 <i class="fa fa-download"></i> 导出
             </a>
         </div>
@@ -65,6 +72,7 @@
 <script th:inline="javascript">
     var editFlag = [[${@permission.hasPermi('iot:save:edit')}]];
     var removeFlag = [[${@permission.hasPermi('iot:save:remove')}]];
+    var datas = [[${@dict.getType('sys_normal_disable')}]];
     var prefix = ctx + "iot/save";
 
     $(function() {
@@ -83,7 +91,9 @@
             },
                 {
                     field: 'info_id',
-                    title: '信号编号'
+                    title: '信号编号',
+                    sortable: true
+
                 },
                 {
                     field: 'user_adress',
@@ -93,15 +103,19 @@
                 {
                     field: 'warnstatus',
                     title: '报警状态',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
 
-                   // sortable: true
                 },
                 {
                     field: 'ray',
                     title: '接收状态',
                     align: 'center',
-
-                    //sortable: true
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
                 },
                 {
                     title: '操作',
